@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=700, initial-scale=1" />
+	<title>CHART</title>
+	
+	<script type="text/javascript">
+		var CHARTIMAGECONTEXT = '/WEB-APP/webponent/chart2.0/';
+	</script>
+
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/jquery.touchSwipe.min.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/raphael.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/comm/webponent.comm.common.js"></script>
+
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/chart/webponent.chart.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/chart/webponent.chart.style.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/lib/stock/webponent.chart.stock.js"></script>
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/extend/yuanta/webponent.chart.stock.style.js"></script>
+	
+	<script type="text/javascript" src="/WEB-APP/webponent/chart2.0/extend/yuanta/webponent.chart.yuanta.js"></script>
+	
+	<link rel="stylesheet" href="/WEB-APP/webponent/chart2.0/sample/layout/css/layout.css"/>
+	<link rel="stylesheet" href="/WEB-APP/webponent/chart2.0/extend/yuanta/webponent.chart.stock.css"/>
+
+	<style type="text/css">
+		.info {width: 700px; height: 30px;border: 1px solid #eee;}
+		.info span {display:inline-block; padding: 8px ;}
+		.chart {width: 700px; height: 500px;border: 1px solid #eee;}
+	</style>
+	<script type="text/javascript">
+	
+	var chart = null;
+	var sliderHtml = ''
+	+ '<div class="sliderContainer">'
+		+ '<div class="sliderArea">'
+			+ '<div class="slider">'
+				+ '<span class="slider-left"><span class="slider-right"><span>SLIDER</span></span></span>'
+			+ '</div>'
+		+ '</div>'
+		+ '<div class="sliderButton">'
+			+ '<input type="button" value="+" class="slider-plus" />'
+			+ '<input type="button" value="초기화" class="slider-default" />'
+			+ '<input type="button" value="-" class="slider-minus" />'
+		+ '</div>';
+	+ '</div>';
+
+	var stockInitParams = {
+		"over1": 	[5, 20, 60, 120], 	// 이동평균
+		"chaikins": [3, 10]
+	};
+
+	var options = {
+		data: {
+			url: './data/day.txt',
+			jsonDepth: 'output.OutputBlock_CHART'
+		},
+		format: {
+			xAxis: function(_str){
+				if(_str.indexOf('/') > -1) {
+					return _str;
+				} else {
+					return _str.substr(0, 4)+'/'+_str.substr(4,2)+'/'+_str.substr(6,2);
+				}
+			},
+			yAxis: function(_str, _key){
+				return _str;
+				if(_key == 'main' || _key == undefined){
+					return Number(_str).toFixed(0).format();
+				} else {
+					return String(_str).format();
+				}
+			}
+		},
+		func: {
+			info: function(data){
+
+				var str =  '<span class="date">'+ options.format.xAxis(String(data.basedate))+'</span>';
+					str += '<span class="open">시가 : '+ options.format.yAxis(data.startjuka, 'main')+'</span>';
+					str += '<span class="high">고가 : '+ options.format.yAxis(data.highjuka, 'main')+'</span>';
+					str += '<span class="low">저가 : '+ options.format.yAxis(data.lowjuka, 'main')+'</span>';
+					str += '<span class="close">종가 : '+ options.format.yAxis(data.lastjuka, 'main')+'</span>';
+					str += '<span class="volume">거래량 : '+ data.volume+'</span>';
+
+				$('#info').html(str);
+			},
+			tip: function(tipElement, data, rect, thisSeries){
+				var tip = '';
+				if(thisSeries && thisSeries.type == 'MAIN') {
+					tip = '<div class="text">날짜 : '+options.format.xAxis(data.xaxis) + '<br/>' + thisSeries.label + ' : ' + String(Number(data.yaxis || data.close).toFixed(0)).format()+'</div>';
+				} else {
+					tip = '<div class="text">날짜 : '+options.format.xAxis(data.xaxis) + '<br/>' + thisSeries.label + ' : ' + String(data.yaxis || data.close).format()+'</div>';
+				}
+
+				tipElement.html(tip).show().css({
+					left: rect.x - (tipElement.width() / 2), top: rect.y - 35
+				});
+			}
+		},
+		use: {
+			animate: false,
+			aCrossLine: true,
+			magnet: true
+		},
+		stock: {
+			menuWidth: 98,
+			sliderHeight: 30,
+			stockParams: stockInitParams
+		},
+		tRadar: {
+			type: '3',
+			xaxis: 'basedate', 	//필수입력
+			open: 'startjuka',		
+			high: 'highjuka',	//필수입력
+			low: 'lowjuka',		//필수입력
+			close: 'lastjuka',	//필수입력
+			volume: 'volume',
+			trendStyles: {
+				color: '#dcdcf5',
+				opacity: 0.5
+			},
+			trend0123Styles: {
+				upColor: '#ff0000',
+				downColor: '#0000ff'
+			},
+			lsStyles: {
+				upColor: '#ff0000',
+				downColor: '#0000ff'
+			}
+		},
+		events: {
+			'beforeDrawSeriesInGraph' : beforeDrawSeriesInGraph
+		}
+	}
+	var styles = {
+		useStyles: webPonent.STOCKSTYLE
+	};
+	var series = {xaxis: 'basedate', open: 'startjuka', high: 'highjuka', low: 'lowjuka', close: 'lastjuka', volume: 'volume'};
+
+	window.onload = function(){
+		chart = webponent.stockchart.init($('.chart'), options, styles, series, sliderHtml);
+	};
+	function onChangeStyle(styles) {
+		
+	}
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<h1>Main(line + line) / Sub(line) / Sub(line)</h1>
+		<h2>일반 디자인</h2>
+		<input type="hidden" id="SVGHIDDEN" value=""/>
+		<div >
+			<div class="ctrlBox">
+			</div>
+			
+		</div>
+	</div>
+	<div class="info" id="info"></div>
+	<div class="chart"></div>
+</body>
+</html>

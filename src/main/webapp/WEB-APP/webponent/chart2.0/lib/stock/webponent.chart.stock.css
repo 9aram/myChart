@@ -1,0 +1,77 @@
+.sliderContainer {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden;  bottom: 0; border-top: 1px solid #ddd;}
+.sliderArea 		{font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; background: url(../../lib/stock/img/slider_bg.png) 50% 50% no-repeat;}
+.sliderArea .slider {background: url(../../lib/stock/img/slider_cent.gif) 50% 50% no-repeat; height: 17px; position: absolute;}
+.sliderArea .slider .slider-left {display: block; background: url(../../lib/stock/img/slider_left.gif) left 50% no-repeat; height: 17px; width: 100%;}
+.sliderArea .slider .slider-right {display: block; background: url(../../lib/stock/img/slider_right.gif) right 50% no-repeat; height: 17px; width: 100%;}
+.sliderArea .slider .slider-right span {visibility: hidden}
+.sliderButton {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; right: 5px;}
+.sliderButton input {font-size: 11px;font-family: Tahoma, dotum, gulim; margin: 6px 0 0 2px; padding: 0 4px; vertical-align: top;}
+
+.sliderButton input[type=button]{text-indent: -9999px; cursor: pointer; overflow: hidden;}
+*html .sliderButton input[type=button]{font-size:0;line-height:0;} /*ie6*/
+*+html .sliderButton input[type=button]{text-indent: 0;font-size:0;line-height:0;padding-left: 100px;}  /*ie7*/
+
+.sliderButton .slider-plus {width: 18px; height: 19px; background: url(../../lib/stock/img/bt_plus.png)}
+.sliderButton .slider-plus:hover {background-image: url(../../lib/stock/img/bt_plus_over.png)}
+.sliderButton .slider-plus:active {background-image: url(../../lib/stock/img/bt_plus_sel.png)}
+.sliderButton .slider-default {width: 43px; height: 19px; background: url(../../lib/stock/img/bt_default.png)}
+.sliderButton .slider-default:hover {background-image: url(../../lib/stock/img/bt_default_over.png)}
+.sliderButton .slider-default:active {background-image: url(../../lib/stock/img/bt_default_sel.png)}
+.sliderButton .slider-minus {width: 18px; height: 19px; background: url(../../lib/stock/img/bt_minus.png)}
+.sliderButton .slider-minus:hover {background-image: url(../../lib/stock/img/bt_minus_over.png)}
+.sliderButton .slider-minus:active {background-image: url(../../lib/stock/img/bt_minus_sel.png)}
+
+		
+.accordionArea {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff;top: 0; position: absolute; overflow: hidden; border-right: 1px solid #ccc;}
+.accordionArea fieldset {margin: 0; padding: 0; border: 0; text-align: left;}
+.accordionArea ul, .accordionArea dl {list-style: none; margin: 0; padding: 0; display: block;}
+.accordionArea .stockchart-layer-overlay, .accordionArea .stockchart-layer-assist, .accordionArea .stockchart-options-overlay, .accordionArea .stockchart-options-assist {display: none;}
+.accordionArea .item {position: absolute;}
+.accordionArea .item .title {display: block;height: 25px;  line-height: 25px; width: 100%; border-bottom: 1px solid #ccc;}
+.accordionArea .item .title h4 {margin: 0; padding: 0; font-size: 12px; font-weight: bold;}
+.accordionArea .item .title a {display: block; color: #5b564a; padding-left: 10px; text-decoration: none;}
+.accordionArea .item .title a:link, .accordionArea .item .title a:visited, .accordionArea .item .title a:hover {background: url(../../../lib/stock/img/acc_tl_bg.png) no-repeat;}
+.accordionArea .item .title a:active {background: url(../../../lib/stock/img/acc_tl_bg2.png) no-repeat;}
+.accordionArea .item .content {background-color: #fff; border-bottom: 1px solid #ccc; color: #333;}
+.accordionArea .item .content .tab {padding: 10px 0px; text-align: center; font-size: 0;}
+.accordionArea .item .content .tab01 {width: 49px; height: 21px; background: url(../../../lib/stock/img/tab01.png); font-size: 12px; margin: 0; }
+.accordionArea .item .content .tab01.sel {background: url(../../../lib/stock/img/tab01_on.png);}
+.accordionArea .item .content .tab02 {width: 49px; height: 21px; background: url(../../../lib/stock/img/tab02.png); font-size: 12px; margin: 0;}
+.accordionArea .item .content .tab02.sel {background: url(../../../lib/stock/img/tab02_on.png);}
+
+.accordionArea .item .content .list .wrapper {position: relative;}
+.accordionArea .item .content .list .wrapper .stockchart-layer-overlay, 
+.accordionArea .item .content .list .wrapper .stockchart-layer-assist {position: absolute; background: #fff; top: 0; left: 0; text-align: center; line-height: 140%;}
+.accordionArea .item .content input.sel {background-color: #fff; border-bottom: 0;}
+.accordionArea .item .content fieldset legend {text-indent: 100000; font-size: 0; line-height: 0;}
+.accordionArea .item .content fieldset dt {padding: 3px 0 3px 10px;}
+.accordionArea .item .content fieldset dd {padding: 0; margin: 0; text-align: center;}
+.accordionArea .item .content fieldset dd input {width: 40px; font-size: 12px; font-family: dotum; border: 1px solid #d1d1d1;}
+.accordionArea .item .content fieldset dd input.minus, .accordionArea .item .content fieldset dd input.plus {width: auto;width: 21px; height: 18px; border: 0;}
+.accordionArea .item .content fieldset dd input.minus {background: url(../../../lib/stock/img/btn_minus.png) no-repeat;margin-right: 2px;}
+.accordionArea .item .content fieldset dd input.plus {background: url(../../../lib/stock/img/btn_plus.png) no-repeat;margin-left: 2px;}
+.accordionArea .item .content select {border: 1px solid #d1d1d1; font-family: dotum; font-size: 12px; height: 18px;}
+.accordionArea .item .content .stockchart-default {margin-top: 5px; width: 88px; height: 22px; background: url(../../../lib/stock/img/btn_default.png) no-repeat;}
+.accordionArea .item .content .stockchart-default:hover {background-image: url(../../../lib/stock/img/btn_default_over.png);}
+.accordionArea .item .content .stockchart-default:active {background-image: url(../../../lib/stock/img/btn_default_sel.png);}
+
+
+
+.accordionArea .item .content input[type=button]{text-indent: -9999px; cursor: pointer}
+*html .accordionArea .item .content input[type=button]{font-size:0;line-height:0;} /*ie6*/
+*+html .accordionArea .item .content input[type=button]{text-indent: 0;font-size:0;line-height:0;}  /*ie7*/
+
+/* 시리즈 팁 */
+.WEBPONENT-STOCK-TIP {
+	border: 1px solid #767676;
+	background: #f9f9f9;
+	color: #333;
+	padding: 3px 5px;
+}
+/* 축 팁 */
+.WEBPONENT-AXIS-TIP {
+	border: 0;
+	background: #767676;
+	color: #fff;
+	padding: 3px 5px;
+}

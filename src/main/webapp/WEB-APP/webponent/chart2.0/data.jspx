@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+    <jsp:directive.page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+    <jsp:directive.page extends="coreframe.http.JspxController" />
+    <jsp:directive.page import="java.io.*,java.util.*" />
+    <jsp:directive.page import="coreframe.*" />
+    
+    <jsp:directive.page import="coreframe.data.schema.*" />
+    <jsp:directive.page import="coreframe.http.*,coreframe.data.*,coreframe.log.*,coreframe.security.impl.CoreframeSecurityRequest" />
+    <c:set var="viewpage.prefix" value="/WEB-APP/dtk/view/" scope="request" />
+    <c:set var="viewpage.postfix" value=".jsp" scope="request" />
+    <jsp:declaration><![CDATA[//
+    private String ROOT = CoreApplication.getInstance().getAttributeText(CoreApplication.WEB_DOCUMENT_ROOT);
+
+    public void index(ViewMeta view) throws Exception {
+        view.setViewName("client");
+    }
+    
+    public void chartData(ViewMeta view) throws Exception {
+        DataSet input = view.getInputDataSet();
+        
+        String type = input.getText("type");
+        
+        DataSet output = new DataSet();
+        
+        StringBuffer sb = new StringBuffer();
+        
+        String bld = "";
+        if("stock".equals(type)){
+            bld = "chart/stock_dayprice";
+            output = executeBL(bld, input);
+        }else if("jisu".equals(type)){
+            bld = "chart/jisu_dayprice";
+            output = executeBL(bld, input);
+        }else if("pie_kospi".equals(type)){
+            bld = "chart/pie_kospi";
+            output = executeBL(bld, input);
+            
+            
+            String target = input.getText("target");
+            String[] targets = target.split(",");
+            
+            if("".equals(target)){
+                //Block[] blocks = output.getBlocks();
+                targets = (String[])output.keySet().toArray(new String[]{});
+            }
+            
+            
+            sb.append("{");
+            sb.append("\"output\" : {");
+            sb.append("\"result\"").append(":").append("[");
+            
+            
+            boolean start = true; 
+            for( int i = 0, ic = output.getCount("REG_DT"); i < ic; i++ ){
+                String date = output.getText("REG_DT",i);
+                   
+                for(int j =0; j < targets.length; j++){
+                    
+                    if(start){
+                        start = false;
+                    }else{
+                        sb.append(",");
+                    }
+                    
+                    sb.append("{");
+                    sb.append("\"Date\"").append(":").append("\"").append(date).append("\"").append(",");
+                    sb.append("\"upjong\"").append(":").append("\"").append(targets[j]).append("\"").append(",");
+                    sb.append("\"price\"").append(":").append("\"").append(output.getText(targets[j],i)).append("\"");
+                    sb.append("}");
+                }
+            }
+            
+            sb.append("]");
+            sb.append("}");
+            sb.append("}");
+        }else if("pie_kosdaq".equals(type)){
+            bld = "chart/pie_kosdaq";
+            output = executeBL(bld, input);
+            
+            String target = input.getText("target");
+            String[] targets = target.split(",");
+            
+            if("".equals(target)){
+                //Block[] blocks = output.getBlocks();
+                targets = (String[])output.keySet().toArray(new String[]{});
+            }
+            
+            sb.append("{");
+            sb.append("\"output\" : {");
+            sb.append("\"result\"").append(":").append("[");
+            
+            
+            boolean start = true; 
+            for( int i = 0, ic = output.getCount("REG_DT"); i < ic; i++ ){
+                String date = output.getText("REG_DT",i);
+                   
+                for(int j =0; j < targets.length; j++){
+                    
+                    if(start){
+                        start = false;
+                    }else{
+                        sb.append(",");
+                    }
+                    
+                    sb.append("{");
+                    sb.append("\"Date\"").append(":").append("\"").append(date).append("\"").append(",");
+                    sb.append("\"upjong\"").append(":").append("\"").append(targets[j]).append("\"").append(",");
+                    sb.append("\"price\"").append(":").append("\"").append(output.getText(targets[j],i)).append("\"");
+                    sb.append("}");
+                }
+            }
+            
+            sb.append("]");
+            sb.append("}");
+            sb.append("}");
+            
+        }else if("horizon".equals(type)){
+            bld = "chart/horizon";
+            output = executeBL(bld, input);
+        }else if("koreamap".equals(type)){
+            bld = "chart/koreamap";
+            DataSet output2 = executeBL(bld, input);
+        
+            List list = new ArrayList();
+            list.add("kw__강원");
+            list.add("kg__경기");
+            list.add("kn__경남");
+            list.add("kb__경북");
+            list.add("kj__광주");
+            list.add("dg__대구");
+            list.add("dj__대전");
+            list.add("bs__부산");
+            list.add("se__서울");
+            list.add("us__울산");
+            list.add("ic__인천");
+            list.add("jn__전남");
+            list.add("jb__전북");
+            list.add("jj__제주");
+            list.add("cn__충남");
+            list.add("cb__충북");
+            
+            
+            
+            int listSize = list.size();
+            boolean start = true;
+            
+            
+            sb.append("{");
+            sb.append("\"output\" : {");
+            sb.append("\"result\"").append(":").append("[");
+            for( int i = 0, ic = output2.getCount("REG_DT"); i < ic; i++){
+                String date = output2.getText("REG_DT",i);
+                
+                for(int j =0; j < listSize; j++){
+                    String[] location = ((String)list.get(j)).split("__");
+                    if(start){
+                        start = false;
+                    }else{
+                        sb.append(",");
+                    }
+                    
+                    sb.append("{");
+                    sb.append("\"Date\"").append(":").append("\"").append(date).append("\"").append(",");
+                    sb.append("\"Location\"").append(":").append("\"").append(location[1]).append("\"").append(",");
+                    sb.append("\"Amount\"").append(":").append("\"").append(output2.getText(location[0]+"_amount",i)).append("\"").append(",");
+                    sb.append("\"Count\"").append(":").append("\"").append(output2.getText(location[0]+"_count",i)).append("\"");
+                    sb.append("}");
+                }
+            }
+            
+            sb.append("]");
+            sb.append("}");
+            sb.append("}");
+        }else if("scatter".equals(type)){
+            bld = "chart/scatter";
+            output = executeBL(bld, input);
+            
+            List list = new ArrayList();
+            list.add("금융투자");
+            list.add("보험");
+            list.add("투신");
+            list.add("사모");
+            list.add("은행");
+            list.add("기타금융");
+            list.add("연기금");
+            list.add("국가,지자체");
+            list.add("기타법인");
+            list.add("개인");
+            list.add("외국인");
+            list.add("기타외국인");
+            
+            int listSize = list.size();
+            boolean start = true;
+            
+            
+            sb.append("{");
+            sb.append("\"output\" : {");
+            sb.append("\"result\"").append(":").append("[");
+            for( int i = 0, ic = output.getCount("REG_DT"); i < ic; i++){
+                String date = output.getText("REG_DT",i);
+                
+                for(int j =0; j < listSize; j++){
+                    String location = ((String)list.get(j));
+                    if(start){
+                        start = false;
+                    }else{
+                        sb.append(",");
+                    }
+                    
+                    sb.append("{");
+                    sb.append("\"Date\"").append(":").append("\"").append(date).append("\"").append(",");
+                    sb.append("\"Name\"").append(":").append("\"").append(location).append("\"").append(",");
+                    sb.append("\"Ask\"").append(":").append("\"").append(output.getText("ASK_"+(j+1),i)).append("\"").append(",");
+                    sb.append("\"Bid\"").append(":").append("\"").append(output.getText("BID_"+(j+1),i)).append("\"").append(",");
+                    sb.append("\"NetBid\"").append(":").append("\"").append(output.getText("NET_BID_"+(j+1),i)).append("\"");
+                    sb.append("}");
+                }
+            }
+            
+            sb.append("]");
+            sb.append("}");
+            sb.append("}");
+            
+        }else if("heat".equals(type)){
+            bld = "chart/heatmap";
+            output = executeBL(bld, input);
+        }
+        
+        
+        if(!"".equals(sb.toString())){
+            HttpServletResponse resp = view.getHttpServletResponse();
+            resp.setContentType("application/json;charset=UTF-8");
+            view.setMessage(sb.toString());
+        }else{
+            view.setAttribute("output", output);
+            view.printJSON();   
+        }
+        
+        
+    }
+
+    
+
+    //]]></jsp:declaration>
+</jsp:root>

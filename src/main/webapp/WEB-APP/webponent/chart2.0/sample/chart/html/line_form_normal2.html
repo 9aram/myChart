@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>CHART01</title>
+
+	<script type="text/javascript" src="../../../lib/comm/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../../../lib/comm/raphael.js"></script>
+	<script type="text/javascript" src="../../../lib/comm/raphael.export.js"></script>
+	<script type="text/javascript" src="../../../lib/comm/webponent.comm.common.js"></script>
+
+	
+	<script type="text/javascript" src="../../../lib/chart/webponent.chart.js"></script>
+	<script type="text/javascript" src="../../../lib/comm/webponent.comm.export.js"></script>
+	<link rel="stylesheet" href="../../layout/css/layout.css"/>
+
+	<style type="text/css">
+		.chart01 {width: 100%; height: 100%;}
+	</style>
+	<script type="text/javascript">
+	var chart = null;
+	window.onload = function(){
+		var options = {
+			data: {
+				/* url: '/WEB-APP/webponent/chart/sample/chart/data/chart01_txt.txt',
+				type: 'text' */
+				data: [
+					{ Date: '20140101', Mprc: 50, Oprc: 50 },
+					{ Date: '20140102', Mprc: 50.1, Oprc: 51},
+					{ Date: '20140103', Mprc: 60, Oprc: 61},
+					{ Date: '20140104', Mprc: 61, Oprc: 58},
+					{ Date: '20140105', Mprc: 65,  Oprc: 64},
+					{ Date: '20140106', Mprc: 63, Oprc: 67},
+					{ Date: '20140107', Mprc: 80, Oprc: 80},
+					{ Date: '20140108', Mprc: 81.1, Oprc: 80},
+					{ Date: '20140109', Mprc: 87.4, Oprc: 85},
+					{ Date: '20140110', Mprc: 88,  Oprc: 86}
+				]
+			},
+			format: {
+				xAxis: function(_str){
+					return _str.substr(0, 4)+'.'+_str.substr(4,2)+'.'+_str.substr(6,2);
+				},
+				yAxis: 'priceDataFormat'
+			},
+			func: {
+				tip: function(tipElement, data, rect){
+					console.dir(data);
+					console.dir(chart);
+					console.log(data.data.Mprc + " " +data.data.Oprc +" "+data.yaxis);
+					
+					var date = data.xaxis.substr(0, 4)+'.'+data.xaxis.substr(4, 2)+'.'+data.xaxis.substr(6, 2);
+					var tip = '<div class="text">'+date + ' /  Mprc:' + data.data.Mprc+ ' / Oprc:' +data.data.Oprc  + '</div>';
+
+					tipElement.html(tip).show();
+
+					tipElement.html(tipElement.html()).css({
+						left: Math.round(rect.x - (tipElement.width() / 2)), top: Math.round(rect.y+10)
+					});
+				}
+			},
+			use: {
+				
+				aCrossLine: true
+			}
+		}
+		var styles = {
+			main: {
+				layout: {
+					paddingTop: 57, paddingRight: 30, color: '#f8f8f8',
+					line: {color: '#eaeaea', width: 1}
+				},
+				graph: {
+					color: '#f8f8f8',
+					line: {
+						top: {color: '#cccccc'},
+						left: {width: 0},
+						right: {width: 0},
+						bottom: {color: '#cccccc'}
+					}
+				},
+				crossLine: {
+					color: '#465866'
+				},
+				xAxis: {
+					paddingTop: 13, height: 30,
+					text: {family: 'Nanum Gothic', size: 12, color: '#666'},
+					line: {color: '#e3e3e3', width: 1}
+				},
+				yAxis: {
+					useValue: {min: true},
+					line: {color: '#cccccc', width: 1, opacity: 1},
+					text: {family: 'Nanum Gothic', size: 12, color: '#666', align: 'right'}
+				},
+				tip: {
+					className: 'tip'
+				},
+				series: {
+					s1: {
+						line: {
+							normal: {
+								color: '#2bcdba', width: 3,
+								over: {
+									color: '#00a693', width: 3
+								}
+							}
+						},
+						text: {
+							use: true, color: '#666666', family: 'Nanum Gothic', size: 12,
+							format: 'priceDataFormat'
+						},
+						tick: {
+							
+							area: {
+								normal: {
+									color: '#fff', over: {color: '#fff'}
+								}
+							},
+							line: {
+								normal: {
+									color: '#2bcdba', width: 3, over: {color: '#465866', width: 3}
+								}
+							}
+						}
+					}
+				,s2: {
+					line: {
+						normal: {
+							color: '#ff0000', width: 3,
+							over: {
+								color: '#00a693', width: 3
+							}
+						}
+					},
+					tick: {
+						
+						area: {
+							normal: {
+								color: '#fff', over: {color: '#fff'}
+							}
+						},
+						line: {
+							normal: {
+								color: '#2bcdba', width: 3, over: {color: '#465866', width: 3}
+							}
+						}
+					}
+				}
+				}
+			}
+		};
+		var series = {
+			"main": {
+				"s1": {series: 'line', xaxis: 'Date', yaxis: 'Mprc'}
+		        ,"s2": {series: 'line', xaxis: 'Date', yaxis: 'Oprc'}
+		
+			}
+		};
+		chart = webponent.chart.init($('.chart01'), options, styles, series);
+	};
+	var saveImage = function (){
+
+		chart.getSVG();
+
+
+	};
+	</script>
+<body>
+	<h1>LINESERIES-normal</h1>
+	<h2>Normal</h2>
+	<div class="wrap">
+		
+		<div class="chart01"></div>
+	</div>
+</body>
+</html>
