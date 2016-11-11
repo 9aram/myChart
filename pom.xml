@@ -21,6 +21,57 @@
         </dependency>
     </dependencies>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <name>oss.sonatype.org</name>
+            <id>oss.sonatype.org</id>
+            <url>http://oss.sonatype.org/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDirectory>src/main/webapp/WEB-APP/webponent/chart2.0/lib</sourceDirectory>
+
+                    <excludes>
+                        <exclude>comm/*.js</exclude>
+                    </excludes>
+                    <nosuffix>true</nosuffix>
+                    <linebreakpos>50000</linebreakpos>
+                    <preserveAllSemiColons>true</preserveAllSemiColons>
+                    <force>true</force>
+
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>
+                        WEB-APP/webponent/cahrt.0/sample/**/**
+                        ,WEB-INF/webponent/export/bin/**/**,WEB-INF/webponent/export/fonts/**/**
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
     <distributionManagement>
         <repository>
             <id>releases</id>
