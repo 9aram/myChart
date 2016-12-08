@@ -96,7 +96,7 @@
 
 		var options = {
 			data: {
-				url: '/WEB-APP/webponent/chart/data.jspx?cmd=chartData&type=stock&Code='+code+'&Sdate='+frm.Sdate.value+ '&Edate='+frm.Edate.value
+				url: '/WEB-APP/webponent/chart2.0/data.jspx?cmd=chartData&type=stock&Code='+code+'&Sdate='+frm.Sdate.value+ '&Edate='+frm.Edate.value
 			}
 		};
 		
@@ -115,7 +115,7 @@
 
 		var options = {
 			data: {
-				url: '/WEB-APP/webponent/chart/data.jspx?cmd=chartData&type=jisu&Jisu='+code+'&Sdate='+frm.Sdate.value+ '&Edate='+frm.Edate.value
+				url: '/WEB-APP/webponent/chart2.0/data.jspx?cmd=chartData&type=jisu&Jisu='+code+'&Sdate='+frm.Sdate.value+ '&Edate='+frm.Edate.value
 			}
 		}
 		chart2.inquery(options, {}, {});
@@ -124,7 +124,7 @@
 	window.onload = function(){
 		var options = {
 			data: {
-				// /WEB-APP/webponent/chart/data.jspx?cmd=chartData&type=stock&Code=005930&Sdate=20140301&Edate=20140411
+				// /WEB-APP/webponent/chart2.0/data.jspx?cmd=chartData&type=stock&Code=005930&Sdate=20140301&Edate=20140411
 				url: '',
 				reverse: true,
 				jsonDepth: 'output.result'
@@ -235,7 +235,7 @@
 
 		var options = {
 			data: {
-				url: '/WEB-APP/webponent/chart/data.jspx?cmd=chartData&type=jisu&Jisu=1001&Sdate=20131202&Edate=20140102',
+				url: '/WEB-APP/webponent/chart2.0/data.jspx?cmd=chartData&type=jisu&Jisu=1001&Sdate=20131202&Edate=20140102',
 				reverse: true
 			},
 			format: {
