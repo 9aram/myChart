@@ -352,7 +352,7 @@
 						+ '<input type="button" value="+" class="slider-plus" />'
 						+ '<input type="button" value="초기화" class="slider-default" />'
 						+ '<input type="button" value="-" class="slider-minus" />'
-					+ '</div>';
+					+ '</div>'
 				+ '</div>';
 		}
 		var slider = new window.webponent.STOCKSLIDERMINI(_selector, accWidth, sliderHeight, _sliderHtml);
@@ -1736,7 +1736,7 @@
 
 			_this.slider.css({
 				left: (SLIDER_WIDTH - buttonWidth) +'px', 
-				width: buttonWidth, 
+				width: buttonWidth
 			});
 			_this.sliderUpdate('default', _data, _itemCount);
 		};

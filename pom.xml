@@ -16,7 +16,7 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-        <maven.yuicompressor.skip>true</maven.yuicompressor.skip>
+        <skipMinify>true</skipMinify>
     </properties>
 
     <scm>
@@ -55,13 +55,14 @@
                 </configuration>
             </plugin>
 
+
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
                 <version>1.1</version>
                 <executions>
                     <execution>
-                        <phase>test</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>compress</goal>
                         </goals>
@@ -81,7 +82,7 @@
                     <nosuffix>true</nosuffix>
                     <linebreakpos>50000</linebreakpos>
                     <preserveAllSemiColons>true</preserveAllSemiColons>
-                    <skip>${maven.yuicompressor.skip}</skip>
+                    <skip>${skipMinify}</skip>
 
                 </configuration>
             </plugin>
@@ -96,6 +97,20 @@
                     </packagingExcludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
+                    <checkModificationExcludes>
+                        <checkModificationExclude>pom.xml</checkModificationExclude>
+                    </checkModificationExcludes>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 
