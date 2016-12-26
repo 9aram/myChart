@@ -16,7 +16,7 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-        <skipMinify>true</skipMinify>
+        <skipMinify>false</skipMinify>
     </properties>
 
     <scm>
