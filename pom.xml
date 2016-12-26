@@ -7,7 +7,7 @@
     <groupId>kr.co.cyberx</groupId>
     <artifactId>webponent-chart</artifactId>
     <packaging>war</packaging>
-    <version>2.0.7-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 
     <name>webponent-chart</name>
     <url>http://www.webponent.com</url>
@@ -17,6 +17,7 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+        <maven.yuicompressor.skip>true</maven.yuicompressor.skip>
     </properties>
 
     <scm>
@@ -81,7 +82,7 @@
                     <nosuffix>true</nosuffix>
                     <linebreakpos>50000</linebreakpos>
                     <preserveAllSemiColons>true</preserveAllSemiColons>
-                    <skip>true</skip>
+                    <skip>${maven.yuicompressor.skip}</skip>
 
                 </configuration>
             </plugin>
