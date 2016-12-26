@@ -62,7 +62,7 @@
                 <version>1.1</version>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>compress</goal>
                         </goals>
@@ -83,6 +83,7 @@
                     <linebreakpos>50000</linebreakpos>
                     <preserveAllSemiColons>true</preserveAllSemiColons>
                     <skip>${skipMinify}</skip>
+
 
                 </configuration>
             </plugin>
