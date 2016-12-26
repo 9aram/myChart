@@ -6,7 +6,7 @@
     <groupId>kr.co.cyberx</groupId>
     <artifactId>webponent-chart</artifactId>
     <packaging>war</packaging>
-    <version>2.0.8</version>
+    <version>2.0.9-SNAPSHOT</version>
 
     <name>webponent-chart</name>
     <url>http://www.webponent.com</url>
@@ -22,7 +22,7 @@
         <developerConnection>scm:git:http://memo.cyber-i.com:30000/cx/webponent-chart.git</developerConnection>
         <connection>scm:git:http://memo.cyber-i.com:30000/cx/webponent-chart.git</connection>
         <url>http://memo.cyber-i.com:30000/cx/webponent-chart.git</url>
-        <tag>webponent-chart-2.0.8</tag>
+        <tag>webponent-chart-2.0.0</tag>
     </scm>
 
 
