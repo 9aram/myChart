@@ -56,6 +56,26 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="Creating minify source output directory"/>
+                                <mkdir dir="./target/min"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
                 <version>1.1</version>
@@ -69,9 +89,7 @@
                 </executions>
                 <configuration>
                     <sourceDirectory>src/main/webapp/WEB-APP/webponent/chart2.0/lib</sourceDirectory>
-
                     <webappDirectory>${project.build.directory}/min</webappDirectory>
-
 
                     <excludes>
                         <exclude>**/comm/**.js</exclude>
@@ -106,18 +124,8 @@
                             <directory>${project.build.directory}/min</directory>
                         </resource>
                     </webResources>
-
-
                 </configuration>
-                <executions>
-                    <execution>
 
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>war</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
 
