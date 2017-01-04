@@ -758,7 +758,7 @@
 						+ '<input type="button" value="+" class="slider-plus" />'
 						+ '<input type="button" value="초기화" class="slider-default" />'
 						+ '<input type="button" value="-" class="slider-minus" />'
-					+ '</div>';
+					+ '</div>'
 				+ '</div>';
 		}
 		/*

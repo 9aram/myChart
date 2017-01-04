@@ -1,17 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-    
-    
+
+
     <groupId>kr.co.cyberx</groupId>
     <artifactId>webponent-chart</artifactId>
     <packaging>war</packaging>
-    <version>2.0.7-SNAPSHOT</version>
-    
+
+    <version>2.0.6-SNAPSHOT</version>
     <name>webponent-chart</name>
     <url>http://www.webponent.com</url>
-    
+
+
+    <properties>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+        <skipMinify>true</skipMinify>
+    </properties>
+
+    <scm>
+        <developerConnection>scm:git:http://memo.cyber-i.com:30000/cx/webponent-chart.git</developerConnection>
+        <connection>scm:git:http://memo.cyber-i.com:30000/cx/webponent-chart.git</connection>
+        <url>http://memo.cyber-i.com:30000/cx/webponent-chart.git</url>
+        <tag>webponent-chart-2.0.0</tag>
+    </scm>
+
+
     <dependencies>
         <dependency>
             <groupId>kr.co.cyberx</groupId>
@@ -31,14 +45,42 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <skipSource>true</skipSource>
+                </configuration>
+            </plugin>
 
-            <!--<plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="Creating minify source output directory" />
+                                <mkdir dir="./target/min" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
                 <version>1.1</version>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>compress</goal>
                         </goals>
@@ -46,28 +88,59 @@
                 </executions>
                 <configuration>
                     <sourceDirectory>src/main/webapp/WEB-APP/webponent/chart2.0/lib</sourceDirectory>
+                    <webappDirectory>${project.build.directory}/min</webappDirectory>
 
                     <excludes>
-                        <exclude>comm/*.js</exclude>
+                        <exclude>**/comm/**.js</exclude>
+                        <exclude>**/*.test.js</exclude>
+                        <exclude>**/jquery.*.js</exclude>
+                        <exclude>**/**.css</exclude>
+                        <exclude>**/webponent.chart.style.js</exclude>
+                        <exclude>**/webponent.licenseKey.js</exclude>
                     </excludes>
                     <nosuffix>true</nosuffix>
                     <linebreakpos>50000</linebreakpos>
                     <preserveAllSemiColons>true</preserveAllSemiColons>
-                    <force>true</force>
+                    <skip>${skipMinify}</skip>
+                    <jswarn>false</jswarn>
+
 
                 </configuration>
-            </plugin>-->
+            </plugin>
 
 
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
+
                     <packagingExcludes>
                         WEB-APP/webponent/chart2.0/sample/**/**
                         ,WEB-INF/webponent/export/bin/**/**,WEB-INF/webponent/export/fonts/**/**
                     </packagingExcludes>
+
+                    <webResources>
+                        <resource>
+                            <directory>${project.build.directory}/min</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
+                    <checkModificationExcludes>
+                        <checkModificationExclude>pom.xml</checkModificationExclude>
+                    </checkModificationExcludes>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 

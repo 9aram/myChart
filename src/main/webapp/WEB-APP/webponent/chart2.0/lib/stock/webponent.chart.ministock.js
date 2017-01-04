@@ -37,7 +37,7 @@
 		loadData(_options, {
 			init: function(_data){
 				if(_data.length < itemCount) {
-					
+
 					for(var i = 0; i < itemCountArray.length; i ++) {
 						if(itemCountArray[i] >= _data.length) {
 							// 데이터 갯수보다 itemCountArray[i]가 커지기 바로 직전까지 저장하고 
@@ -63,9 +63,9 @@
 		_selector.css('overflow', 'hidden');
 
 		/* STOCKCHART LEFT MENU
-			_selector: DIV 객체 _chart: svg _width: Accor 넓이 _sliderHeight: slider 높이 _data: 데이터 _styles: 스타일
-			_series: 만들어진 series, __series: 사용자 입력 series, _overlaySerieses: 오버레이 활성 체크 변수, _assistSerieses: 보조지표 활성 체크 변수
-		*/
+		 _selector: DIV 객체 _chart: svg _width: Accor 넓이 _sliderHeight: slider 높이 _data: 데이터 _styles: 스타일
+		 _series: 만들어진 series, __series: 사용자 입력 series, _overlaySerieses: 오버레이 활성 체크 변수, _assistSerieses: 보조지표 활성 체크 변수
+		 */
 		var overlay = new webponent.STOCKOVERLAYMINI();
 		var assist = new webponent.STOCKASSISTMINI(_selector);
 		var chartType = '';
@@ -82,9 +82,9 @@
 				type = 'overlay';
 
 				var returnData = reDrawOverLay(_selector, stockStyles, data, 'over1', styles, _series, series, overlaySerieses, overlay, isRealTime);
-				
+
 				_overlaySerieses = returnData.overSerieses;
-				
+
 				styles = $.extend(true, {}, styles, returnData.styles), series = $.extend({}, series, returnData.series);
 
 				sliceData(data, returnData);
@@ -104,21 +104,21 @@
 		};
 
 		var waitForFinalEvent = (function () {
-		  	var timers = {};
-		  	return function (callback, ms, uniqueId) {
-		    	if (!uniqueId) {
-			      	uniqueId = "Don't call this twice without a uniqueId";
-			    }
-		    	if (timers[uniqueId]) {
-			      	clearTimeout (timers[uniqueId]);
-			    }
-		    	timers[uniqueId] = setTimeout(callback, ms);
-		  	};
+			var timers = {};
+			return function (callback, ms, uniqueId) {
+				if (!uniqueId) {
+					uniqueId = "Don't call this twice without a uniqueId";
+				}
+				if (timers[uniqueId]) {
+					clearTimeout (timers[uniqueId]);
+				}
+				timers[uniqueId] = setTimeout(callback, ms);
+			};
 		})();
 		var chkReDraw = false;
 		var sliceData = function(user_data, _returnData, _thisType){
 			var tempData = user_data.concat([]);
-			
+
 			var sliceIndex = slider.rightSliderIndecator - itemCount;
 			if(sliceIndex < 0) {
 				sliceIndex = 0;
@@ -160,13 +160,13 @@
 				return;
 			}
 
-			
+
 			waitForFinalEvent(function(){
 
-			   initLegend(chart, stockStyles, stockLegend, overlay, assist, overlaySerieses, assistSerieses, _thisType);
-			      //...
+				initLegend(chart, stockStyles, stockLegend, overlay, assist, overlaySerieses, assistSerieses, _thisType);
+				//...
 			}, 1, "legend making");
-			
+
 			chkReDraw = true;
 
 		};
@@ -319,57 +319,57 @@
 		if(!_sliderHtml) {
 			_sliderHtml = ''
 				+ '<style>'
-					+ '.sliderContainer {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden;  bottom: 0; border-top: 1px solid #ddd;}'
-					+ '.sliderArea 		{font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; background: url(../../../lib/stock/img/slider_bg.png) 50% 50% no-repeat;}'
-					+ '.sliderArea .slider {background: url(../../../lib/stock/img/slider_cent.gif) 50% 50% no-repeat; height: 17px; position: absolute;}'
-					+ '.sliderArea .slider .slider-left {display: block; background: url(../../../lib/stock/img/slider_left.gif) left 50% no-repeat; height: 17px; width: 100%;}'
-					+ '.sliderArea .slider .slider-right {display: block; background: url(../../../lib/stock/img/slider_right.gif) right 50% no-repeat; height: 17px; width: 100%;}'
-					+ '.sliderArea .slider .slider-right span {visibility: hidden}'
-					+ '.sliderButton {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; right: 5px;}'
-					+ '.sliderButton input {font-size: 11px;font-family: Tahoma, dotum, gulim; margin: 6px 0 0 2px; padding: 0 4px; vertical-align: top;}'
+				+ '.sliderContainer {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden;  bottom: 0; border-top: 1px solid #ddd;}'
+				+ '.sliderArea 		{font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; background: url(../../../lib/stock/img/slider_bg.png) 50% 50% no-repeat;}'
+				+ '.sliderArea .slider {background: url(../../../lib/stock/img/slider_cent.gif) 50% 50% no-repeat; height: 17px; position: absolute;}'
+				+ '.sliderArea .slider .slider-left {display: block; background: url(../../../lib/stock/img/slider_left.gif) left 50% no-repeat; height: 17px; width: 100%;}'
+				+ '.sliderArea .slider .slider-right {display: block; background: url(../../../lib/stock/img/slider_right.gif) right 50% no-repeat; height: 17px; width: 100%;}'
+				+ '.sliderArea .slider .slider-right span {visibility: hidden}'
+				+ '.sliderButton {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; right: 5px;}'
+				+ '.sliderButton input {font-size: 11px;font-family: Tahoma, dotum, gulim; margin: 6px 0 0 2px; padding: 0 4px; vertical-align: top;}'
 
-					+ '.sliderButton input[type=button]{text-indent: -9999px; cursor: pointer; overflow: hidden;}'
-					+ '*html .sliderButton input[type=button]{font-size:0;line-height:0;}' /*ie6*/
-					+ '*+html .sliderButton input[type=button]{text-indent: 0;font-size:0;line-height:0;padding-left: 100px;}'  /*ie7*/
+				+ '.sliderButton input[type=button]{text-indent: -9999px; cursor: pointer; overflow: hidden;}'
+				+ '*html .sliderButton input[type=button]{font-size:0;line-height:0;}' /*ie6*/
+				+ '*+html .sliderButton input[type=button]{text-indent: 0;font-size:0;line-height:0;padding-left: 100px;}'  /*ie7*/
 
-					+ '.sliderButton .slider-plus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_plus.png)}'
-					+ '.sliderButton .slider-plus:hover {background-image: url(../../../lib/stock/img/bt_plus_over.png)}'
-					+ '.sliderButton .slider-plus:active {background-image: url(../../../lib/stock/img/bt_plus_sel.png)}'
-					+ '.sliderButton .slider-default {width: 43px; height: 19px; background: url(../../../lib/stock/img/bt_default.png)}'
-					+ '.sliderButton .slider-default:hover {background-image: url(../../../lib/stock/img/bt_default_over.png)}'
-					+ '.sliderButton .slider-default:active {background-image: url(../../../lib/stock/img/bt_default_sel.png)}'
-					+ '.sliderButton .slider-minus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_minus.png)}'
-					+ '.sliderButton .slider-minus:hover {background-image: url(../../../lib/stock/img/bt_minus_over.png)}'
-					+ '.sliderButton .slider-minus:active {background-image: url(../../../lib/stock/img/bt_minus_sel.png)}'
+				+ '.sliderButton .slider-plus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_plus.png)}'
+				+ '.sliderButton .slider-plus:hover {background-image: url(../../../lib/stock/img/bt_plus_over.png)}'
+				+ '.sliderButton .slider-plus:active {background-image: url(../../../lib/stock/img/bt_plus_sel.png)}'
+				+ '.sliderButton .slider-default {width: 43px; height: 19px; background: url(../../../lib/stock/img/bt_default.png)}'
+				+ '.sliderButton .slider-default:hover {background-image: url(../../../lib/stock/img/bt_default_over.png)}'
+				+ '.sliderButton .slider-default:active {background-image: url(../../../lib/stock/img/bt_default_sel.png)}'
+				+ '.sliderButton .slider-minus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_minus.png)}'
+				+ '.sliderButton .slider-minus:hover {background-image: url(../../../lib/stock/img/bt_minus_over.png)}'
+				+ '.sliderButton .slider-minus:active {background-image: url(../../../lib/stock/img/bt_minus_sel.png)}'
 				+ '</style>'
 				+ '<div class="sliderContainer">'
-					+ '<div class="sliderArea">'
-						+ '<div class="slider">'
-							+ '<span class="slider-left"><span class="slider-right"><span>SLIDER</span></span></span>'
-						+ '</div>'
-					+ '</div>'
-					+ '<div class="sliderButton">'
-						+ '<input type="button" value="+" class="slider-plus" />'
-						+ '<input type="button" value="초기화" class="slider-default" />'
-						+ '<input type="button" value="-" class="slider-minus" />'
-					+ '</div>';
+				+ '<div class="sliderArea">'
+				+ '<div class="slider">'
+				+ '<span class="slider-left"><span class="slider-right"><span>SLIDER</span></span></span>'
+				+ '</div>'
+				+ '</div>'
+				+ '<div class="sliderButton">'
+				+ '<input type="button" value="+" class="slider-plus" />'
+				+ '<input type="button" value="초기화" class="slider-default" />'
+				+ '<input type="button" value="-" class="slider-minus" />'
+				+ '</div>'
 				+ '</div>';
 		}
 		var slider = new window.webponent.STOCKSLIDERMINI(_selector, accWidth, sliderHeight, _sliderHtml);
 
 		slider.init(data, itemCount);
-		
+
 		var mouseDownCheck = false, sliderEventCheck = false;
 		if(('createTouch' in doc) || ('ontouchstart' in doc)){
 			var downPos = {};
 			var svg = _selector.children().get(0);
 			svg.addEventListener('touchstart', function(event){
-				
+
 				mouseDownCheck = true;
 			})
 			$(svg).swipe({
 				swipeStatus: function(event, phase, direction, distance , duration , fingerCount){
-					
+
 					if(direction === 'up' || direction === 'down'){
 						event.preventDefault();
 						return;
@@ -382,30 +382,30 @@
 
 			svg.addEventListener("touchend", function(event){
 				waitForFinalEvent(function(){
-				  	sliceData(data, {styles: styles, series: series}, 'slider');     //...
+					sliceData(data, {styles: styles, series: series}, 'slider');     //...
 				}, 0, "touchMove");
 				mouseDownCheck = false;
 
 				var downPos = {};
 				if(event.changedTouches.length > 0){
-			    		
-			    	var target = event.target || event.srcElement,
-			    		rect = target.getBoundingClientRect(),
-			    		parent = target.parentNode,
-			    		parentRect = parent.getBoundingClientRect();
 
-			    	downPos.x = event.changedTouches[0].clientX - parentRect.left; 
-			    	downPos.y = event.changedTouches[0].clientY - parentRect.top;
-		    	}
-				
+					var target = event.target || event.srcElement,
+						rect = target.getBoundingClientRect(),
+						parent = target.parentNode,
+						parentRect = parent.getBoundingClientRect();
+
+					downPos.x = event.changedTouches[0].clientX - parentRect.left;
+					downPos.y = event.changedTouches[0].clientY - parentRect.top;
+				}
+
 				if(downPos.x > accWidth){
-					 getChartData(chart, downPos, stockLegend, overlay, assist, overlaySerieses, assistSerieses);
+					getChartData(chart, downPos, stockLegend, overlay, assist, overlaySerieses, assistSerieses);
 				}
 			}, false);
 
 			$('.slider', _selector).bind('touchend', function(event){
 				waitForFinalEvent(function(){
-				  	sliceData(data, {styles: styles, series: series}, 'slider');     //...
+					sliceData(data, {styles: styles, series: series}, 'slider');     //...
 				}, 0, "touchMove");
 				mouseDownCheck = false;
 			});
@@ -422,15 +422,15 @@
 				var downPos = {};
 				if (typeof event.layerX !== 'undefined') { // Opera
 					downPos.x = event.layerX, downPos.y = event.layerY;
-			    } else if(typeof event.offsetX !== 'undefined') { // Firefox
-			    	downPos.x = event.offsetX, downPos.y = event.offsetY;
-			    	if(TYPE === 'VML') downPos.x +=  $(event.target).offset().left;
-			    } else {
-			    	downPos.x = event.clientX - $(event.target).offset().left;
-			    	downPos.y = event.clientY - $(event.target).offset().top;
+				} else if(typeof event.offsetX !== 'undefined') { // Firefox
+					downPos.x = event.offsetX, downPos.y = event.offsetY;
+					if(TYPE === 'VML') downPos.x +=  $(event.target).offset().left;
+				} else {
+					downPos.x = event.clientX - $(event.target).offset().left;
+					downPos.y = event.clientY - $(event.target).offset().top;
 				}
 				if(downPos.x > accWidth){
-					 getChartData(chart, downPos, stockLegend, overlay, assist, overlaySerieses, assistSerieses);
+					getChartData(chart, downPos, stockLegend, overlay, assist, overlaySerieses, assistSerieses);
 				}
 			}).mouseup(function(event){
 				mouseDownCheck = false;
@@ -448,7 +448,7 @@
 		});
 		var plusButtonClick = function(){
 			if(itemCountArray[0] > data.length) return;
-			
+
 			--itemCountIndex;
 			if(itemCountIndex < 0) {
 
@@ -473,7 +473,7 @@
 
 			++itemCountIndex;
 			if(itemCountIndex >= itemCountArray.length) {
-			
+
 				itemCountIndex = itemCountArray.length - 1;
 			}
 
@@ -484,10 +484,10 @@
 		};
 		var defaultButtonClick = function(){
 			if(itemCountArray[0] > data.length) return;
-			
+
 			itemCountIndex = 4;
 			itemCount = _options.stock.itemCount || 80;
-			
+
 			if(itemCount > data.length) {
 
 				for(var i = 0; i < itemCountArray.length; i ++) {
@@ -524,7 +524,7 @@
 						data = _data;
 
 						if(_data.length < itemCount || _data.length < 80) {
-							
+
 							for(var i = 0; i < itemCountArray.length; i ++) {
 								if(itemCountArray[i] >= _data.length) {
 									// 데이터 갯수보다 itemCountArray[i]가 커지기 바로 직전까지 저장하고 
@@ -551,7 +551,7 @@
 							_options.data.url = null;
 							_options.data.data = data;
 						}
-						
+
 						chart.inquery(_options, {}, series);
 						chartInstance.subGraphScript(true);
 					},
@@ -625,7 +625,7 @@
 			};
 			/**
 			 * 주식차트의 활성화중인 오버레이와 보조지표 종류
-			 * @return {Object} 오버레이는 over1, over2 
+			 * @return {Object} 오버레이는 over1, over2
 			 *                  보조지표는 보조지표 명이 들어있다.
 			 */
 			chartInstance.getSelectSeries = function() {
@@ -648,7 +648,7 @@
 			 */
 			chartInstance.getSelectSeriesParams = function(name) {
 				if(name.indexOf('over') > -1) {
-					
+
 					return overlay[name];
 				} else {
 					return assist[name];
@@ -669,7 +669,7 @@
 			 */
 			chartInstance.switchMainSeries = function (name) {
 
-				
+
 				$.each(series.main, function(key, value) {
 
 					if(key === name) {
@@ -693,7 +693,7 @@
 
 		return chartInstance;
 	};
-	
+
 
 	var getChartData = function(chart, _event, _legend, _overlay, _assist, _overlaySerieses, _assistSerieses, _thisType){
 		var data = chart.getData();
@@ -703,7 +703,7 @@
 					var key = _overlaySerieses[i];
 
 					if(key == 'over1' || key == 'over2' || key == 'over6' || key == 'over7') continue;
-						
+
 					var thisSeriesData = data.main;
 					var thisLegend = _legend.main[key];
 					var thisLegendInfo = thisLegend.items.info;
@@ -753,12 +753,12 @@
 						for(var k = thisData.length; k--;){
 							if($.trim(thisData[k].xaxis) == '' || thisData[k].yaxis == null || thisData[k].yaxis == undefined) continue;
 
-								var shape = thisData[k].shape;//, next = thisData[k + 1].shape;
-								if(shape.mx < _event.x && shape.mx + shape.mw > _event.x){
-									text += ' ' + thisLegend.legend.info[count] + ': ' + Number(thisData[k].yaxis).toFixed(thisLegend.legend.toFixed).format();
+							var shape = thisData[k].shape;//, next = thisData[k + 1].shape;
+							if(shape.mx < _event.x && shape.mx + shape.mw > _event.x){
+								text += ' ' + thisLegend.legend.info[count] + ': ' + Number(thisData[k].yaxis).toFixed(thisLegend.legend.toFixed).format();
 
-									break;
-								}
+								break;
+							}
 
 						}
 						count ++;
@@ -802,7 +802,7 @@
 	/* 차트형식 */
 	var reDrawChartType = function(_this, _series){
 		var value = _this.val();
-		
+
 		var thisSeries = _series.main;
 		var count = 0;
 		for(var i in thisSeries){
@@ -813,7 +813,7 @@
 				thisSeries[i].visible = false;
 			}
 		}
-		
+
 		return _series;
 	};
 	var reDrawOverLay = function(_selector, _stockStyles, _data, _this, _styles, _series, _seriesObject, _serieses, _overlay, _isRealTime){
@@ -830,18 +830,18 @@
 		var stockStyle = _stockStyles;
 		var style = null, series = null;
 		switch(value){
-		case 'over1':
+			case 'over1':
 
-			style = { over1_series1: stockStyle.over1.series1, over1_series2: stockStyle.over1.series2, over1_series3: stockStyle.over1.series3, over1_series4: stockStyle.over1.series4 };
-			series = {
-				over1_series1: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '5일선'},
-				over1_series2: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '20일선'},
-				over1_series3: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '60일선'},
-				over1_series4: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '120일선'}
-			}
+				style = { over1_series1: stockStyle.over1.series1, over1_series2: stockStyle.over1.series2, over1_series3: stockStyle.over1.series3, over1_series4: stockStyle.over1.series4 };
+				series = {
+					over1_series1: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '5일선'},
+					over1_series2: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '20일선'},
+					over1_series3: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '60일선'},
+					over1_series4: {series: 'line', xaxis: _series.xaxis, yaxis: _series.close, label: '120일선'}
+				}
 
-			_data = _overlay.parseOver1Data(_data, series);
-			break;
+				_data = _overlay.parseOver1Data(_data, series);
+				break;
 
 		}
 		if(!_isRealTime){
@@ -865,20 +865,20 @@
 			var canvaspaddingleft = _left + (stockStyle.core_sub.layout.paddingLeft || 10);
 
 			switch(value){
-			case 'volume':
-				style = {
-					volume: { series: { series1: stockStyle.volume.series1 }}
-				}
-				style.volume = $.extend(true, {}, style.volume, stockStyle.core_sub);
-				style.volume.layout.paddingLeft = canvaspaddingleft;
-				series = {
-					volume: {
-						type: 'sub', series1: {series: 'column', xaxis: _series.xaxis, yaxis: _series.volume, label: '거래량'}
+				case 'volume':
+					style = {
+						volume: { series: { series1: stockStyle.volume.series1 }}
 					}
-				}
-				_assist.parseVolumeData();
-				break;
-			
+					style.volume = $.extend(true, {}, style.volume, stockStyle.core_sub);
+					style.volume.layout.paddingLeft = canvaspaddingleft;
+					series = {
+						volume: {
+							type: 'sub', series1: {series: 'column', xaxis: _series.xaxis, yaxis: _series.volume, label: '거래량'}
+						}
+					}
+					_assist.parseVolumeData();
+					break;
+
 			}
 			_serieses.push(value);
 			_seriesObject = $.extend({}, _seriesObject, series);
@@ -941,11 +941,11 @@
 		styles.volume.layout.paddingLeft 	= _accWidth + (style.core_sub.layout.paddingLeft || 10);
 
 		/*styles.main.yAxis = {}, styles.volume.yAxis = {};
-		styles.main.yAxis.position = 'right', styles.volume.yAxis.position = 'right';*/
+		 styles.main.yAxis.position = 'right', styles.volume.yAxis.position = 'right';*/
 		return styles;
 	};
 
-		// ajax data Loading
+	// ajax data Loading
 	var loadData = function(_options, _callback){
 		if(_options.data.data){
 			var arr = _options.data.data;
@@ -1123,7 +1123,7 @@
 	};
 
 	/*
-		오버레이
+	 오버레이
 	 */
 	window.webponent.STOCKOVERLAYMINI = function(){
 		var _this = this;
@@ -1351,7 +1351,7 @@
 
 	};
 	/*
-		보조지표
+	 보조지표
 	 */
 	window.webponent.STOCKASSISTMINI = function(_selector){
 
@@ -1469,11 +1469,11 @@
 			selector.append(_sliderHtml);
 
 			_this.maximum = _data.length;
-			
+
 			itemCount = _itemCount;
-			
+
 			if(_this.maximum < itemCount) {
-			
+
 				itemCount = _this.maximum;
 			}
 
@@ -1482,7 +1482,7 @@
 
 
 			$('.sliderContainer', selector).css({
-				width: CHART_WIDTH, 
+				width: CHART_WIDTH,
 				height: CONTAINER_HEIGHT+'px'
 			});
 			$('.sliderButton', selector).css({
@@ -1493,15 +1493,15 @@
 			var buttonWidth = SLIDER_WIDTH * (itemCount / _this.maximum);
 
 			$('.sliderArea', selector).css({
-				left: CONTAINER_LEFT+'px', 
-				width: SLIDER_WIDTH, 
+				left: CONTAINER_LEFT+'px',
+				width: SLIDER_WIDTH,
 				height: CONTAINER_HEIGHT+'px'
 			});
 
 			_this.slider = $('.slider', selector);
 			_this.slider.css({
-				top: (CONTAINER_HEIGHT/2) - (_this.slider.height()/2), 
-				left: (SLIDER_WIDTH - buttonWidth) +'px', 
+				top: (CONTAINER_HEIGHT/2) - (_this.slider.height()/2),
+				left: (SLIDER_WIDTH - buttonWidth) +'px',
 				width: buttonWidth,
 				cursor: 'pointer'
 			});
@@ -1533,7 +1533,7 @@
 
 				$('.slider', selector).bind('touchstart', function(event){
 					// if(event.layerX < 0){ //Android
-						downPos.x = $(event.target).closest('.slider').position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
+					downPos.x = $(event.target).closest('.slider').position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
 					// } else {
 					// 	downPos.x = event.target.layerX;
 					// }
@@ -1559,11 +1559,11 @@
 					_this.sliderDownChk = true;
 					if (typeof event.layerX !== 'undefined') { // Opera
 						downPos.x = event.layerX, downPos.y = event.layerY;
-				    } else if(typeof event.offsetX !== 'undefined') { // Firefox
-				    	downPos.x = event.offsetX, downPos.y = event.offsetY;
-				    } else {
-				    	downPos.x = event.clientX - $(event.target).offset().left;
-				    	downPos.y = event.clientY - $(event.target).offset().top;
+					} else if(typeof event.offsetX !== 'undefined') { // Firefox
+						downPos.x = event.offsetX, downPos.y = event.offsetY;
+					} else {
+						downPos.x = event.clientX - $(event.target).offset().left;
+						downPos.y = event.clientY - $(event.target).offset().top;
 					}
 					downPos.left = Math.floor(Number(_this.slider.css('left').split('px')[0]));
 					downPos.width = SLIDER_WIDTH * (itemCount / _this.maximum);
@@ -1607,7 +1607,7 @@
 
 				if(direction === 'right' && _type != 'button' || direction === 'left' && _type == 'button') move = move * -1;
 				// if(_event.layerX < 0){ //Android
-					// move = Math.floor(downX - _event.touches[0].pageX);
+				// move = Math.floor(downX - _event.touches[0].pageX);
 				// } else {
 				// 	move = Math.floor(downX - _event.layerX)/2;
 				// }
@@ -1723,7 +1723,7 @@
 		};
 
 		this.sliderReInit = function(_data, _itemCount) {
-			
+
 			if(_data.length <= 0) {
 				_this.slider.hide();
 			} else {
@@ -1735,8 +1735,8 @@
 			var buttonWidth = SLIDER_WIDTH * (_itemCount / _this.maximum);
 
 			_this.slider.css({
-				left: (SLIDER_WIDTH - buttonWidth) +'px', 
-				width: buttonWidth, 
+				left: (SLIDER_WIDTH - buttonWidth) +'px',
+				width: buttonWidth
 			});
 			_this.sliderUpdate('default', _data, _itemCount);
 		};
@@ -1744,4 +1744,4 @@
 		return _this;
 	};
 
- })();
+})();
