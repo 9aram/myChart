@@ -457,7 +457,8 @@
                 data : [],
                 wrapper : {
                     width : null
-                }
+                },
+                animation : []
             };
             return settingModel;
         }
@@ -906,6 +907,9 @@
                         clearTimeout(gapNum);
                     }
                 }, 1000/difference);
+
+                gauge.settings.animation.push(gapNum);
+
             }
         }
 
@@ -1207,7 +1211,7 @@
          * 회전 애니메이션	[ USE_TYPE : Angular ]
          * @[param] :  (비교값1, 비교값2, 각도, 대상, 회전중심X, 회전중심Y);
          */
-        function animRotate(prevVal,curVal,obj,x,y){			// Angular type의  빨간색, 또는 주황색 부분 rotation
+        function animRotate(prevVal,curVal,obj,x,y,gauge){			// Angular type의  빨간색, 또는 주황색 부분 rotation
 
             var difference  = Math.floor(Math.abs(curVal-prevVal));
             var d = difference;
@@ -1234,6 +1238,9 @@
                     }
                 }
             }, 1000 / (difference + 50), 'bounce');
+
+            gauge.settings.animation.push(gapNum);
+
         }
 
         /**
@@ -1320,7 +1327,7 @@
 
                 if(isAnimated){
                     multiArrow.rotate(prevMultiAngle,(pos.centerX),(pos.centerY+5));
-                    animRotate(prevMultiAngle, secondAngle, multiArrow, pos.centerX, (pos.centerY+3) );
+                    animRotate(prevMultiAngle, secondAngle, multiArrow, pos.centerX, (pos.centerY+3) , gauge );
                 }else{
                     multiArrow.rotate(secondAngle,(pos.centerX),(pos.centerY+5));
                 }
@@ -1353,7 +1360,7 @@
 
                 if(isAnimated){
                     dualArrow.rotate(dualPrevAngle,(pos.centerX),((pos.centerY+moveY)+2.5));
-                    animRotate(dualPrevAngle, dualAngle, dualArrow, pos.centerX,((pos.centerY+moveY)+2.5));
+                    animRotate(dualPrevAngle, dualAngle, dualArrow, pos.centerX,((pos.centerY+moveY)+2.5), gauge);
                 }else{
                     dualArrow.rotate(dualAngle,(pos.centerX),((pos.centerY+moveY)+2.5));
                 }
@@ -1371,7 +1378,7 @@
 
             if(isAnimated){
                 baseArrow.rotate(prevAngle,(pos.centerX),(pos.centerY));
-                animRotate((prevAngle-1),curAngle,baseArrow,(pos.centerX),(pos.centerY));
+                animRotate((prevAngle-1),curAngle,baseArrow,(pos.centerX),(pos.centerY), gauge);
             }else{
                 baseArrow.rotate(curAngle,(pos.centerX),(pos.centerY));
             }
@@ -1829,10 +1836,14 @@
 
                 if (afterWrapperWidth !== beforeWrapperWidth|| afterWrapperHeight !== beforeWrapperHeight) {
                     if (gauge.options.use.responsive) {
-                        for (var i = 0; i < 9999; i++){
-                            window.clearInterval(i);
-                        }
-                        gauge.resize();
+                        waitForFinalEvent(function() {
+                            var anim = gauge.settings.animation;
+                            for (var i = 0; i < anim.length; i++){
+                                clearInterval(anim[i]);
+                            }
+                            gauge.resize();
+
+                        }, 500, "some unique string");
                     }
                     gauge.svg.width = gauge.wrapper.width();
                     gauge.svg.height = gauge.wrapper.height();
