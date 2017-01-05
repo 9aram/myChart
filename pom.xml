@@ -113,10 +113,10 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
 
-                    <packagingExcludes>
+<!--                    <packagingExcludes>
                         WEB-APP/webponent/chart2.0/sample/**/**
                         ,WEB-INF/webponent/export/bin/**/**,WEB-INF/webponent/export/fonts/**/**
-                    </packagingExcludes>
+                    </packagingExcludes>-->
 
                     <webResources>
                         <resource>
