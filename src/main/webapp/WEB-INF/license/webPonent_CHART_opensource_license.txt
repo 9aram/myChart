@@ -1,4 +1,4 @@
-Libraries License:
+webPonent CHART - Libraries License:
 	
 	# jquery (http://www.jquery.com/)
 	  License: MIT (https://jquery.org/license/)
