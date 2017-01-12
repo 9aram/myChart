@@ -114,7 +114,7 @@
                 <configuration>
 
                     <packagingExcludes>
-                        WEB-INF/classes/**/**
+                        WEB-INF/classes/**/**,WEB-INF/webponent/export/bin/**/**
                     </packagingExcludes>
 
                     <webResources>
