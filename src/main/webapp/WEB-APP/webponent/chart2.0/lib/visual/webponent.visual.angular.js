@@ -2,7 +2,7 @@
  * 사이버이메지네이션
  * 최초 작성자 : joointhezoo@cyber-i.com
  * 마지막 수정자 : joointhezoo@cyber-i.com
- * 마지막 수정날짜 :  16.11.10
+ * 마지막 수정날짜 :  16.01.05
  */
 (function () {
 
@@ -408,8 +408,8 @@
 
             var width = gauge.svg.width,
                 height = gauge.svg.height,
-                styles =  gauge.styles;
-            use = gauge.options.use,
+                styles =  gauge.styles,
+                use = gauge.options.use,
                 rate = (type!=='dual')  ? 0.159 : 0.11;
 
             var standard =  (width > height) ? height : width,
@@ -448,7 +448,7 @@
 
         }
 
-        function cloneSettingModel (gauge) {
+        function cloneSettingModel () {
 
             var settingModel = {
                 /**
@@ -557,8 +557,6 @@
         function loadJson (data, options) {
 
             var bld_depth = options.data.jsonDepth.split('.');
-            var outPut = bld_depth[0];
-            var result = bld_depth[1];
 
             var arr = data;
 
@@ -577,7 +575,7 @@
          * @param  {Object} options [PIE 옵션]
          * @return {Array}         [PIE 데이터]
          */
-        function loadText (data2, options) {
+        function loadText (data2) {
 
             var arr = [];
             var data = data2;
@@ -972,8 +970,13 @@
 
             var linesCount = countLine(axis);
 
-            var i =0, interval = 0,count = 0,
-                start_x =0, start_y =0, end_x=0, end_y=0;
+            var i =0,
+                interval = 0,
+                count = 0,
+                start_x =0,
+                start_y =0,
+                end_x=0,
+                end_y=0;
 
             var angle = styles.angular.angle,
                 radius =pos.objRadius;
@@ -1008,10 +1011,14 @@
 
             if(type==='dual'){
 
-
                 var linesCount = countLine(axis.dual);
-                var i =0, interval = 0,count = 0,
-                    start_x =0, start_y =0, end_x=0, end_y=0;
+                var i =0,
+                    interval = 0,
+                    count = 0,
+                    start_x =0,
+                    start_y =0,
+                    end_x=0,
+                    end_y=0;
 
                 var angle = axis.dual.angle;
 
@@ -1109,7 +1116,6 @@
 
                 angle = axis.dual.angle;
                 startAngle =90 + (360-angle)/2 ;
-                t = 0 ;
 
                 var moveY = (radius / 13 * 8 +(radius / 2));
                 var dualTextLength = axis.dual.text;
@@ -1121,7 +1127,7 @@
                         textVal = textVal+ (5-(textVal%5));
                     }
 
-                    t = (startAngle + ( (angle /dualRange)*textVal)) * Math.PI / 180;
+                    var t = (startAngle + ( (angle /dualRange)*textVal)) * Math.PI / 180;
 
                     dualMeterVal.push(
                         paper.text(getCos(pos, t, (radius-(bar.end_block*1.75))/2),getSin(pos, t, (radius-(bar.end_block*1.75))/2),textVal)
@@ -1140,7 +1146,7 @@
          * @param(type) : GAUGE CHART TYPE
          * @param(targetVal) : TARGET VALUE
          */
-        function drawTarget(gauge, type){
+        function drawTarget(gauge){
             var paper = gauge.svg;
             var pos = gauge.sizes;
             var pointer = gauge.styles.pointer.target;
@@ -1193,7 +1199,7 @@
             }
             labels.attr({'font-size': styles.font.size, 'fill': styles.angular.color , "text-anchor": "middle", 'font-family' : styles.font.family });
 
-            var pointer =  paper.path(pointerCmd)
+            var pointerPath =  paper.path(pointerCmd)
                 .rotate(pointerAngle, (pos.centerX), Math.round(pos.centerY)).attr({"stroke":styles.bar.color});
 
             if( type === 'max'){
@@ -1204,7 +1210,7 @@
                 gauge.tipItems.avg = paper.set();
                 gauge.tipItems.avg.push(labels, type);
             }
-            gauge.redrawItem.push(pointer,labels);
+            gauge.redrawItem.push(pointerPath,labels);
         }
 
         /*GAUEGE function:
@@ -1214,12 +1220,11 @@
         function animRotate(prevVal,curVal,obj,x,y,gauge){			// Angular type의  빨간색, 또는 주황색 부분 rotation
 
             var difference  = Math.floor(Math.abs(curVal-prevVal));
-            var d = difference;
+            var d = difference - 1 ;
             if (obj === undefined) {
                 return false;
             }
             var gapNum = setInterval(function () {
-                d = d - 1;
                 if (d === -50) {
                     clearTimeout(gapNum);
                 } else {	// 흔들림 표현
@@ -1266,7 +1271,7 @@
 
             if(type==='dual'){
                 var moveY = (radius/13 * 8 +(radius/2)-2);
-                angularDualBase = paper.circle( pos.centerX, pos.centerY+moveY, radius/2 )
+                var angularDualBase = paper.circle( pos.centerX, pos.centerY+moveY, radius/2 )
                     .attr({
                         'fill': angular.base.color,
                         'stroke': angular.base.border,
@@ -1457,7 +1462,6 @@
          * mouse move event
          */
         function mouseMoveFunc(e, _this, gauge, x) {
-            var styles = gauge.styles;
             var options = gauge.options;
             var toolTip = gauge.tipItems.toolTip;
 
@@ -1545,7 +1549,7 @@
                 gauge.tipItems.toolTip.show();
                 mouseMoveFunc(e, this, gauge, "draw");
 
-            }).mouseout(function(e) {
+            }).mouseout(function() {
 
                 gauge.tipItems.toolTip.hide();
 
@@ -1557,7 +1561,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge,"max");
 
-                }).mouseout( function(e){
+                }).mouseout( function(){
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1570,7 +1574,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge,"avg");
 
-                }).mouseout( function(e){
+                }).mouseout( function(){
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1583,7 +1587,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge,"targetPointer");
 
-                }).mouseout( function(e){
+                }).mouseout( function(){
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1596,7 +1600,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge,"dual");
 
-                }).mouseout( function(e){
+                }).mouseout( function(){
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1687,7 +1691,7 @@
                 drawTextAxis(gauge,type);
             }
             if(use.target){
-                drawTarget(gauge, type);
+                drawTarget(gauge);
             }
             if(use.max){
                 drawPointer(gauge,"max");
