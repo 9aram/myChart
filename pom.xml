@@ -114,7 +114,7 @@
                 <configuration>
 
                     <packagingExcludes>
-                        WEB-INF/classes/**/**,WEB-INF/webponent/export/bin/**/**
+                        WEB-INF/classes/**/**,WEB-INF/webponent/export/bin/**/**,WEB-APP/webponent/chart2.0/extend/**/**
                     </packagingExcludes>
 
                     <webResources>
