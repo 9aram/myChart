@@ -557,6 +557,8 @@
         function loadJson (data, options) {
 
             var bld_depth = options.data.jsonDepth.split('.');
+            var outPut = bld_depth[0];
+            var result = bld_depth[1];
 
             var arr = data;
 
@@ -575,7 +577,7 @@
          * @param  {Object} options [PIE 옵션]
          * @return {Array}         [PIE 데이터]
          */
-        function loadText (data2) {
+        function loadText (data2, options) {
 
             var arr = [];
             var data = data2;
@@ -1225,6 +1227,8 @@
                 return false;
             }
             var gapNum = setInterval(function () {
+
+                d = d - 1;
                 if (d === -50) {
                     clearTimeout(gapNum);
                 } else {	// 흔들림 표현
