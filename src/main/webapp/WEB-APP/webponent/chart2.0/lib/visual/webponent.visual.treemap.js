@@ -2796,7 +2796,7 @@
 
 							options.useTimeSlice = false;
 
-							treemap.empty();
+							treemap.empty().off("*");
 
 							self.init(treemap, styles, options, loading_bar);
 
@@ -3013,7 +3013,7 @@
 
 				options.useTimeSlice = false;
 					
-				treemap.empty();
+				treemap.empty().off("*");
 				
 				self.init(treemap, styles, options, loading_bar);
 			}

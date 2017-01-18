@@ -2409,7 +2409,7 @@
 			 */
 			pie.setStylesAndOptions = function (styles, options) {
 
-				pie.wrapper.empty();
+				pie.wrapper.empty().off("*");
 
 				clearInterval(pie.settings.animation.firstDraw);
 				clearInterval(pie.settings.animation.timeSlice);
@@ -2428,7 +2428,7 @@
 			 */
 			pie.reDraw = function () {
 
-				pie.wrapper.empty();
+				pie.wrapper.empty().off("*");
 
 				clearInterval(pie.settings.animation.firstDraw);
 				clearInterval(pie.settings.animation.timeSlice);
@@ -2526,7 +2526,7 @@
 
 				pie.options.data.data = data;
 
-				pie.wrapper.empty();
+				pie.wrapper.empty().off("*");
 
 				pie = self.init(pie.wrapper, pie.styles, pie.options);
 			};

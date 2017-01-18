@@ -2181,7 +2181,7 @@
 
 						waitForFinalEvent(function() {
 
-							horizon.empty();
+							horizon.empty().off("*");
 
 							svgElement.endTimeSlice("disabled");
 
@@ -2580,7 +2580,7 @@
 
 					options = $.extend(true, options, _options);
 					
-					horizon.empty();
+					horizon.empty().off("*");
 					options.timeSlice.play.unbind('click');
 					options.timeSlice.pause.unbind('click');
 					options.timeSlice.stop.unbind('click');
@@ -2594,7 +2594,7 @@
 
 			svgElement.resize = function () {
 
-				horizon.empty();
+				horizon.empty().off("*");
 
 				svgElement.endTimeSlice("disabled");
 
