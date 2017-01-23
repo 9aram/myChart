@@ -181,6 +181,17 @@
 
 			return n + "%";
 		};
+		// Number Format 1,000만원
+		manwonDataFormat = function(txt) {
+			if(txt==0) return 0;
+
+			var reg = /(^[+-]?\d+)(\d{3})/;
+			var n = (txt + '');
+
+			while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+
+			return n + "만원";
+		};
 		// float Format 1,000.00 | 1,000
 		priceDataFormatFixMulti = function(txt, useDot) {
 			if(txt==0) return 0;
