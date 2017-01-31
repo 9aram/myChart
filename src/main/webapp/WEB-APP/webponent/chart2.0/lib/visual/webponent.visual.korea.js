@@ -1008,7 +1008,7 @@
 								loadingBar.hide();
 							}				
 
-							korea.empty().off("*");
+							korea.children().remove();
 
 							clearInterval(svgElement.timeSliceInterval);
 
@@ -1769,7 +1769,7 @@
 	            
 				options = $.extend(true, options, _options);
 
-				korea.empty().off("*");
+				korea.children().remove();
 				options.timeSlice.play.unbind('click');
 				options.timeSlice.pause.unbind('click');
 				options.timeSlice.stop.unbind('click');
@@ -1791,7 +1791,7 @@
 					loadingBar.hide();						
 				}				
 
-				korea.empty().off("*");
+				korea.children().remove();
 
 				clearInterval(svgElement.timeSliceInterval);
 

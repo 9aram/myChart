@@ -2156,7 +2156,7 @@
 
 							svgElement.timeSlicePlayCheck = false;
 
-							scatterPlot.empty().off("*");
+							scatterPlot.children().remove();
 
 							clearInterval(svgElement.timeSliceInterval);
 
@@ -3028,7 +3028,7 @@
 				
 				options = $.extend(true, options, _options);
 
-				scatterPlot.empty().off("*");
+				scatterPlot.children().remove();
 				options.timeSlice.play.unbind('click');
 				options.timeSlice.pause.unbind('click');
 				options.timeSlice.stop.unbind('click');
@@ -3040,7 +3040,7 @@
 
 			svgElement.resize = function () {
 
-				scatterPlot.empty().off("*");
+				scatterPlot.children().remove();
 
 				clearInterval(svgElement.timeSliceInterval);
 
