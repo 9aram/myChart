@@ -542,38 +542,39 @@
 		};
 
 		function parseDatasJson ( data, options ) {
-		
-			var total = 0;		
-			var dataLen = data.length;				
+
+			var total = 0;
+			var dataLen = data.length;
 			var dataArr = [];
-			var gCode = data[0][options.data.group];
 			var cnt = 0;
 			var dG = options.data.group;
 			var dN = options.data.groupName;
 			var dI = options.data.item;
 			var dU = options.data.use;
+			var groupArr = [];
 
 			dataArr[0] = {};
 			dataArr[0].data = [];
 			dataArr[0].name = data[0][dN];
 			dataArr[0].group = data[0][dG];
+			groupArr.push(data[0][dG]);
 
 			for ( var i = 0; i < dataLen; i++ ) {
-					
 				var dataI = data[i];
 
 				dataI.name = dataI[dI];
 
-				if ( gCode == dataI[dG] ) {
-					dataArr[cnt].data.push(dataI);
-				} else {
+				var groupIdx = $.inArray(data[i][dG],groupArr);
+				if(groupIdx > -1){
+					dataArr[groupIdx].data.push(dataI);
+				}else{
 					cnt++;
 					dataArr[cnt] = {};
 					dataArr[cnt].data = [];
 					dataArr[cnt].data.push(dataI);
 					dataArr[cnt].name = dataI[dN];
 					dataArr[cnt].group = dataI[dG];
-					gCode = dataI[dG];
+					groupArr.push(data[i][dG]);
 				}
 			}
 
