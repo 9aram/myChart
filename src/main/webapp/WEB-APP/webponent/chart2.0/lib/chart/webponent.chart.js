@@ -5979,6 +5979,8 @@
 							var getPath = function(_start, _end){
 								for(var i = _start; i < _end; i++){
 									value = data[i];
+									// data값 한개인 경우 발생하는 error 방지
+									if(data[i+1] == undefined){data[i+1]=data[i]};
 									if(($.trim(value.xaxis) == '' && $.trim(value.yaxis) == '') || value.yaxis === null || data[i + 1].yaxis === null) continue;
 									path += getPathString(value['shape'], (data[i + 1]).shape);
 								}
