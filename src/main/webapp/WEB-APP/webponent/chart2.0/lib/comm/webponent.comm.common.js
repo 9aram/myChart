@@ -255,6 +255,10 @@
     	 		return value.substr(0, 2) + "/" + value.substr(2, 2);
     	};
 
+		press_format_date4 = function(value) {
+			return value.substr(0, 2);
+		};
+
     	// Number 1,000
     	press_format_num1 = function(value) {
 			if(value==0) return 0;

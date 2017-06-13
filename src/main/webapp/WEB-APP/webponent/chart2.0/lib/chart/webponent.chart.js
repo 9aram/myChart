@@ -2891,6 +2891,8 @@
 				var useLine = (xAxisStyles.line.width > 0) ? true : false;
 				var useText = (xAxisStylesText.size > 0) ? true : false;
 
+				var drawedXais = [];
+
 				var gap = 0, skip = 0, text;
 				var xLabelCount = 0;
 				for(var i = 0; i < count; i++){
@@ -2908,6 +2910,16 @@
 					if((gap - xLabelWidthHalf <= startX && i != 0) && !xAxisStylesValueAll){
 						continue;
 					}
+
+
+
+					//xlabel 중복일때 skip 처리 [박대영 2017.06.13]
+					if($.inArray(value, drawedXais) > -1) {
+						continue;
+					}else {
+						drawedXais.push(value);
+					}
+
 					if(skip <= gap && CHART_WIDTH > gap || xAxisStyles.useValue.last && i == count - 1 || xAxisStylesValueAll){
 						var x =  gap + xGapHalf + 1;
 						if(useLine){
@@ -3483,6 +3495,8 @@
 					min: true,
 					max: true
 				};
+
+				console.log(222, xAxisStyles)
 
 				if(!xAxisStyles.hasOwnProperty('useValue')){
 					xAxisStyles.useValue = {};
