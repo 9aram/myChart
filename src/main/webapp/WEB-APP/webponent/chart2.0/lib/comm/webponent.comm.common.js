@@ -256,6 +256,10 @@
     	};
 
 		press_format_date4 = function(value) {
+			return value.substr(0, 4) + "-" + value.substr(4, 2) + "-" + value.substr(6,2);
+		};
+
+		press_format_date5 = function(value) {
 			return value.substr(0, 2);
 		};
 
