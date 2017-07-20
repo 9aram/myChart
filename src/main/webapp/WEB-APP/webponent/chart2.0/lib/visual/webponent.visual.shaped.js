@@ -856,6 +856,11 @@
             }
         }
 
+        /**
+         * 눈금의 최대범위와 최소범위 값을 설정
+         * @param {gauge} gauge 객체
+         * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
+         */
         function adjustMinMax(gauge) {
 
             var range = gauge.options.minmax;
@@ -903,7 +908,7 @@
         }
 
         /**
-         * CHART 의 눈금 표시 (  ANGULAR || 'COL' || 'ROW'  )
+         * CHART 의 눈금 표시
          */
         function drawAxis(gauge, type) {
 
@@ -943,7 +948,7 @@
         }
 
         /**
-         * CHART 의 치수 표시 (  ANGULAR || 'COL' || 'ROW'  )
+         * CHART 의 치수 표시
          */
         function drawTextAxis(gauge, type) {
 
@@ -1016,6 +1021,12 @@
             gauge.redrawItem.push(target);
         }
 
+        /**
+         * 최대값 또는 평균값
+         * @param(type) : GAUGE CHART TYPE
+         * @param(targetVal) : TARGET VALUE
+         * targetVal =( max || avg )
+         */
         function drawPointer(gauge, type, pointerType) {
             var paper = gauge.svg;
             var pos = gauge.sizes;
@@ -1029,12 +1040,12 @@
             var  pointerVal = null;
 
             if(pointerType === 'max'){
-                pointerVal =  pointer.max - minAxis,
-                    styles = styles.pointer.max;
+                pointerVal =  pointer.max - minAxis;
+                styles = styles.pointer.max;
             }
             else if (pointerType === 'avg') {
-                pointerVal =  pointer.avg - minAxis,
-                    styles = styles.pointer.avg;
+                pointerVal =  pointer.avg - minAxis;
+                styles = styles.pointer.avg;
             }
             var linesCount = countLine(gauge.styles.axis);
 
@@ -1404,7 +1415,7 @@
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {pie} pie 객체
+         * @param  {gauge} gauge 객체
          */
         function appendToolTip(gauge) {
             var options = gauge.options;
@@ -1525,9 +1536,9 @@
 
                 gauge.sizes = cloneSettingSize(gauge, type);
                 drawItem(gauge, type);
+                itemsEvents(gauge);
             }
 
-            itemsEvents(gauge);
         }
 
         /**
@@ -1576,9 +1587,8 @@
                 gauge.sizes = cloneSettingSize(gauge, type);
 
                 drawItem(gauge, type);
-
+                itemsEvents(gauge);
             }
-            itemsEvents(gauge);
         }
 
         /**

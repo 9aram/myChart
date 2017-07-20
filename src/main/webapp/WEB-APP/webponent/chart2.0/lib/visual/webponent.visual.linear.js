@@ -327,7 +327,7 @@
                     axis : true ,			// 눈금
                     axisText : true ,		// 치수
                     counter : true ,		// 치수표시판
-                    max :true ,			// 최대값 표시
+                    max :true ,			    // 최대값 표시
                     avg : true ,			// 평균값 표시
                     target : false ,		// 타겟값 표시
                     toolTip : true ,		// 마우스오버 툴팁
@@ -373,8 +373,8 @@
 
             var width = gauge.svg.width,
                 height = gauge.svg.height,
-                styles =  gauge.styles;
-            use = gauge.options.use;
+                styles =  gauge.styles,
+                use = gauge.options.use;
             var
                 objWidth = width * 0.1,
                 objHeight = height * 0.6,
@@ -382,9 +382,9 @@
                 standard = (width > height) ? height : width;
 
             if (use.direct === 'row') {
-                objWidth = height * 0.6,
-                    objHeight =  width * 0.1,
-                    centerX = (width / 2) + styles.layout.position.x;
+                objWidth = height * 0.6;
+                objHeight =  width * 0.1;
+                centerX = (width / 2) + styles.layout.position.x;
             }
 
             /**
@@ -808,6 +808,11 @@
             }
         }
 
+        /**
+         * 눈금의 최대범위와 최소범위 값을 설정
+         * @param {gauge} gauge 객체
+         * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
+         */
         function adjustMinMax(gauge) {
 
             var range = gauge.options.minmax;
@@ -855,7 +860,8 @@
         }
 
         /**
-         * CHART 의 눈금 표시 ( ANGULAR || 'COL' || 'ROW' )
+         * CHART 의 눈금 표시
+         * ( col(가로) || row(세로) )
          */
         function drawAxis(gauge, type) {
 
@@ -886,7 +892,6 @@
 
                 }
             } else {
-
                 interval = pos.objWidth / linesCount; // 한칸당 수 범위
                 for (i = 0; i < linesCount + 1; i++) {
                     lineY = Math.round(pos.startY) - 0.5;
@@ -909,7 +914,8 @@
         }
 
         /**
-         * CHART 의 치수 표시 ( ANGULAR || 'COL' || 'ROW' )
+         * CHART 의 치수 표시
+         * ( col(가로) || row(세로) )
          */
         function drawTextAxis(gauge, type) {
 
@@ -1020,6 +1026,12 @@
             gauge.redrawItem.push(target);
         }
 
+        /**
+         * 최대값 또는 평균값
+         * @param(type) : GAUGE CHART TYPE
+         * @param(targetVal) : TARGET VALUE
+         * targetVal =( max || avg )
+         */
         function drawPointer(gauge, type, pointerType) {
             var paper = gauge.svg,
                 pos = gauge.sizes,
@@ -1035,12 +1047,12 @@
             var interval= "", pointerCmd= "",  pointerFlag= "",   labels= "",   pointerPath = "", value = null;
 
             if(pointerType === 'max'){
-                value =  pointer.max - minAxis,
-                    styles = styles.pointer.max;
+                value =  pointer.max - minAxis;
+                styles = styles.pointer.max;
             }
             else if (pointerType === 'avg') {
-                value =  pointer.avg - minAxis,
-                    styles = styles.pointer.avg;
+                value =  pointer.avg - minAxis;
+                styles = styles.pointer.avg;
             }
 
 
@@ -1646,6 +1658,11 @@
 
         }
 
+        /**
+         * 데이터 형식 변환
+         * @param  {num} 데이터 값
+         * @param  {formatType} 형식 종류
+         */
         function formatting(num, formatType) {
             var res = null;
             switch (formatType) {
@@ -1729,9 +1746,8 @@
 
                 gauge.sizes = cloneSettingSize(gauge, type);
                 drawItem(gauge, type);
+                itemsEvents(gauge);
             }
-
-            itemsEvents(gauge);
         }
 
         /**
@@ -1778,9 +1794,9 @@
                 adjustMinMax(gauge);
                 gauge.sizes = cloneSettingSize(gauge, type);
                 drawItem(gauge, type);
+                itemsEvents(gauge);
 
             }
-            itemsEvents(gauge);
         }
 
         /**

@@ -329,7 +329,7 @@
                         },
                         angular :{
                             color:'#2bcdba',
-                            length: -5 // 10
+                            length: -5
                         }
                     },
                     target : {
@@ -363,12 +363,12 @@
                     axis : true ,			// 눈금
                     axisText : true ,		// 치수
                     counter : true ,		// 치수표시판
-                    max :true ,			// 최대값 표시
+                    max :true ,			    // 최대값 표시
                     avg : true ,			// 평균값 표시
-                    target : false ,			// 타겟값 표시
-                    toolTip : true ,			// 마우스오버 툴팁
+                    target : false ,        // 타겟값 표시
+                    toolTip : true ,		// 마우스오버 툴팁
                     animate : true ,		// 움직이는 효과
-                    resize : false ,			// 게이지 사이즈 조절
+                    resize : false ,		// 게이지 사이즈 조절
                     responsive : true 		// 반응형 유무
                 },
 
@@ -913,6 +913,11 @@
             }
         }
 
+        /**
+         * 눈금의 최대범위와 최소범위 값을 설정
+         * @param {gauge} gauge 객체
+         * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
+         */
         function adjustMinMax(gauge) {
 
             var range = gauge.options.minmax;
@@ -960,7 +965,7 @@
         }
 
         /**
-         * CHART 의 눈금 표시 (  ANGULAR || 'COL' || 'ROW'  )
+         * CHART 의 눈금 표시
          */
         function drawAxis(gauge,type){
 
@@ -1075,7 +1080,7 @@
         }
 
         /**
-         * CHART 의 치수 표시 (  ANGULAR || 'COL' || 'ROW'  )
+         * CHART 의 치수 표시 (눈금 치수)
          */
         function drawTextAxis(gauge,type){
             var pos = gauge.sizes;
@@ -1169,6 +1174,12 @@
             gauge.redrawItem.push(target);
         }
 
+        /**
+         * 최대값 또는 평균값
+         * @param(type) : GAUGE CHART TYPE
+         * @param(targetVal) : TARGET VALUE
+         * targetVal =( max || avg )
+         */
         function drawPointer(gauge,type){
             var paper = gauge.svg,
                 pos = gauge.sizes,
@@ -1182,12 +1193,12 @@
             var value = null;
 
             if(type === 'max'){
-                value =  pointer.max - minAxis,
-                    styles = styles.pointer.max;
+                value =  pointer.max - minAxis;
+                styles = styles.pointer.max;
             }
             else if (type === 'avg') {
-                value =  pointer.avg - minAxis,
-                    styles = styles.pointer.avg;
+                value =  pointer.avg - minAxis;
+                styles = styles.pointer.avg;
             }
 
             var startAngle = (360 - angle ) / 2 ;
@@ -1215,11 +1226,12 @@
             gauge.redrawItem.push(pointerPath,labels);
         }
 
-        /*GAUEGE function:
+        /**
          * 회전 애니메이션	[ USE_TYPE : Angular ]
          * @[param] :  (비교값1, 비교값2, 각도, 대상, 회전중심X, 회전중심Y);
+         * 데이터를 가르키는 바늘 애니메이션
          */
-        function animRotate(prevVal,curVal,obj,x,y,gauge){			// Angular type의  빨간색, 또는 주황색 부분 rotation
+        function animRotate(prevVal,curVal,obj,x,y,gauge){
 
             var difference  = Math.floor(Math.abs(curVal-prevVal));
             var d = difference - 1 ;
@@ -1289,7 +1301,8 @@
         }
 
         /**
-         * DRWAWING ANGULAR GAUGE'S ARROW  : 원형게이지 차트의 화살표를 그리는 부분
+         * DRWAWING ANGULAR GAUGE'S ARROW
+         * : 원형게이지 차트의 데이터 표시 바늘
          * @param  {[gauge]}
          * @param  {[type]}
          */
@@ -1429,10 +1442,10 @@
             var target, rect, parent, parentRect ;
             e = e || window.event;
             if (elementType === 'VML' ) {
-                target = e.target || e.srcElement,
-                    rect = target.getBoundingClientRect(),
-                    parent = target.parentNode,
-                    parentRect = parent.getBoundingClientRect();
+                target = e.target || e.srcElement;
+                rect = target.getBoundingClientRect();
+                parent = target.parentNode;
+                parentRect = parent.getBoundingClientRect();
                 m.x = e.offsetX + rect.left - parentRect.left;
                 m.y = e.offsetY + rect.top - parentRect.top;
             } else {
@@ -1442,10 +1455,10 @@
                     m.x = Math.round(e.layerX);
                     m.y = Math.round(e.layerY);
                 } else if (appName === 'opera') { // Opera
-                    target = e.target || e.srcElement,
-                        rect = target.getBoundingClientRect(),
-                        parent = target.parentNode,
-                        parentRect = parent.getBoundingClientRect();
+                    target = e.target || e.srcElement;
+                    rect = target.getBoundingClientRect();
+                    parent = target.parentNod;
+                    parentRect = parent.getBoundingClientRect();
                     m.x = e.offsetX + rect.left - parentRect.left;
                     m.y = e.offsetY + rect.top - parentRect.top;
                 } else if(userAgent.indexOf('chrome') > - 1 ) { // chrome
@@ -1616,7 +1629,7 @@
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {pie} pie 객체
+         * @param  {gauge} gauge 객체
          */
         function appendToolTip (gauge) {
             var options = gauge.options;
@@ -1649,6 +1662,11 @@
 
         }
 
+        /**
+         * 데이터 형식 변환
+         * @param  {num} 데이터 값
+         * @param  {formatType} 형식 종류
+         */
         function formatting( num, formatType){
             var res = null;
             switch(formatType){
@@ -1738,9 +1756,10 @@
                 gauge.sizes = cloneSettingSize(gauge,type);
 
                 drawItem(gauge,type);
+
+                itemsEvents(gauge);
             }
 
-            itemsEvents(gauge);
         }
 
         /**
@@ -1789,8 +1808,8 @@
 
                 drawItem(gauge,type);
 
+                itemsEvents(gauge);
             }
-            itemsEvents(gauge);
         }
 
         /**
