@@ -397,7 +397,25 @@
 			return data;
 		}
 
-		/**
+        /**
+         * 데이터가 load 되지 않았을 경우
+         * @param  {korea} korea 객체
+         */
+        function noData (korea, svgElement) {
+
+            var x = korea.width() / 2;
+            var y = korea.height() / 2;
+            var text = svgElement.text(x, y, '데이터가 로드되지 않았습니다.');
+
+            text.attr({
+                'font-family': 'dotum',
+                'font-size': 12,
+                fill: '#000'
+            });
+        }
+
+
+        /**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
 		 * @param  {pie} pie 객체
 		 */
@@ -1550,6 +1568,13 @@
 			var svgElement = getSvg(korea, styles);
 
 			svgElement.event = $({});
+
+            if (data === 'error' || data.length <= 0) {
+
+                noData(korea, svgElement);
+                return svgElement;
+
+            }
 
 			/* 시, 도 element 생성 */
 

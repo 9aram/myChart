@@ -445,6 +445,23 @@
 			return data;
 		}
 
+        /**
+         * 데이터가 load 되지 않았을 경우
+         * @param  {treemap} pie 객체
+         */
+        function noData (treemap, svgElement) {
+
+            var x = treemap.width() / 2;
+            var y = treemap.height() / 2;
+            var text = svgElement.text(x, y, '데이터가 로드되지 않았습니다.');
+
+            text.attr({
+                'font-family': 'dotum',
+                'font-size': 12,
+                fill: '#000'
+            });
+        }
+
 		/**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
 		 * @param  {pie} pie 객체
@@ -2887,6 +2904,30 @@
 
 			loadImages(images, styles, options);
 
+			/* SVG 엘리먼트 생성 */
+
+            var svgElement = getSvg(treemap, styles);
+
+            svgElement.event = $({});
+
+            svgElement.event.on('drawCompleted', function () {
+
+                treemap.trigger('drawCompleted');
+            });
+
+            svgElement.event.on('selectedItem', function (e, data, position, mode) {
+
+                treemap.trigger('selectedItem', [data, position, mode]);
+            });
+debugger;
+			/* data가 없으면 noData 처리, svgElement 반환 */
+            if(options.data.data == null || options.data.data === 'undefined'){
+
+                noData(treemap, svgElement);
+
+                return svgElement;
+            }
+
 			/* load data */
 
 			var data = getData(options);
@@ -2900,24 +2941,8 @@
 			var groupData = setDataAttr( treemap, data, totalPrice, styles, options);	
 			
 			data = setDataObj(groupData);
-		
-			/* SVG 엘리먼트 생성 */
 
-			var svgElement = getSvg(treemap, styles);
-
-			svgElement.event = $({});
-
-			svgElement.event.on('drawCompleted', function () {
-
-				treemap.trigger('drawCompleted');
-			});
-
-			svgElement.event.on('selectedItem', function (e, data, position, mode) {
-
-				treemap.trigger('selectedItem', [data, position, mode]);
-			});
-
-			/* draw tree map base */
+            /* draw tree map base */
 
 			var base = drawBaseTreeMap(treemap, svgElement, styles);
 

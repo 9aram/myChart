@@ -1776,7 +1776,24 @@
 			return pixel;
 		}
 
-		function setPlotSize ( styles, options, data, scatterPlot ) {
+        /**
+         * 데이터가 load 되지 않았을 경우
+         * @param  {scatterPlot} pie 객체
+         */
+        function noData (scatterPlot, svgElement) {
+
+            var x = scatterPlot.width() / 2;
+            var y = scatterPlot.height() / 2;
+            var text = svgElement.text(x, y, '데이터가 로드되지 않았습니다.');
+
+            text.attr({
+                'font-family': 'dotum',
+                'font-size': 12,
+                fill: '#000'
+            });
+        }
+
+        function setPlotSize ( styles, options, data, scatterPlot ) {
 
 			var plotSizeMax = getPixel(styles.series.area.size.max, scatterPlot);
 			var plotSizeMin = getPixel(styles.series.area.size.min, scatterPlot);
@@ -2667,7 +2684,15 @@
 				scatterPlot.trigger('drawCompleted');
 			});
 
-			/* options.gubunOption 별로 분리한 data */
+			/* data가 없으면 noData처리한 svgElement 반환 */
+            if(data.length == 0){
+
+                noData(scatterPlot, svgElement);
+
+                return svgElement;
+            }
+
+            /* options.gubunOption 별로 분리한 data */
 
 			var sliceData = setTimeSlice(data, options);	
 
