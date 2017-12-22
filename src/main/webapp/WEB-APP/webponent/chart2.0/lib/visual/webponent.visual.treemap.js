@@ -2919,7 +2919,7 @@
 
                 treemap.trigger('selectedItem', [data, position, mode]);
             });
-debugger;
+
 			/* data가 없으면 noData 처리, svgElement 반환 */
             if(options.data.data == null || options.data.data === 'undefined'){
 
