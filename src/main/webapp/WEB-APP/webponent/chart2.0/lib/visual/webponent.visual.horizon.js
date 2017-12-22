@@ -13,7 +13,7 @@
 
 		if (typeof WEBPONENT_CHART_LICENSE_KEY === 'undefined' || WEBPONENT_CHART_LICENSE_KEY === '') {
 			
-			alert(productName + '의 라이센트키를 입력해주세요.');
+			alert(productName + '의 라이센스키를 입력해주세요.');
 			return;
 		}
 	}

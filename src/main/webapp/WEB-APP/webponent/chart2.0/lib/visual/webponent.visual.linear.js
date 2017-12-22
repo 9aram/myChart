@@ -1,6 +1,5 @@
 /*
  * 사이버이메지네이션
- * 최초 작성자 : joointhezoo@cyber-i.com
  * 마지막 수정자 : joointhezoo@cyber-i.com
  * 마지막 수정날짜 :  16.11.10
  */
@@ -19,7 +18,7 @@
 
         if (typeof WEBPONENT_CHART_LICENSE_KEY === 'undefined'|| WEBPONENT_CHART_LICENSE_KEY === '') {
 
-            alert(productName + '의 라이센트키를 입력해주세요.');
+            alert(productName + '의 라이센스키를 입력해주세요.');
             return;
         }
     }
