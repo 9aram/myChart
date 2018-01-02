@@ -2904,7 +2904,22 @@
 
 			loadImages(images, styles, options);
 
-			/* SVG 엘리먼트 생성 */
+			/* load data */
+
+            var data = getData(options);
+
+			/* get dataTotal */
+
+            var totalPrice = getTotalData(data);
+
+			/* set data */
+
+            var groupData = setDataAttr( treemap, data, totalPrice, styles, options);
+
+            data = setDataObj(groupData);
+
+
+            /* SVG 엘리먼트 생성 */
 
             var svgElement = getSvg(treemap, styles);
 
@@ -2915,32 +2930,19 @@
                 treemap.trigger('drawCompleted');
             });
 
-            svgElement.event.on('selectedItem', function (e, data, position, mode) {
-
-                treemap.trigger('selectedItem', [data, position, mode]);
-            });
 
 			/* data가 없으면 noData 처리, svgElement 반환 */
-            if(options.data.data == null || options.data.data === 'undefined'){
+            if(data == null || data === 'undefined'){
 
                 noData(treemap, svgElement);
 
                 return svgElement;
             }
 
-			/* load data */
+            svgElement.event.on('selectedItem', function (e, data, position, mode) {
 
-			var data = getData(options);
-
-			/* get dataTotal */
-
-			var totalPrice = getTotalData(data);
-
-			/* set data */
-
-			var groupData = setDataAttr( treemap, data, totalPrice, styles, options);	
-			
-			data = setDataObj(groupData);
+                treemap.trigger('selectedItem', [data, position, mode]);
+            });
 
             /* draw tree map base */
 
