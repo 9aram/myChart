@@ -1869,13 +1869,17 @@
              *   설정 값에 따른 셋팅
              *   BEFORE REDRAW  SETTING USER OPTIONS
              */
-            gauge.reDraw = function(styles, options) {
-
-                gauge.styles = extendStyles(styles);
-                gauge.options = extendOptions(options);
-                gauge.options.data.data = loadData(gauge.options);
-
-                reDrawGauge(gauge,type);
+            gauge.reDraw = function (styles, options, redraw) {
+                if(styles !== undefined ){
+                    gauge.styles = extendStyles(styles);
+                }
+                if(options !== undefined){
+                    gauge.options = extendOptions(options);
+                    gauge.options.data.data = loadData(gauge.options);
+                }
+                if(redraw !== false){
+                    reDrawGauge(gauge,type);
+                }
 
                 gauge.event.trigger('reDraw', [ gauge ]);
             };

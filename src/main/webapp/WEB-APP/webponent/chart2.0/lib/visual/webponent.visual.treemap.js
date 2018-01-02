@@ -3044,7 +3044,21 @@
 				self.init(treemap, styles, options, loading_bar);
 			}
 
-			if (TRIAL_UI) {
+            svgElement.reDraw = function(style, option, redraw) {
+                if(style !== undefined ){
+                    styles = extendStyles(style);
+                }
+                if(option !== undefined ){
+                    options = extendOptions(option);
+                    options.data.data = loadData(option);
+                }
+                if(redraw !== false){
+                    treemap.children().remove();
+                    self.init(treemap, styles, options, loading_bar);
+                }
+            }
+
+            if (TRIAL_UI) {
 
 				appendTrialUi(treemap);
 			}

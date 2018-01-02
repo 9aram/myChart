@@ -12,7 +12,7 @@
 		});
 
 		if (typeof WEBPONENT_CHART_LICENSE_KEY === 'undefined' || WEBPONENT_CHART_LICENSE_KEY === '') {
-			
+
 			alert(productName + '의 라이센스키를 입력해주세요.');
 			return;
 		}
@@ -119,7 +119,7 @@
 		}
 	/**
 		licenseType ED시리즈 조건 추가(ver.150915 평다진)
-	*/	
+	*/
 	} else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001" || licenseObject.licenseType === "ED002" || licenseObject.licenseType === "ED003") {
 
 		var domain = window.location.host.toUpperCase();
@@ -129,7 +129,7 @@
 		var splitedDomain = licenseObject.domains.split(',');
 
 		for (var i = 0; i < splitedDomain.length; i++) {
-			
+
 			var regesteredSite = splitedDomain[i];
 
 			if (domain.indexOf(regesteredSite) > -1) {
@@ -140,7 +140,7 @@
 	} else if (licenseObject.product !== productId) {
 
 		TRIAL_UI = true;
-	 
+
 	} else {
 
 		alert('유효하지 않은 ' + productName + ' 라이센스입니다.');
@@ -180,49 +180,49 @@
 		    			opacity : 1
 		            },
 		            line: {
-		                top: { 
-		                	color: '#cccccc', 
-		                	width: 1, 
-		                	opacity: 1 
+		                top: {
+		                	color: '#cccccc',
+		                	width: 1,
+		                	opacity: 1
 		                },
-		                left: { 
-		                	color: '#cccccc', 
-		                	width: 1, 
-		                	opacity: 1 
+		                left: {
+		                	color: '#cccccc',
+		                	width: 1,
+		                	opacity: 1
 		                },
-		                right: { 
-		                	color: '#cccccc', 
-		                	width: 1, 
-		                	opacity: 1 
+		                right: {
+		                	color: '#cccccc',
+		                	width: 1,
+		                	opacity: 1
 		                },
-		                bottom: { 
-		                	color: '#cccccc', 
-		                	width: 1, 
-		                	opacity: 1 
+		                bottom: {
+		                	color: '#cccccc',
+		                	width: 1,
+		                	opacity: 1
 		                }
-		            }						            
+		            }
 				},
 				yAxis: {
-					width: 30, 
+					width: 30,
 					position: 'left',
-					paddingLeft: 10, 
+					paddingLeft: 10,
 					paddingRight: 20,
 					baseZero : true,
 					line: {
-						color: '#cccccc', 
-						width: 1, 
+						color: '#cccccc',
+						width: 1,
 						opacity: 1,
 						underLine : {
 		                	use : false,
-		                	color: '#3e4150', 
-			                width: 1, 
+		                	color: '#3e4150',
+			                width: 1,
 			                opacity: 1
 		                }
 					},
 					text: {
-						family: 'Nanum Gothic', 
-		                size: 12, 
-		                color: '#737373', 
+						family: 'Nanum Gothic',
+		                size: 12,
+		                color: '#737373',
 		                align: 'right',		/* left | center | right */
 		                style: 'normal', 	/* normal | italic */
 		                weight: 'bold',	/* normal | bold */
@@ -230,33 +230,33 @@
 					},
 					tick: {
 						use : false,
-						length: 8, 
+						length: 8,
 						color: '#202228',
-						width: 1, 
+						width: 1,
 						opacity: 1,
 						position: 'out'	/* out|in */
 					}
 				},
 				xAxis: {
-					height: 10, 
+					height: 10,
 					paddingTop: 25,
 					betweenLabels: false,
-					line: { 
+					line: {
 						use :true,
-						color: '#e3e3e3', 
-						width: 1, 
+						color: '#e3e3e3',
+						width: 1,
 						opacity: 1,
 						underLine : {
 		                	use : false,
-		                	color: '#3e4150', 
-			                width: 1, 
+		                	color: '#3e4150',
+			                width: 1,
 			                opacity: 1
 		                }
 					},
 					text: {
 						family: 'Nanum Gothic',
-		                size: 12, 
-		                color: '#737373', 
+		                size: 12,
+		                color: '#737373',
 		                align: 'center',	/* left | center | right */
 		                style: 'normal',	/* normal | italic */
 		                weight: 'bold',		/* normal | bold */
@@ -269,8 +269,8 @@
 						use : true,
 						way : 'up',
 						line: {
-							color: '#f26744', 
-							width: 0, 
+							color: '#f26744',
+							width: 0,
 							opacity: 1
 						},
 						area : {
@@ -280,15 +280,15 @@
 						animate : {
 							use : true,
 							type : 'linear', /* linear|>|<|<>|bounce|elastic|backln|backOut */
-							speed : 400				     	
+							speed : 400
 						}
-					}, 
+					},
 					s2 : {
 						use : true,
 						way : 'up',
 						line: {
-							color: '#e42f02', 
-							width: 0, 
+							color: '#e42f02',
+							width: 0,
 							opacity: 1
 						},
 						area : {
@@ -298,15 +298,15 @@
 						animate : {
 							use : true,
 							type : 'linear', /* linear|>|<|<>|bounce|elastic|backln|backOut */
-							speed : 400	
+							speed : 400
 						}
 					},
 					s3 : {
 						use : true,
 						way : 'down',
 						line: {
-							color: '#485fff', 
-							width: 0, 
+							color: '#485fff',
+							width: 0,
 							opacity: 1
 						},
 						area : {
@@ -316,15 +316,15 @@
 						animate : {
 							use : true,
 							type : 'linear', /* linear|>|<|<>|bounce|elastic|backln|backOut */
-							speed : 400	
+							speed : 400
 						}
 					},
 					s4 : {
 						use : true,
 						way : 'down',
 						line: {
-							color: '#6095ff', 
-							width: 0, 
+							color: '#6095ff',
+							width: 0,
 							opacity: 1
 						},
 						area : {
@@ -367,7 +367,7 @@
 					jsonDepth: 'output.result',
 					gubun : '',
 					gubunOption : null
-				},		
+				},
 				xAxis : {
 					select : '',
 					format : null
@@ -409,12 +409,12 @@
 			return defaultOptions;
 		}
 
-		var elementType = getElementType();	
+		var elementType = getElementType();
 
 		var lineError = getLineError();
 
 		function getLineError () {
-			
+
 			var lineError = 0;
 
 			if ( elementType == 'SVG' ) {
@@ -439,7 +439,7 @@
 		function extendStyles (style) {
 
 			var defaultStyles = getDefaultStyles();
-			
+
 			var styles = $.extend(true, defaultStyles, style);
 
 			if(elementType === 'VML') {
@@ -477,7 +477,7 @@
 						if (options.data.type == "json"||options.data.type == "jsonp") {
 							var arr = loadJson(data2, options);
 						} else {
-							var arr = loadText(data2, options);						
+							var arr = loadText(data2, options);
 						}
 						data = arr;
 					},
@@ -511,11 +511,11 @@
 
 					if (typeof dataI[dataSelect] == 'string') {
 
-						dataI[dataSelect] = 
+						dataI[dataSelect] =
 								Number(dataI[dataSelect].split(',').join(''));
 
 					}
-				});			
+				});
 			}
 
 			return data;
@@ -616,7 +616,7 @@
 		}
 
 		function loadJson (data, options) {
-			
+
 			var bld_depth = options.data.jsonDepth.split('.');
 			var outPut = bld_depth[0];
 			var result = bld_depth[1];
@@ -626,7 +626,7 @@
 			for (var i = 0; i < bld_depth.length; i++) {
 
 				arr = arr[bld_depth[i]];
-			}		
+			}
 
 			/*var arr = data2[outPut][result];
 
@@ -731,18 +731,18 @@
 				data += ".";
 				data += str.substr(2, 2);
 			}
-			
+
 			return data;
 		};
 
 		function parseMaxMinData ( tempData, styles, options ) {
-			
+
 			var vmax = -99999999999999999;
 			var vmin = 99999999999999999;
-			var yaxisKeyLen = objectKeyLength;	
+			var yaxisKeyLen = objectKeyLength;
 
-			for( var i = 0; i < tempData.length; i++) {			
-				
+			for( var i = 0; i < tempData.length; i++) {
+
 				for ( var key in options.yAxis.select ) {
 					var yaxisKey = options.yAxis.select[key];
 					var _data = tempData[i][yaxisKey];
@@ -796,13 +796,13 @@
 				data += "/";
 				data += str.substr(2, 2);
 			}
-			
+
 			return data;
 		};
 
-		
+
 		function setXAxis ( styles, options, data, graphAttr ) {
-			
+
 			var horizonAreaWidth = graphAttr.chartAreaWidth;
 			var dataLength = data.length;
 			var xGap = horizonAreaWidth / dataLength;
@@ -810,7 +810,7 @@
 			var dataValue = String(data[data.length-1][options.xAxis.select]);
 
 			var textWidth = ((dataValue.length - 4) * styles.xAxis.text.size) + styles.xAxis.gap;
-			
+
 			for(i = 0; i < horizonAreaWidth; i += xGap) {
 				if(i < textWidth){
 					xLabelSkip += 1;
@@ -833,20 +833,20 @@
 			var mmHValue = 0;
 			var useAccess = false;
 			var yAxis = [];
-			
+
 			if ( useAccess ) {
 				mmHValue = Math.round((60 / (graphAttr.chartAreaHeight - yLabelPos)) * (max - min));
 			}
 			var labelTop = computedMaximum + mmHValue;
-			
+
 			var decimal = Math.abs(computedInterval) - Math.floor(Math.abs(computedInterval));
 			var precision = decimal == 0 ? 1 : -Math.floor(Math.log(decimal) / Math.LN10);
-			
+
 			decimal = Math.abs(computedMinimum) - Math.floor(Math.abs(computedMinimum));
 			precision = Math.max(precision, decimal == 0 ? 1: -Math.floor(Math.lof(decimal) / Math.LN10));
-			
+
 			var roundBase = Math.pow(10, precision);
-			
+
 			var roundedValue;
 			for( var i = computedMinimum; i <= labelTop + computedInterval; i += computedInterval) {
 				roundedValue = Math.round(i * roundBase) / roundBase;
@@ -857,31 +857,31 @@
 		};
 
 		function adjustMinMax ( styles, maxValue, minValue, options ) {
-			
+
 			if(maxValue == 0 && minValue == 0){
 				maxValue = 100;
 			}
-			
+
 			var powerOfTen = Math.floor(Math.log(Math.abs(maxValue - minValue)) / Math.LN10);
-			
+
 			var y_userInterval = Math.pow(10, powerOfTen);
 			if(Math.abs(maxValue - minValue) / y_userInterval < 4) {
 				powerOfTen--;
 				y_userInterval = y_userInterval *2/5;
 			}
-		
+
 			var y_topBound = Math.round(maxValue / y_userInterval) * y_userInterval ? maxValue : (Math.floor(maxValue / y_userInterval) + 1) * y_userInterval;
-			
+
 			var y_lowerBound;
 			if(minValue < 0 || options.baseatzero == false){
 				y_lowerBound = Math.floor(minValue / y_userInterval) * y_userInterval;
-				
+
 				if(maxValue < 0 && styles.yaxis.baseZero)
 					y_topBound = 0;
 			} else {
 				y_lowerBound = 0;
 			}
-			
+
 			var computed = {};
 			computed.computedInterval = y_userInterval;
 			computed.computedMinimum = y_lowerBound;
@@ -891,7 +891,7 @@
 		};
 
 		function drawSvg (horizon, styles) {
-			
+
 	  		var svgElement = null;
 
 			var svgWidth = Math.floor(horizon.width()) - lineError;
@@ -904,7 +904,7 @@
 			var width = svgWidth;
 			var height = svgHeight;
 
-			if (elementType === "VML") { 
+			if (elementType === "VML") {
 
 				width = width - (styles.layout.line.width / 2) - 1.5;
 				height = height - (styles.layout.line.width / 2) - 1.5;
@@ -955,7 +955,7 @@
 
 		// 	return surroundHorizonArea;
 		// }
-		
+
 		function drawSurroundHorizon ( styles, options, svgElement, graphAttr ) {
 
 			var surroundGroup = svgElement.set();
@@ -1031,7 +1031,7 @@
 
 
 		function drawXaxisText ( styles, options, data, svgElement, xAxisGroup, graphAttr ) {
-			
+
 			var xAxis = setXAxis(styles, options, data, graphAttr);
 			var xAxisArr = getXAxisArr(options, data, xAxis);
 
@@ -1047,9 +1047,9 @@
 			for ( var i = 0; i < xAxisGroupLength; i++ ) {
 
 				var xAxisTextElement = svgElement.text();
-				
+
 				var text = xAxisArr[i];
-				
+
 				if ( options.xAxis.format != undefined && options.xAxis.format != null ) {
 					text = eval(options.xAxis.format)(text);
 				}
@@ -1058,9 +1058,9 @@
 					x : x,
 					y : y,
 					text : text
-				})	
-				xAxisTextGroup.push(xAxisTextElement);	
-				
+				})
+				xAxisTextGroup.push(xAxisTextElement);
+
 				x += xGap;
 			}
 
@@ -1070,9 +1070,9 @@
 		}
 
 		function getAlign ( textAlign ) {
-			
+
 			var align = 'middle';
-			
+
 			if ( textAlign == 'right' ) {
 				align = 'end';
 			} else if ( textAlign == 'left' ) {
@@ -1083,17 +1083,17 @@
 		}
 
 		function drawXaxisLine ( styles, options, data, svgElement, graphAttr ) {
-			
+
 			var xAxis = setXAxis(styles, options, data, graphAttr);
 			var xAxisArr = getXAxisArr(options, data, xAxis);
-			var x = graphAttr.chartAreaX;		
+			var x = graphAttr.chartAreaX;
 			var xGap = graphAttr.chartAreaWidth / (data.length-1) * xAxis;
 			var xAxisGroup = svgElement.set();
 			var xAxisArrLength = xAxisArr.length;
-			for ( var i = xAxisArrLength; i--; ) {			
+			for ( var i = xAxisArrLength; i--; ) {
 				var xAxisElement = svgElement.path();
 				var xLinePath = 'M' + (Math.floor(x) + lineError) + ',' + graphAttr.baseY + 'L' + (Math.floor(x) + lineError) + ',' + graphAttr.baseY2  + 'Z';
-				xAxisElement.attr({				
+				xAxisElement.attr({
 					path : xLinePath,
 					stroke : styles.xAxis.line.color,
 					'stroke-width' : styles.xAxis.line.width,
@@ -1106,7 +1106,7 @@
 			return xAxisGroup;
 		}
 
-		
+
 		function drawYaxisLine ( styles, options, data, svgElement, graphAttr ) {
 
 			var yAxisArr = setYAxis(styles, options, data, max, min, graphAttr);
@@ -1116,18 +1116,18 @@
 			var yLineGroup = svgElement.set();
 
 			for ( var i = yAxisLength - 1; i--; ) {
-				
+
 				y -= yInterval;
 
 				var yAxisElement = svgElement.path();
 				var yLinePath = 'M' + graphAttr.baseX + ',' + (Math.floor(y) + lineError) + 'L' + graphAttr.baseX2 + ',' + (Math.floor(y) + lineError) + 'Z';
-				
-				yAxisElement.attr({				
+
+				yAxisElement.attr({
 					path : yLinePath,
 					stroke : styles.yAxis.line.color,
 					'stroke-width' : styles.yAxis.line.width,
 					opacity : styles.yAxis.line.opacity
-				})	
+				})
 				yAxisElement.pointY = (Math.floor(y) + lineError);
 				yLineGroup.push(yAxisElement)
 			}
@@ -1157,7 +1157,7 @@
 				upY -= intervalY;
 
 				var text = yAxisArr[i];
-				
+
 				if ( options.yAxis.format != undefined && options.yAxis.format != null ) {
 					text = eval(options.yAxis.format)(text);
 				}
@@ -1169,14 +1169,14 @@
 				})
 				yAxisTextGroup.push(yAxisUpTextElement);
 
-			}	
+			}
 
 			for ( var i = 1; i < yAxisArrLength; i++ ) {
 				var yAxisDownTextElement = svgElement.text();
 				downY += intervalY;
 
 				var text = yAxisArr[i];
-				
+
 				if ( options.yAxis.format != undefined && options.yAxis.format != null ) {
 					text = eval(options.yAxis.format)(text);
 				}
@@ -1195,7 +1195,7 @@
 				if ( options.yAxis.format != undefined && options.yAxis.format != null ) {
 					zeroText = String(eval(options.yAxis.format)(zeroText));
 				}
-				
+
 				zeroTextElement.attr({
 					x : x,
 					y : zeroY,
@@ -1206,10 +1206,10 @@
 
 			setTextAttr(yAxisTextGroup, styles.yAxis.text);
 
-			return yAxisTextGroup;		
+			return yAxisTextGroup;
 		}
 
-		
+
 		function setTextAttr ( itemGroup, styles ) {
 
 			var textAlign = getAlign(styles.align);
@@ -1218,7 +1218,7 @@
 				'font-family': styles.family,
 				'font-size': styles.size,
 				'font': styles.size + " '" + styles.family + "'",
-				'fill': styles.color, 
+				'fill': styles.color,
 				'text-anchor': textAlign,
 				'font-weight': styles.weight,
 				'font-style': styles.style,
@@ -1233,14 +1233,14 @@
 			for ( var i = 0; i < dataLength; i++ ) {
 
 				if ( i % xAxis == 0 ) {
-				
+
 					xAxisArr.push(data[i][options.xAxis.select])
 
 				}
 			}
-			
+
 			return xAxisArr;
-		} 
+		}
 
 
 		function drawYaxisTick ( styles, svgElement, yAxisGroup, graphAttr ) {
@@ -1249,7 +1249,7 @@
 			var yAxisGroupLength = yAxisGroup.length;
 			var moveX = graphAttr.baseX;
 			var lineX = moveX - styles.yAxis.tick.length;
-			
+
 			if ( styles.yAxis.tick.position == 'in' ) {
 				lineX = moveX + styles.yAxis.tick.length;
 			}
@@ -1281,15 +1281,15 @@
 		function getDataArr ( styles, options, data ) {
 
 			var dataArr = [];
-			
-			var yaxisKeyLen = objectKeyLength;			
+
+			var yaxisKeyLen = objectKeyLength;
 
 		    for ( var i = yaxisKeyLen; i--; ) {
 		    	dataArr[i] = [];
 		    }
 
-			var dataLength = data.length;	
-			
+			var dataLength = data.length;
+
 			var j = 0;
 
 			for( var i = 0; i < dataLength; i++) {
@@ -1305,16 +1305,16 @@
 					if ( j == yaxisKeyLen ) {
 						j = 0;
 					}
-					
+
 				}
 
 			}
-			
+
 			return dataArr;
 		}
 
 		function getPath ( styles, options, data, svgElement, yAxisGroup, graphAttr ) {
-		
+
 			/* data 를 아이템 별로 구분 */
 			var dataArr = getDataArr(styles, options, data);
 			var startX = graphAttr.chartAreaX;
@@ -1326,14 +1326,14 @@
 
 			var pathGroup = [];
 
-			for ( var i = 0; i < dataArrLength; i++ ) {			
+			for ( var i = 0; i < dataArrLength; i++ ) {
 				pathGroup[i] = {};
 				var x = startX;
 				var path = '';
 				var pathZeroY = '';
 				var dataArrI = dataArr[i];
 				var series = styles.series['s'+(i+1)];
-				
+
 				if ( series.use ) {
 					for ( var j = 0; j < dataArrI.length; j++ ) {
 						if ( series.way == 'up' || series.way == 'UP' ) {
@@ -1350,19 +1350,19 @@
 						}
 						x += xInterval;
 					}
-					var areaPath = path + 
-								'L' + (x - xInterval) + ',' + zeroY + 
+					var areaPath = path +
+								'L' + (x - xInterval) + ',' + zeroY +
 								'L' + startX + ',' + zeroY;
-					var areaPathZeroY = pathZeroY + 
-										'L' + (x - xInterval) + ',' + zeroY + 
+					var areaPathZeroY = pathZeroY +
+										'L' + (x - xInterval) + ',' + zeroY +
 										'L' + startX + ',' + zeroY;
-					
+
 					pathGroup[i].areaPath = areaPath;
 					pathGroup[i].areaPathZeroY = areaPathZeroY;
 					pathGroup[i].linePath = path;
 					pathGroup[i].linePathZeroY = pathZeroY;
 
-				}				
+				}
 			}
 
 			return pathGroup;
@@ -1374,7 +1374,7 @@
 
 			if ( direction != undefined ) {
 				if ( direction == 'horizontal' ) {
-					fillcolor = '0-';	
+					fillcolor = '0-';
 				} else if ( direction == 'vertical' ) {
 					fillcolor = '90-';
 				} else {
@@ -1382,10 +1382,10 @@
 				}
 			} else {
 				fillcolor = 'r(0.5,0.5)';
-			} 
+			}
 
 			for( var j = 0, len = color.length; j < len; j++ ){
-				
+
 				var colorVal = color[j];
 				fillcolor += colorVal[1] + ":" + colorVal[0] + '-';
 
@@ -1397,16 +1397,16 @@
 		}
 
 		function setFillColorSrc (color) {
-				
+
 			var fillstyle = color;
 
 			if ( fillstyle.hasOwnProperty('src')/* || fillstyle[0].hasOwnProperty('src')*/) {
-				color = fillColorPattern(fillstyle);		
+				color = fillColorPattern(fillstyle);
 			} else {
-				color = fillstyle;		
+				color = fillstyle;
 			}
-			
-			return color;		
+
+			return color;
 		}
 
 
@@ -1416,12 +1416,12 @@
 			var fillstyle = series.area.color;
 
 			if ( fillstyle.hasOwnProperty('src') ) {
-				color = fillColorPattern(fillstyle);		
+				color = fillColorPattern(fillstyle);
 			} else {
 				if ( typeof fillstyle == 'object' && series.area.gradient != undefined ) {
 					color = getGradient(fillstyle, series.area.gradient.direction);
-				} else { 
-					color = fillstyle;		
+				} else {
+					color = fillstyle;
 				}
 
 			}
@@ -1439,12 +1439,12 @@
 			var fillstyleLength = fillstyle.length;
 
 			if ( fillstyle.length == undefined ) {
-				
+
 				fillcolor.push(fillstyle.src);
 			}
 
-			for ( var i = 0; i < fillstyleLength; i++ ) {			
-				
+			for ( var i = 0; i < fillstyleLength; i++ ) {
+
 				fillcolor.push(fillstyle[i].src);
 			}
 
@@ -1463,19 +1463,19 @@
 		}
 
 		function drawTimeSliceItem ( styles, options, timeSliceData, yAxisGroup, graphAttr, timeSliceGroup, startIndex, svgElement ) {
-			
-			var dataLength = timeSliceData.length - 1;	
 
-			var xAxis = setXAxis(styles, options, timeSliceData, graphAttr);		
+			var dataLength = timeSliceData.length - 1;
+
+			var xAxis = setXAxis(styles, options, timeSliceData, graphAttr);
 			var coverElement = timeSliceGroup.coverGroup.cover;
 			var coverYaxisGroup = timeSliceGroup.coverGroup.coverYAxisLine;
-			var coverXaxisGroup = timeSliceGroup.coverGroup.coverXAxisLine;	
+			var coverXaxisGroup = timeSliceGroup.coverGroup.coverXAxisLine;
 
 			if ( styles.yAxis.line.underLine.use ) {
 				var coverYaxisUnderGroup = timeSliceGroup.coverGroup.coverYAxisUnderLine;
 			}
 			if ( styles.xAxis.line.underLine.use ) {
-				var coverXaxisUnderGroup = timeSliceGroup.coverGroup.coverXAxisUnderLine;		
+				var coverXaxisUnderGroup = timeSliceGroup.coverGroup.coverXAxisUnderLine;
 			}
 
 			var coverX = coverElement[0].attr('x');
@@ -1484,29 +1484,29 @@
 			var coverWidth = coverElement[0].attr('width');
 
 			var xInterval = coverWidth / (dataLength - timeSliceGroup.aniCount);
-			var coverYaxisGroupLength = coverYaxisGroup.length;		
+			var coverYaxisGroupLength = coverYaxisGroup.length;
 			var aniSpeed = options.timeSlice.animate.speed;
 
 			if ( options.timeSlice.delay < aniSpeed + 20 ) {
 				aniSpeed = options.timeSlice.delay - 20;
 			}
-			
-			timeSliceGroup.animation = setInterval(function(){	
-				
+
+			timeSliceGroup.animation = setInterval(function(){
+
 				coverX += xInterval;
 				coverWidth -= xInterval;
-				
+
 				if ( coverWidth < 0 ) {
-					coverWidth = 0;				
-				}		
-				
+					coverWidth = 0;
+				}
+
 				if ( elementType == 'SVG' && options.timeSlice.animate.use == true ) {
 
 					coverElement[0].animate({
 						x : coverX,
 						width : coverWidth
 					}, aniSpeed, options.timeSlice.animate.type)
-					
+
 					for ( var i = coverYaxisGroupLength; i--; ) {
 						var path = 'M' + coverX + ',' + yAxisGroup[i].pointY + 'L' + coverX2 + ',' + yAxisGroup[i].pointY + 'Z';
 						var underPath = 'M' + coverX + ',' + (yAxisGroup[i].pointY + 1) + 'L' + coverX2 + ',' + (yAxisGroup[i].pointY + 1) + 'Z';
@@ -1517,15 +1517,15 @@
 							coverYaxisUnderGroup[i].animate({
 								path : underPath
 							}, aniSpeed, options.timeSlice.animate.type)
-						}					
-					}	
+						}
+					}
 				} else {
 
 					coverElement[0].attr({
 						x : coverX,
 						width : coverWidth
 					})
-					
+
 					for ( var i = coverYaxisGroupLength; i--; ) {
 						var path = 'M' + coverX + ',' + yAxisGroup[i].pointY + 'L' + coverX2 + ',' + yAxisGroup[i].pointY + 'Z';
 						var underPath = 'M' + coverX + ',' + (yAxisGroup[i].pointY + 1) + 'L' + coverX2 + ',' + (yAxisGroup[i].pointY + 1) + 'Z';
@@ -1539,7 +1539,7 @@
 						}
 					}
 				}
-				
+
 				if ( timeSliceGroup.aniCount % xAxis == 0 ) {
 					var step = timeSliceGroup.aniCount / xAxis;
 					if ( styles.xAxis.line.use ) {
@@ -1549,13 +1549,13 @@
 						}
 					}
 				}
-				
+
 				options.timeSlice.slider.slider({
 		            values: [ startIndex, startIndex + timeSliceGroup.aniCount + 1]
 		        });
 
 		        eval(options.timeSlice.data)(timeSliceData[0], timeSliceData[1 + timeSliceGroup.aniCount]);
-				
+
 				timeSliceGroup.aniCount += 1;
 				if ( timeSliceGroup.aniCount == dataLength) {
 
@@ -1564,7 +1564,7 @@
 					setTimeout(function () {
 						timeSliceGroup.coverGroup.cover.remove();
 						if ( styles.xAxis.line.use ) {
-							timeSliceGroup.coverGroup.coverXAxisLine.remove();						
+							timeSliceGroup.coverGroup.coverXAxisLine.remove();
 						}
 						timeSliceGroup.coverGroup.coverYAxisLine.remove();
 						if ( styles.yAxis.line.underLine.use ) {
@@ -1577,12 +1577,12 @@
 						timeSliceGroup.playCheck = false;
 
 					}, options.timeSlice.delay)
-				}			
+				}
 			}, options.timeSlice.delay);
 
 			return timeSliceGroup;
 		}
-		
+
 		function getgraphAttr ( styles, horizon ) {
 
 			var graph = {};
@@ -1603,14 +1603,14 @@
 
 			return graph;
 		}
-		
+
 
 		function drawCover ( styles, surroundHorizon, yAxisLine, xAxisLine, graphAttr, yAxisUnderLine, xAxisUnderLine ) {
 			var coverGroup = {};
 			var coverX = graphAttr.chartAreaX;
 			var coverY = graphAttr.baseY + 1;
 			var coverWidth = graphAttr.baseWidth - styles.graph.paddingLeft - styles.graph.paddingRight - 1;
-			var coverHeight = graphAttr.baseHeight - 2;		
+			var coverHeight = graphAttr.baseHeight - 2;
 
 			coverGroup.cover = surroundHorizon.clone();
 			if ( styles.yAxis.line.underLine.use ) {
@@ -1622,7 +1622,7 @@
 			coverGroup.coverYAxisLine = yAxisLine.clone();
 
 			if ( styles.xAxis.line.use ) {
-				coverGroup.coverXAxisLine = xAxisLine.clone();			
+				coverGroup.coverXAxisLine = xAxisLine.clone();
 			}
 
 			if ( elementType !== 'SVG' ) {
@@ -1648,7 +1648,7 @@
 			var itemGroup = [];
 
 			for ( var i = 0; i < pathGroup.length; i++ ) {
-				
+
 				itemGroup[i] = {};
 
 				var series = styles.series['s'+(i+1)];
@@ -1663,7 +1663,7 @@
 					areaItem.attr({
 						path : pathGroup[i].areaPathZeroY,
 						'stroke-width' : 0,
-						fill : series.area.color,				
+						fill : series.area.color,
 						opacity : series.area.opacity
 					})
 
@@ -1711,7 +1711,7 @@
 		}
 
 		function setItemGroupPath ( pathGroup, itemGroup ) {
-			
+
 			for ( var i = 0; i < itemGroup.length; i++ ) {
 				itemGroup[i].area.attr({
 					path : pathGroup[i].areaPath
@@ -1726,7 +1726,7 @@
 		}
 
 		function getTimeSliceData ( first, end, data ) {
-			
+
 			var timeSliceData = [];
 
 			for ( var i = first; i <= end; i++ ) {
@@ -1750,7 +1750,7 @@
 				if(userAgent.indexOf('firefox') > -1 ){ // FireFox
 					if(e.layoutX != undefined){
 						m.x = Math.round(e.layerX);
-						m.y = Math.round(e.layerY);					
+						m.y = Math.round(e.layerY);
 					} else {
 						m.x = e.originalEvent.layerX;
 						m.y = e.originalEvent.layerY;
@@ -1769,29 +1769,29 @@
 			return m;
 		};
 
-		// function getMousePosition ( e, horizon ) {		
+		// function getMousePosition ( e, horizon ) {
 
 		// 	var position = {};
 
 		// 	position.x = 0;
 		// 	position.y = 0;
-			 
+
 		// 	if (!e) {
 		// 		var e = window.event;
-		// 	} 		
-		// 	if ( e.pageX || e.pageY )  {	
+		// 	}
+		// 	if ( e.pageX || e.pageY )  {
 		// 		position.x = e.pageX - horizon[0].offsetLeft;
-		// 		position.y = e.pageY - horizon[0].offsetTop;		
+		// 		position.y = e.pageY - horizon[0].offsetTop;
 		// 	} else if (e.clientX || e.clientY)  {
 		// 		position.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - horizon[0].offsetLeft;
 		// 		position.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - horizon[0].offsetTop;
 		// 	}
 		// 	return position;
-		
+
 		// }
 
 		function appendTip ( styles, options ) {
-			
+
 			var tip = $('<div>');
 
 			if (options.toolTip.className == null) {
@@ -1810,7 +1810,7 @@
 			}
 
 			tip.css({
-				'position' : "absolute",			
+				'position' : "absolute",
 				'white-space': 'nowrap',
 				'z-index': 100000
 			});
@@ -1823,7 +1823,7 @@
 		function drawVerticalLine ( svgElement, styles ) {
 
 			var line = svgElement.path();
-				
+
 			line.attr({
 				stroke : styles.color,
 				'stroke-dasharray': styles.type,
@@ -1844,22 +1844,22 @@
 			var chartAreaX2 = graphAttr.chartAreaX2;
 			var chartAreaWidth = graphAttr.chartAreaWidth;
 			var tipOffsetY = options.toolTip.position.y;
-			var tipOffsetX = options.toolTip.position.x;		
+			var tipOffsetX = options.toolTip.position.x;
 			var tipPaddingX = parseInt(tip.css('padding-left' ), 10) + parseInt(tip.css('padding-right'), 10);
 			var tipPaddingY = parseInt(tip.css('padding-top' ), 10) + parseInt(tip.css('padding-bottom'), 10);
 			var tipWidth = tip.width() + tipPaddingX;
 			var verticalOpacity = styles.verticalLine.opacity;
 			var horizonOpacity = styles.horizonLine.opacity;
 			if ( styles.verticalLine.use ) {
-				var verticalLine = drawVerticalLine(svgElement, styles.verticalLine);			
+				var verticalLine = drawVerticalLine(svgElement, styles.verticalLine);
 			}
 			if ( styles.horizonLine.use ) {
-				var horizonLine = drawVerticalLine(svgElement, styles.horizonLine);			
+				var horizonLine = drawVerticalLine(svgElement, styles.horizonLine);
 			}
 
 			horizon.mousemove(function (e) {
 
-				// var evt = window.event || e; 
+				// var evt = window.event || e;
 
 				var mousePosition = getMousePosition(e, this);
 
@@ -1873,32 +1873,32 @@
 				timeSliceData = svgElement.getTimeSliceData();
 
 				if ( mousePosition.x > chartAreaX && mousePosition.x < chartAreaX2 && mousePosition.y > baseY && mousePosition.y < baseY2) {
-					
-					var xInterval = chartAreaWidth / (timeSliceData.length - 1 ); 
+
+					var xInterval = chartAreaWidth / (timeSliceData.length - 1 );
 					var mouseX = mousePosition.x - chartAreaX;
-					var index = Math.round(mouseX / xInterval);				
-				
+					var index = Math.round(mouseX / xInterval);
+
 					tipWidth = tip.width() + tipPaddingX;
-					
+
 					if ( tipX + tipWidth > baseX2 ) {
 						tipX = baseX2 - tipWidth;
 					}
 					if ( tipY + tip.height() + tipPaddingY > baseY2 ) {
 						tipY = baseY2 - tip.height() - tipPaddingY;
 					}
-					
+
 					if ( options.toolTip.use ) {
-						
+
 						if (options.toolTip.func != null) {
 
 							eval(options.toolTip.func)(timeSliceData[index], tip, options);
-						
+
 						} else {
 
 							var data = timeSliceData[index];
 
 							var date = '<div class="tip_date">'+ dayDataFormatDot(data[options.xAxis.select]) + '</div>';
-							
+
 							var yAxisSeriesData = "";
 
 							var seriesCount = 1;
@@ -1906,7 +1906,7 @@
 							for (var key in styles.series) {
 
 								if (styles.series[key].use) {
-									
+
 									var seriesOption = options.yAxis.select[key];
 									var seriesData = '<span>시리즈' + seriesCount + ' : ' + data[seriesOption] +'</span><br />';
 
@@ -1915,12 +1915,12 @@
 
 								seriesCount ++;
 							}
-						
+
 	                        var tipElement = '<div class="tip_data">'+ yAxisSeriesData + '</div>';
 
 	                        tip.html(date + tipElement);
 						}
-						
+
 						tip.css({
 							left : tipX,
 							top : tipY
@@ -1945,22 +1945,22 @@
 						horizonLine.toFront();
 					}
 
-				} else {		
+				} else {
 
 					if ( options.toolTip.use ) {
 						tip.hide();
-					}				
+					}
 					if ( styles.verticalLine.use ) {
 						verticalLine.attr({
 							opacity : 0
 						})
-					}	
+					}
 					if ( styles.horizonLine.use ) {
 						horizonLine.attr({
 							opacity : 0
 						})
-					}			
-				}			
+					}
+				}
 			})
 
 			return tip;
@@ -1970,19 +1970,19 @@
 		function drawYaxisUnderLine ( styles, yAxisLine, graphAttr ) {
 
 	        var cloneYAxisGroup = yAxisLine.clone();
-	     	
+
 	        cloneYAxisGroup.attr({
 	    		stroke: styles.yAxis.line.underLine.color,
 	    		'stroke-width': styles.yAxis.line.underLine.width,
 	    		'stroke-opacity': styles.yAxis.line.underLine.opacity
 	    	})
-	        for ( var i = yAxisLine.length; i--; ) {        	
+	        for ( var i = yAxisLine.length; i--; ) {
 
 	        	var path = cloneYAxisGroup[i].attr('path');
 
 	        	if ( elementType == 'SVG' ) {
 	        		path[0][2] = path[0][2] + 1;
-	        		path[1][2] = path[1][2] + 1;	
+	        		path[1][2] = path[1][2] + 1;
 	        	} else {
 	        		var path1 = new Array();
 	        		var path1 = path.split(',');
@@ -1990,7 +1990,7 @@
 	        		path1[1] = Number(path1[1]) + 1;
 	        		path1[3] = Number(path1[3]) + 1;
 	        		path = path1;
-	        	}        	
+	        	}
 	        	cloneYAxisGroup[i].attr({
 	        		path : path
 	        	})
@@ -2001,7 +2001,7 @@
 		    	})
 	    	}
 	        yAxisLine.toFront();
-	        
+
 	        return cloneYAxisGroup;
 		}
 
@@ -2016,12 +2016,12 @@
 	    	})
 
 	    	for ( var i = xAxisLine.length; i--; ) {
-	        	
+
 	        	var path = cloneXAxisGroup[i].attr('path');
 
 	        	if ( elementType == 'SVG' ) {
 	        		path[0][1] = path[0][1] + 1;
-	        		path[1][1] = path[1][1] + 1;	
+	        		path[1][1] = path[1][1] + 1;
 	        	} else {
 	        		var path1 = new Array();
 	        		var path1 = path.split(',');
@@ -2048,13 +2048,13 @@
 		}
 
 		function getMaxData ( data, options ) {
-			
+
 			var max = 0;
 
 			var yaxisKeyLen = objectKeyLength;
 
 			for ( var i = data.length; i--; ) {
-				
+
 				for ( var key in options.yAxis.select ) {
 
 					var yaxisKey = options.yAxis.select[key];
@@ -2072,7 +2072,7 @@
 		}
 
 		function getMinData ( data, options ) {
-			
+
 			var min = 0;
 
 			// var min = Number(data[0][options.yAxis.select.s1]);
@@ -2080,7 +2080,7 @@
 			// var yaxisKeyLen = Object.keys(options.yAxis.select).length;
 
 			// for ( var i = data.length; i--; ) {
-				
+
 			// 	for ( var key in options.yAxis.select ) {
 
 			// 		var yaxisKey = options.yAxis.select[key];
@@ -2102,12 +2102,12 @@
 		function getObjectKeyLength ( _object ) {
 
 			if ( elementType == 'SVG' ) {
-				
+
 				objectKeyLength = Object.keys(_object).length;
 
 			} else {
 
-				var i = 0; 
+				var i = 0;
 
 				for ( var key in _object ) {
 					i++;
@@ -2200,10 +2200,10 @@
 			var y = horizon.height() / 2;
 
 			var text = svgElement.text(x,y,'데이터가 로드되지 않았습니다.');
-			
+
 			text.attr({
-				'font-family': 'dotum', 
-				'font-size': 12, 
+				'font-family': 'dotum',
+				'font-size': 12,
 				fill: '#000'
 			});
 
@@ -2213,7 +2213,7 @@
 
 			horizon.css({
 				'position' : "relative"
-			})	
+			})
 
 			/* styles extend */
 
@@ -2250,7 +2250,7 @@
 			/* data extend */
 
 			var data = loadData(options);
-		
+
 			if ( data === 'error' || data.length <= 0) {
 				noData(svgElement, horizon);
 				return;
@@ -2264,19 +2264,19 @@
 			min = getMinData(data, options);
 
 			// data = setDataFormat(data, options);
-			
+
 			var surroundHorizon = drawSurroundHorizon(styles, options, svgElement, graphAttr);
 
 			/* horizon 이 그려지는 영역 */
 
 			var horizonArea = drawHorizonArea(styles, options, svgElement, graphAttr);
-					
+
 			/* y 축 그리기 */
 
 			var yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
 
 			/* y 축 under line 그리기 */
-		
+
 			if ( styles.yAxis.line.underLine.use ) {
 
 				var yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
@@ -2336,12 +2336,12 @@
 			svgElement.getTimeSliceData = function () {
 				return timeSliceData;
 			}
-			
+
 			svgElement.drawYAxisLine = function () {
 	        	yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
 	        }
 
-			svgElement.getYAxisLine = function () {		
+			svgElement.getYAxisLine = function () {
 				return yAxisLine;
 			}
 
@@ -2349,7 +2349,7 @@
 	        	yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
 	        }
 
-			svgElement.getYAxisUnderLine = function () {		
+			svgElement.getYAxisUnderLine = function () {
 				return yAxisUnderLine;
 			}
 
@@ -2357,15 +2357,15 @@
 	        	yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
 	        }
 
-			svgElement.getYAxisText = function () {		
+			svgElement.getYAxisText = function () {
 				return yAxisTextGroup;
-			}		
+			}
 
 			svgElement.drawYAxisTick = function () {
 	        	yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
 	        }
 
-			svgElement.getYAxisTick = function () {		
+			svgElement.getYAxisTick = function () {
 				return yAxisTick;
 			}
 
@@ -2373,7 +2373,7 @@
 	        	xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
 	        }
 
-			svgElement.getXAxisLine = function () {		
+			svgElement.getXAxisLine = function () {
 				return xAxisLine;
 			}
 
@@ -2389,7 +2389,7 @@
 	        	xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
 	        }
 
-			svgElement.getXAxisText = function () {		
+			svgElement.getXAxisText = function () {
 				return xAxisTextGroup;
 			}
 
@@ -2400,7 +2400,7 @@
 			svgElement.drawItem = function (data) {
 				itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
 			}
-			
+
 			svgElement.getItem = function () {
 				return itemGroup;
 			}
@@ -2408,7 +2408,7 @@
 			svgElement.setItemGroup = function (pathGroup) {
 				setItemGroupPath(pathGroup, itemGroup);
 			}
-					
+
 			svgElement.timeSliceGroup = {};
 
 			svgElement.timeSliceGroup.aniCount = 0;
@@ -2418,7 +2418,7 @@
 			svgElement.startTimeSlice = function (timeSliceData, startIndex) {
 
 				if ( svgElement.timeSliceGroup.coverGroup == null ) {
-					
+
 					svgElement.timeSliceGroup.aniCount = 0;
 
 					svgElement.timeSliceGroup.coverGroup = drawCover(styles, surroundHorizon, yAxisLine, xAxisLine, graphAttr, yAxisUnderLine, xAxisUnderLine);
@@ -2426,7 +2426,7 @@
 				}
 
 				svgElement.timeSliceGroup = drawTimeSliceItem(styles, options, timeSliceData, yAxisLine, graphAttr, svgElement.timeSliceGroup, startIndex, svgElement);
-				
+
 			}
 
 			svgElement.endTimeSlice = function (disabled) {
@@ -2443,18 +2443,18 @@
 			}
 
 			svgElement.timeSlice = function ( timeSliceData ) {
-				
+
 				if ( styles.xAxis.line.use ) {
 					xAxisLine.remove();
 				}
-				
+
 				if ( styles.xAxis.line.underLine.use ) {
 					xAxisUnderLine.remove();
 				}
 				xAxisTextGroup.remove();
-				
+
 				if ( styles.xAxis.line.use ) {
-					svgElement.drawXAxisLine(timeSliceData);				
+					svgElement.drawXAxisLine(timeSliceData);
 				}
 
 				if ( styles.xAxis.line.underLine.use ) {
@@ -2464,10 +2464,10 @@
 				svgElement.getPathGroup(timeSliceData);
 				svgElement.setItemGroup(pathGroup);
 
-				
+
 				svgElement.endTimeSlice();
 			}
-		
+
 			if ( options.timeSlice.use ) {
 
 				svgElement.endTimeSlice();
@@ -2477,7 +2477,7 @@
 
 				var startIndex = 0;
 				var endIndex = 0;
-				
+
 				eval(options.timeSlice.data)(data[0], data[data.length-1]);
 
 				options.timeSlice.slider.slider({
@@ -2502,21 +2502,21 @@
 								svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
 							}
 							svgElement.timeSliceGroup.coverGroup = null;
-						}				
+						}
 
 						var data1 = data[ui.values[0]];
 						var data2 = data[ui.values[1]];
-						
+
 						eval(options.timeSlice.data)(data1, data2);
 
 						timeSliceData = getTimeSliceData(ui.values[0], ui.values[1], data);
-						svgElement.timeSlice(timeSliceData);					
+						svgElement.timeSlice(timeSliceData);
 						startIndex = ui.values[0];
 						endIndex = ui.values[1];
 
 					}
 				});
-				
+
 				options.timeSlice.play.click(function (){
 
 					options.timeSlice.slider.slider('option', {disabled: true});
@@ -2527,28 +2527,28 @@
 
 						svgElement.startTimeSlice(timeSliceData, startIndex);
 
-						svgElement.timeSliceGroup.playCheck = true;			
+						svgElement.timeSliceGroup.playCheck = true;
 					}
 
 
 				});
 
 				options.timeSlice.pause.click(function (){
-					
+
 					svgElement.endTimeSlice();
 		            svgElement.timeSliceGroup.playCheck = false;
 
 		        });
 
 		        options.timeSlice.stop.click(function (){
-		            
+
 		            svgElement.endTimeSlice("disabled");
 
 		            if ( svgElement.timeSliceGroup.coverGroup != null ) {
 		            	svgElement.timeSliceGroup.coverGroup.cover.remove();
-						
+
 		            	if ( styles.xAxis.line.use ) {
-							svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();	            		
+							svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();
 		            	}
 						svgElement.timeSliceGroup.coverGroup.coverYAxisLine.remove();
 						if ( styles.xAxis.line.underLine.use ) {
@@ -2558,7 +2558,7 @@
 							svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
 						}
 						svgElement.timeSliceGroup.coverGroup = null;
-		            }  
+		            }
 
 		            options.timeSlice.slider.slider({
 			            values: [ startIndex, startIndex + timeSliceData.length - 1 ]
@@ -2569,17 +2569,17 @@
 		            svgElement.timeSliceGroup.playCheck = false;
 
 		        })
-		        
+
 			}
 
 			svgElement.inquery = function( _options ) {
-				
+
 				svgElement.endTimeSlice("disabled");
 
 				setTimeout(function () {
 
 					options = $.extend(true, options, _options);
-					
+
 					horizon.children().remove();
 					options.timeSlice.play.unbind('click');
 					options.timeSlice.pause.unbind('click');
@@ -2600,6 +2600,20 @@
 
 				self.init(horizon, styles, options);
 			}
+
+            svgElement.reDraw = function(style, option, redraw) {
+                if(style !== undefined ){
+                    styles = extendStyles(style);
+                }
+                if(option !== undefined ){
+                    options = extendOptions(option);
+                    options.data.data = loadData(option);
+                }
+                if(redraw !== false){
+                    horizon.children().remove();
+                    self.init(horizon, styles, options);
+                }
+            }
 
 			if (TRIAL_UI) {
 

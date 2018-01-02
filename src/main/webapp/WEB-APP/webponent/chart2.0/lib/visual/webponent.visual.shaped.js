@@ -1544,8 +1544,8 @@
          * GAUGE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
          * @param  {Gauge} gauge 객체
          * @param  {Node} wrapper gauge 가 append 되는 DIV
-         * @param  {Object} styles pie 스타일
-         * @param  {Object} options pie 옵션
+         * @param  {Object} styles shaped 스타일
+         * @param  {Object} options shaped 옵션
          * @param  {String} GAUGE CHART의 TYPE
          */
         function setup(gauge, wrapper, styles, options, type) {
@@ -1657,16 +1657,21 @@
              *   설정 값에 따른 셋팅
              *   BEFORE REDRAW  SETTING USER OPTIONS
              */
-            gauge.reDraw = function(styles, options) {
-
-                gauge.styles = extendStyles(styles);
-                gauge.options = extendOptions(options);
-                gauge.options.data.data = loadData(gauge.options);
-
-                reDrawGauge(gauge,type);
+            gauge.reDraw = function (styles, options, redraw) {
+                if(styles !== undefined ){
+                    gauge.styles = extendStyles(styles);
+                }
+                if(options !== undefined ){
+                    gauge.options = extendOptions(options);
+                    gauge.options.data.data = loadData(gauge.options);
+                }
+                if(redraw !== false){
+                    reDrawGauge(gauge,type);
+                }
 
                 gauge.event.trigger('reDraw', [ gauge ]);
             };
+
 
             /**
              * resize

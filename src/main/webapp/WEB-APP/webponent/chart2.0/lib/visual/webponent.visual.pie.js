@@ -2426,34 +2426,46 @@
 			/**
 			 * pie 를 다시 그릴 경우 사용
 			 */
-			pie.reDraw = function () {
+			pie.reDraw = function (styles, options, redraw) {
 
-				pie.wrapper.children().remove();
+				if(styles !== undefined){
 
-				clearInterval(pie.settings.animation.firstDraw);
-				clearInterval(pie.settings.animation.timeSlice);
-
-				pie.items = {};
-
-				drawSvg(pie);
-
-				drawLayout(pie);
-
-				if (pie.data === 'error' || pie.data.length <= 0) {
-
-					noData(pie);
-
-				} else {
-
-					if (!pie.settings.data.dataTotalValue) {
-
-						return;
-					}
-
-					drawItems(pie);
-
-					itemsEvents(pie);
+                    pie.styles = extendStyles(styles);
 				}
+                if(options !== undefined){
+
+                    pie.options = extendOptions(options);
+                    pie.options.data.data = loadData(pie.options);
+                }
+
+                if(redraw !== false) {
+                    pie.wrapper.children().remove();
+
+                    clearInterval(pie.settings.animation.firstDraw);
+                    clearInterval(pie.settings.animation.timeSlice);
+
+                    pie.items = {};
+
+                    drawSvg(pie);
+
+                    drawLayout(pie);
+
+                    if (pie.data === 'error' || pie.data.length <= 0) {
+
+                        noData(pie);
+
+                    } else {
+
+                        if (!pie.settings.data.dataTotalValue) {
+
+                            return;
+                        }
+
+                        drawItems(pie);
+
+                        itemsEvents(pie);
+                    }
+                }
 
 				pie.event.trigger('reDraw', [pie]);
 			};

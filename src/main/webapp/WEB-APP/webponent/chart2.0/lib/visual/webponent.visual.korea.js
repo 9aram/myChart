@@ -1823,6 +1823,20 @@
 				self.init(korea, styles, options);	
 			}
 
+            svgElement.reDraw = function(style, option, redraw) {
+                if(style !== undefined){
+                    styles = extendStyles(style);
+                }
+                if(option !== undefined){
+                    options = extendOptions(option);
+                    options.data.data = loadData(option);
+                }
+                if(redraw !== false){
+                    korea.children().remove();
+                    self.init(korea, styles, options);
+                }
+            }
+
 			if (TRIAL_UI) {
 
 				appendTrialUi(korea);

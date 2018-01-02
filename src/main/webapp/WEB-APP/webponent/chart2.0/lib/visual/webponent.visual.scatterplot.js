@@ -3072,6 +3072,21 @@
 				self.init(scatterPlot, styles, options);
 			}
 
+            svgElement.reDraw = function(style, option, redraw) {
+                if(style !== undefined ){
+                    styles = extendStyles(style);
+                }
+                if(option !== undefined){
+                    options = extendOptions(option);
+                    options.data.data = loadData(option);
+                }
+                if(redraw !== false){
+                    scatterPlot.children().remove();
+                    self.init(scatterPlot, styles, options);
+                }
+            }
+
+
 			if (TRIAL_UI) {
 
 				appendTrialUi(scatterPlot);
