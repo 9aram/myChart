@@ -2669,10 +2669,6 @@
 
 			var data = loadData(options);
 
-			/* options 의 plot 값이 음수일 경우 절대값으로 변환 */
-
-			data = setAbsData(data, options);
-
 			/* svg element 생성 */
 
 			var svgElement = drawSvg(scatterPlot, styles);
@@ -2685,12 +2681,16 @@
 			});
 
 			/* data가 없으면 noData처리한 svgElement 반환 */
-            if(data.length == 0){
+            if(options.data.data == null || options.data.data === 'undefined'){
 
                 noData(scatterPlot, svgElement);
 
                 return svgElement;
             }
+
+			/* options 의 plot 값이 음수일 경우 절대값으로 변환 */
+
+            data = setAbsData(data, options);
 
             /* options.gubunOption 별로 분리한 data */
 

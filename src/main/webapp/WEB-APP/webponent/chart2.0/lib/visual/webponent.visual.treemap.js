@@ -2904,6 +2904,27 @@
 
 			loadImages(images, styles, options);
 
+			/* SVG 엘리먼트 생성 */
+
+            var svgElement = getSvg(treemap, styles);
+
+            svgElement.event = $({});
+
+            svgElement.event.on('drawCompleted', function () {
+
+                treemap.trigger('drawCompleted');
+            });
+
+            var data = loadData(options);
+
+			/* data가 없으면 noData 처리, svgElement 반환 */
+            if(options.data.data == null || options.data.data === 'undefined'){
+
+                noData(treemap, svgElement);
+
+                return svgElement;
+            }
+
 			/* load data */
 
             var data = getData(options);
@@ -2919,25 +2940,6 @@
             data = setDataObj(groupData);
 
 
-            /* SVG 엘리먼트 생성 */
-
-            var svgElement = getSvg(treemap, styles);
-
-            svgElement.event = $({});
-
-            svgElement.event.on('drawCompleted', function () {
-
-                treemap.trigger('drawCompleted');
-            });
-
-
-			/* data가 없으면 noData 처리, svgElement 반환 */
-            if(data == null || data === 'undefined'){
-
-                noData(treemap, svgElement);
-
-                return svgElement;
-            }
 
             svgElement.event.on('selectedItem', function (e, data, position, mode) {
 

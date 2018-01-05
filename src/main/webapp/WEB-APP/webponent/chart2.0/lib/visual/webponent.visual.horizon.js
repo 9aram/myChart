@@ -2607,10 +2607,11 @@
                 }
                 if(option !== undefined ){
                     options = extendOptions(option);
-                    options.data.data = loadData(option);
+                    options.data.data = loadData(options);
                 }
                 if(redraw !== false){
                     horizon.children().remove();
+                    svgElement.endTimeSlice("disabled");
                     self.init(horizon, styles, options);
                 }
             }
