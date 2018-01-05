@@ -2323,8 +2323,6 @@
                      styles.isComplete = 'complete';
                  }
 
-
-
 			 }
 
             svgElement.getTimeSliceData = function () {
@@ -2460,6 +2458,110 @@
 
 
                 svgElement.endTimeSlice();
+            }
+
+            if ( options.timeSlice.use ) {
+
+                svgElement.endTimeSlice();
+                options.timeSlice.play.unbind('click');
+                options.timeSlice.pause.unbind('click');
+                options.timeSlice.stop.unbind('click');
+
+                var startIndex = 0;
+                var endIndex = 0;
+
+                eval(options.timeSlice.data)(data[0], data[data.length-1]);
+
+                options.timeSlice.slider.slider({
+                    range: true,
+                    min: 0,
+                    max: data.length-1,
+                    values: [ 0, data.length-1 ],
+                    slide: function( event, ui ) {
+
+                        if ( svgElement.timeSliceGroup.coverGroup != null ) {
+
+                            svgElement.endTimeSlice();
+                            svgElement.timeSliceGroup.playCheck = false;
+
+                            svgElement.timeSliceGroup.coverGroup.cover.remove();
+                            svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();
+                            svgElement.timeSliceGroup.coverGroup.coverYAxisLine.remove();
+                            if ( styles.xAxis.line.underLine.use ) {
+                                svgElement.timeSliceGroup.coverGroup.coverXAxisUnderLine.remove();
+                            }
+                            if ( styles.yAxis.line.underLine.use ) {
+                                svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
+                            }
+                            svgElement.timeSliceGroup.coverGroup = null;
+                        }
+
+                        var data1 = data[ui.values[0]];
+                        var data2 = data[ui.values[1]];
+
+                        eval(options.timeSlice.data)(data1, data2);
+
+                        timeSliceData = getTimeSliceData(ui.values[0], ui.values[1], data);
+                        svgElement.timeSlice(timeSliceData);
+                        startIndex = ui.values[0];
+                        endIndex = ui.values[1];
+
+                    }
+                });
+
+                options.timeSlice.play.click(function (){
+
+                    options.timeSlice.slider.slider('option', {disabled: true});
+
+                    if ( svgElement.timeSliceGroup.playCheck == false ) {
+
+                        svgElement.endTimeSlice();
+
+                        svgElement.startTimeSlice(timeSliceData, startIndex);
+
+                        svgElement.timeSliceGroup.playCheck = true;
+                    }
+
+
+                });
+
+                options.timeSlice.pause.click(function (){
+
+                    svgElement.endTimeSlice();
+                    svgElement.timeSliceGroup.playCheck = false;
+
+                });
+
+                options.timeSlice.stop.click(function (){
+
+                    svgElement.endTimeSlice("disabled");
+
+                    if ( svgElement.timeSliceGroup.coverGroup != null ) {
+                        svgElement.timeSliceGroup.coverGroup.cover.remove();
+
+                        if ( styles.xAxis.line.use ) {
+                            svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();
+                        }
+                        svgElement.timeSliceGroup.coverGroup.coverYAxisLine.remove();
+                        if ( styles.xAxis.line.underLine.use ) {
+                            svgElement.timeSliceGroup.coverGroup.coverXAxisUnderLine.remove();
+                        }
+                        if ( styles.yAxis.line.underLine.use ) {
+                            svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
+                        }
+                        svgElement.timeSliceGroup.coverGroup = null;
+                    }
+
+                    options.timeSlice.slider.slider({
+                        values: [ startIndex, startIndex + timeSliceData.length - 1 ]
+                    });
+
+                    eval(options.timeSlice.data)(data[startIndex], data[timeSliceData.length - 1]);
+
+                    svgElement.timeSliceGroup.playCheck = false;
+
+                })
+
             }
 
 			svgElement.inquery = function( _options ) {
