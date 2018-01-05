@@ -1700,6 +1700,10 @@
 
             bindEvents(wrapper, gauge);
 
+            if(type == undefined ){
+                type = 'cylinder';
+            };
+
             gauge.type = type;
 
             setup(gauge, wrapper, styles, options, type);

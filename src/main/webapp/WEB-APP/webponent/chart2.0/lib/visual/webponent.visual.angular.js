@@ -1976,6 +1976,10 @@
 
             bindEvents(wrapper, gauge);
 
+            if(type == undefined ){
+                type = "angular_normal"
+            }
+
             if(type.substring(0, 7) === "angular"){
                 var flag = type.lastIndexOf( "_" );
                 type = type.substring(flag+1);

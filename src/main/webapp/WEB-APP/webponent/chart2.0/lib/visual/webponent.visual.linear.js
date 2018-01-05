@@ -1914,6 +1914,10 @@
 
             bindEvents(wrapper, gauge);
 
+            if(type == undefined ){
+                type = "linear_solid"
+            }
+
             if (type.substring(0, 6) === "linear") {
                 var flag = type.lastIndexOf("_");
                 type = type.substring(flag + 1);
