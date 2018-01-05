@@ -19,7 +19,7 @@
 		});
 
 		if (typeof WEBPONENT_CHART_LICENSE_KEY === 'undefined' || WEBPONENT_CHART_LICENSE_KEY === '') {
-			
+
 			alert(productName + '의 라이센스키를 입력해주세요.');
 			return;
 		}
@@ -126,7 +126,7 @@
 		}
 	/**
 		licenseType ED시리즈 조건 추가(ver.150915 평다진)
-	*/	
+	*/
 	} else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001" || licenseObject.licenseType === "ED002" || licenseObject.licenseType === "ED003") {
 
 		var domain = window.location.host.toUpperCase();
@@ -136,7 +136,7 @@
 		var splitedDomain = licenseObject.domains.split(',');
 
 		for (var i = 0; i < splitedDomain.length; i++) {
-			
+
 			var regesteredSite = splitedDomain[i];
 
 			if (domain.indexOf(regesteredSite) > -1) {
@@ -147,7 +147,7 @@
 	} else if (licenseObject.product !== productId) {
 
 		TRIAL_UI = true;
-	 
+
 	} else {
 
 		alert('유효하지 않은 ' + productName + ' 라이센스입니다.');
@@ -720,7 +720,7 @@
 			var width = Math.floor(pie.wrapper.width()) - lineError;
 			var height = Math.floor(pie.wrapper.height()) - lineError;
 
-			if (elementType === "VML") { 
+			if (elementType === "VML") {
 
 				width = width - (styles.layout.line.width / 2) - 1.5;
 				height = height - (styles.layout.line.width / 2) - 1.5;
@@ -972,7 +972,7 @@
 				var animFunction = animationOptions(animCount, styles);
 
 				setPieAttribute(pie, animFunction);
-			
+
 			}, 10);
 		}
 
@@ -1008,11 +1008,11 @@
 				var val = Number(Number(360 / totalDataValue * data[i][use]).toFixed(2));
 				var startVal = start + val;
 
-				/* 
+				/*
 					데이터가 한개일 경우 파이 한조각의 각도가 360도가 되기 때문에 시작과 끝의 지점이 같아진다.
-					따라서 애니메이션이 적용되지 않은 상태에서는 path 가 정상적으로 그려지지 않기 때문에 
+					따라서 애니메이션이 적용되지 않은 상태에서는 path 가 정상적으로 그려지지 않기 때문에
 					파이의 각도를 359.999도 로 변환한다.
-					
+
 					추가 20150619 평다진
 					애니메이션이 false이고 하나의 조각만 100% 인경우도 위와 같은 현상이 나타나기 때문에 추가함.
 				*/
@@ -1039,7 +1039,7 @@
 					if(start == startVal && Number(data[i][use]) == 0) {
 						startVal -= 0.000000001;
 					}
-					
+
 					if(start != startVal){
 						/*
 						 	start와 startVal이 같으면 다시 변경할 필요가 없으므로 분기처리(ver 20160314 평다진)
@@ -1095,7 +1095,7 @@
 						if (!data[i][options.legend.use]) {
 
 							continue;
-						}	
+						}
 
 					} else if (options.legend.format) {
 
@@ -1374,7 +1374,7 @@
 						if (!data[i][options.legend.use]) {
 
 							continue;
-						}	
+						}
 
 					} else if (options.legend.format) {
 
@@ -1487,7 +1487,7 @@
 						if (!data[i][options.legend.use]) {
 
 							continue;
-						}	
+						}
 
 					} else if (options.legend.format) {
 
@@ -1532,7 +1532,7 @@
 		/**
 		 * legend 를 사용할 경우 legend 전반적인 설정을 해준다.
 		 * @param  {pie} pie  객체
-		 * @param  {json} data 
+		 * @param  {json} data
 		 */
 		function appendLegend (pie, data) {
 
@@ -2150,9 +2150,9 @@
 				var val = 360 / totalDataValue * data[i][use];
 				var startVal = start + val;
 
-				/* 
+				/*
 					데이터가 한개일 경우 파이 한조각의 각도가 360도가 되기 때문에 시작과 끝의 지점이 같아진다.
-					따라서 애니메이션이 적용되지 않은 상태에서는 path 가 정상적으로 그려지지 않기 때문에 
+					따라서 애니메이션이 적용되지 않은 상태에서는 path 가 정상적으로 그려지지 않기 때문에
 					파이의 각도를 359.999도 로 변환한다.
 				*/
 				if (data.length == 1 || (styles.pie.animate.use != true && val == 360)) {
@@ -2170,7 +2170,7 @@
 
 					pie.items.pie[i].attr({
 						segment: [centerX, centerY, pieRadius, start, startVal]
-					});	
+					});
 				}
 
 				start = startVal;
@@ -2426,29 +2426,24 @@
 			/**
 			 * pie 를 다시 그릴 경우 사용
 			 */
-			pie.reDraw = function (styles, options, redraw) {
+            pie.reDraw = function (styles, options, redraw) {
 
 				if(styles !== undefined){
-
                     pie.styles = extendStyles(styles);
 				}
                 if(options !== undefined){
-
                     pie.options = extendOptions(options);
-                    pie.options.data.data = loadData(pie.options);
+                    pie.data = loadData(pie.options);
                 }
-
-                if(redraw !== false) {
-                    pie.wrapper.children().remove();
-
+				if(redraw !== false){
                     clearInterval(pie.settings.animation.firstDraw);
                     clearInterval(pie.settings.animation.timeSlice);
-
-                    pie.items = {};
 
                     drawSvg(pie);
 
                     drawLayout(pie);
+
+                    settingData(pie);
 
                     if (pie.data === 'error' || pie.data.length <= 0) {
 
@@ -2465,11 +2460,11 @@
 
                         itemsEvents(pie);
                     }
-                }
+				}
 
-				pie.event.trigger('reDraw', [pie]);
-			};
 
+                pie.event.trigger('reDraw', [pie]);
+            };
 			/**
 			 * resize
 			 */
