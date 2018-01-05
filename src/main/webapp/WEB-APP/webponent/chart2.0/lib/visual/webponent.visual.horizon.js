@@ -2253,7 +2253,7 @@
 
 			if ( data === 'error' || data.length <= 0) {
 				noData(svgElement, horizon);
-				return;
+				return svgElement;
 			}
 
 			data = sortData(data, options);
