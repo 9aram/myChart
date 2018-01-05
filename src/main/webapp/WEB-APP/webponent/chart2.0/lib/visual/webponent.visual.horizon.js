@@ -2251,326 +2251,216 @@
 
 			var data = loadData(options);
 
-			if ( data === 'error' || data.length <= 0) {
-				noData(svgElement, horizon);
-				return svgElement;
-			}
+			 if ( data === 'error' || data.length <= 0) {
+			 	noData(svgElement, horizon);
 
-			data = sortData(data, options);
+			 }else{
+                 data = sortData(data, options);
 
-			// data = parseMaxMinData(data, styles, options);
+                 // data = parseMaxMinData(data, styles, options);
 
-			max = getMaxData(data, options);
-			min = getMinData(data, options);
+                 max = getMaxData(data, options);
+                 min = getMinData(data, options);
 
-			// data = setDataFormat(data, options);
+                 // data = setDataFormat(data, options);
 
-			var surroundHorizon = drawSurroundHorizon(styles, options, svgElement, graphAttr);
+                 var surroundHorizon = drawSurroundHorizon(styles, options, svgElement, graphAttr);
 
-			/* horizon 이 그려지는 영역 */
+				 /* horizon 이 그려지는 영역 */
+                 var horizonArea = drawHorizonArea(styles, options, svgElement, graphAttr);
 
-			var horizonArea = drawHorizonArea(styles, options, svgElement, graphAttr);
+				 /* y 축 그리기 */
+                 var yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
 
-			/* y 축 그리기 */
+				 /* y 축 under line 그리기 */
+                 if ( styles.yAxis.line.underLine.use ) {
 
-			var yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
+                     var yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
 
-			/* y 축 under line 그리기 */
+                 }
 
-			if ( styles.yAxis.line.underLine.use ) {
+				 /* y 축 tip 그리기 */
+                 if ( styles.yAxis.tick.use ) {
+                     var yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
+                 }
 
-				var yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
+				 /* y 축 text 그리기 */
+                 var yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
 
-			}
+				 /* x 축 그리기 */
+                 var xAxisLine = null;
 
-			/* y 축 tip 그리기 */
-			if ( styles.yAxis.tick.use ) {
-				var yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
-			}
+                 if ( styles.xAxis.line.use ) {
+                     xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
+                 }
 
-			/* y 축 text 그리기 */
+				 /* x 축 under line 그리기 */
+                 if ( styles.xAxis.line.underLine.use ) {
 
-			var yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
+                     var xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
 
-			/* x 축 그리기 */
+                 }
 
-			var xAxisLine = null;
+				 /* x 축 text 그리기 */
+                 var xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
 
-			if ( styles.xAxis.line.use ) {
-				xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
-			}
+                 var pathGroup = getPath(styles, options, data, svgElement, yAxisLine, graphAttr);
 
-			/* x 축 under line 그리기 */
+                 var itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
 
-			if ( styles.xAxis.line.underLine.use ) {
+				 /* resize event */
+                 reSize(styles, options, horizon, svgElement);
 
-				var xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
+                 var timeSliceData = data;
 
-			}
+                 var tip = appendTip(styles, options);
 
-			/* x 축 text 그리기 */
+                 tip.appendTo(horizon);
 
-			var xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
+                 mouseEvent(svgElement, styles, options, horizon, graphAttr, timeSliceData, itemGroup, tip);
 
-			var pathGroup = getPath(styles, options, data, svgElement, yAxisLine, graphAttr);
+                 if(!styles.hasOwnProperty('complete')){
+                     styles.isComplete = 'complete';
+                 }
 
-			var itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
 
-			/* resize event */
 
-			reSize(styles, options, horizon, svgElement);
+			 }
 
+            svgElement.getTimeSliceData = function () {
+                return timeSliceData;
+            }
 
-			var timeSliceData = data;
+            svgElement.drawYAxisLine = function () {
+                yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
+            }
 
-			var tip = appendTip(styles, options);
+            svgElement.getYAxisLine = function () {
+                return yAxisLine;
+            }
 
-			tip.appendTo(horizon);
+            svgElement.drawYAxisUnderLine = function () {
+                yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
+            }
 
-			mouseEvent(svgElement, styles, options, horizon, graphAttr, timeSliceData, itemGroup, tip);
+            svgElement.getYAxisUnderLine = function () {
+                return yAxisUnderLine;
+            }
 
-			if(!styles.hasOwnProperty('complete')){
-				styles.isComplete = 'complete';
-			}
+            svgElement.drawYAxisText = function () {
+                yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
+            }
 
-			svgElement.getTimeSliceData = function () {
-				return timeSliceData;
-			}
+            svgElement.getYAxisText = function () {
+                return yAxisTextGroup;
+            }
 
-			svgElement.drawYAxisLine = function () {
-	        	yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
-	        }
+            svgElement.drawYAxisTick = function () {
+                yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
+            }
 
-			svgElement.getYAxisLine = function () {
-				return yAxisLine;
-			}
+            svgElement.getYAxisTick = function () {
+                return yAxisTick;
+            }
 
-			svgElement.drawYAxisUnderLine = function () {
-	        	yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
-	        }
+            svgElement.drawXAxisLine = function (data) {
+                xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
+            }
 
-			svgElement.getYAxisUnderLine = function () {
-				return yAxisUnderLine;
-			}
+            svgElement.getXAxisLine = function () {
+                return xAxisLine;
+            }
 
-			svgElement.drawYAxisText = function () {
-	        	yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
-	        }
+            svgElement.drawXAxisUnderLine = function () {
+                xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
+            }
 
-			svgElement.getYAxisText = function () {
-				return yAxisTextGroup;
-			}
+            svgElement.getXAxisUnderLine = function () {
+                return xAxisUnderLine;
+            }
 
-			svgElement.drawYAxisTick = function () {
-	        	yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
-	        }
+            svgElement.drawXAxisText = function (data) {
+                xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
+            }
 
-			svgElement.getYAxisTick = function () {
-				return yAxisTick;
-			}
+            svgElement.getXAxisText = function () {
+                return xAxisTextGroup;
+            }
 
-			svgElement.drawXAxisLine = function (data) {
-	        	xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
-	        }
+            svgElement.getPathGroup = function ( data ) {
+                pathGroup = getPath(styles, options, data, svgElement, yAxisLine, graphAttr);
+            }
 
-			svgElement.getXAxisLine = function () {
-				return xAxisLine;
-			}
+            svgElement.drawItem = function (data) {
+                itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
+            }
 
-			svgElement.drawXAxisUnderLine = function () {
-	        	xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
-	        }
+            svgElement.getItem = function () {
+                return itemGroup;
+            }
 
-			svgElement.getXAxisUnderLine = function () {
-				return xAxisUnderLine;
-			}
+            svgElement.setItemGroup = function (pathGroup) {
+                setItemGroupPath(pathGroup, itemGroup);
+            }
 
-			svgElement.drawXAxisText = function (data) {
-	        	xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
-	        }
+            svgElement.timeSliceGroup = {};
 
-			svgElement.getXAxisText = function () {
-				return xAxisTextGroup;
-			}
+            svgElement.timeSliceGroup.aniCount = 0;
+            svgElement.timeSliceGroup.coverGroup = null;
+            svgElement.timeSliceGroup.playCheck = false;
 
-			svgElement.getPathGroup = function ( data ) {
-				pathGroup = getPath(styles, options, data, svgElement, yAxisLine, graphAttr);
-			}
+            svgElement.startTimeSlice = function (timeSliceData, startIndex) {
 
-			svgElement.drawItem = function (data) {
-				itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
-			}
+                if ( svgElement.timeSliceGroup.coverGroup == null ) {
 
-			svgElement.getItem = function () {
-				return itemGroup;
-			}
+                    svgElement.timeSliceGroup.aniCount = 0;
 
-			svgElement.setItemGroup = function (pathGroup) {
-				setItemGroupPath(pathGroup, itemGroup);
-			}
+                    svgElement.timeSliceGroup.coverGroup = drawCover(styles, surroundHorizon, yAxisLine, xAxisLine, graphAttr, yAxisUnderLine, xAxisUnderLine);
 
-			svgElement.timeSliceGroup = {};
+                }
 
-			svgElement.timeSliceGroup.aniCount = 0;
-			svgElement.timeSliceGroup.coverGroup = null;
-			svgElement.timeSliceGroup.playCheck = false;
+                svgElement.timeSliceGroup = drawTimeSliceItem(styles, options, timeSliceData, yAxisLine, graphAttr, svgElement.timeSliceGroup, startIndex, svgElement);
 
-			svgElement.startTimeSlice = function (timeSliceData, startIndex) {
+            }
 
-				if ( svgElement.timeSliceGroup.coverGroup == null ) {
+            svgElement.endTimeSlice = function (disabled) {
 
-					svgElement.timeSliceGroup.aniCount = 0;
+                if (disabled === "disabled") {
 
-					svgElement.timeSliceGroup.coverGroup = drawCover(styles, surroundHorizon, yAxisLine, xAxisLine, graphAttr, yAxisUnderLine, xAxisUnderLine);
+                    if (options.timeSlice.use) {
 
-				}
+                        options.timeSlice.slider.slider('option', {disabled: false});
+                    }
+                }
 
-				svgElement.timeSliceGroup = drawTimeSliceItem(styles, options, timeSliceData, yAxisLine, graphAttr, svgElement.timeSliceGroup, startIndex, svgElement);
+                clearInterval(svgElement.timeSliceGroup.animation);
+            }
 
-			}
+            svgElement.timeSlice = function ( timeSliceData ) {
 
-			svgElement.endTimeSlice = function (disabled) {
+                if ( styles.xAxis.line.use ) {
+                    xAxisLine.remove();
+                }
 
-				if (disabled === "disabled") {
+                if ( styles.xAxis.line.underLine.use ) {
+                    xAxisUnderLine.remove();
+                }
+                xAxisTextGroup.remove();
 
-					if (options.timeSlice.use) {
+                if ( styles.xAxis.line.use ) {
+                    svgElement.drawXAxisLine(timeSliceData);
+                }
 
-						options.timeSlice.slider.slider('option', {disabled: false});
-					}
-				}
+                if ( styles.xAxis.line.underLine.use ) {
+                    svgElement.drawXAxisUnderLine(timeSliceData);
+                }
+                svgElement.drawXAxisText(timeSliceData);
+                svgElement.getPathGroup(timeSliceData);
+                svgElement.setItemGroup(pathGroup);
 
-				clearInterval(svgElement.timeSliceGroup.animation);
-			}
 
-			svgElement.timeSlice = function ( timeSliceData ) {
-
-				if ( styles.xAxis.line.use ) {
-					xAxisLine.remove();
-				}
-
-				if ( styles.xAxis.line.underLine.use ) {
-					xAxisUnderLine.remove();
-				}
-				xAxisTextGroup.remove();
-
-				if ( styles.xAxis.line.use ) {
-					svgElement.drawXAxisLine(timeSliceData);
-				}
-
-				if ( styles.xAxis.line.underLine.use ) {
-					svgElement.drawXAxisUnderLine(timeSliceData);
-				}
-				svgElement.drawXAxisText(timeSliceData);
-				svgElement.getPathGroup(timeSliceData);
-				svgElement.setItemGroup(pathGroup);
-
-
-				svgElement.endTimeSlice();
-			}
-
-			if ( options.timeSlice.use ) {
-
-				svgElement.endTimeSlice();
-				options.timeSlice.play.unbind('click');
-				options.timeSlice.pause.unbind('click');
-				options.timeSlice.stop.unbind('click');
-
-				var startIndex = 0;
-				var endIndex = 0;
-
-				eval(options.timeSlice.data)(data[0], data[data.length-1]);
-
-				options.timeSlice.slider.slider({
-					range: true,
-					min: 0,
-					max: data.length-1,
-					values: [ 0, data.length-1 ],
-					slide: function( event, ui ) {
-
-						if ( svgElement.timeSliceGroup.coverGroup != null ) {
-
-							svgElement.endTimeSlice();
-							svgElement.timeSliceGroup.playCheck = false;
-
-							svgElement.timeSliceGroup.coverGroup.cover.remove();
-							svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();
-							svgElement.timeSliceGroup.coverGroup.coverYAxisLine.remove();
-							if ( styles.xAxis.line.underLine.use ) {
-								svgElement.timeSliceGroup.coverGroup.coverXAxisUnderLine.remove();
-							}
-							if ( styles.yAxis.line.underLine.use ) {
-								svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
-							}
-							svgElement.timeSliceGroup.coverGroup = null;
-						}
-
-						var data1 = data[ui.values[0]];
-						var data2 = data[ui.values[1]];
-
-						eval(options.timeSlice.data)(data1, data2);
-
-						timeSliceData = getTimeSliceData(ui.values[0], ui.values[1], data);
-						svgElement.timeSlice(timeSliceData);
-						startIndex = ui.values[0];
-						endIndex = ui.values[1];
-
-					}
-				});
-
-				options.timeSlice.play.click(function (){
-
-					options.timeSlice.slider.slider('option', {disabled: true});
-
-					if ( svgElement.timeSliceGroup.playCheck == false ) {
-
-						svgElement.endTimeSlice();
-
-						svgElement.startTimeSlice(timeSliceData, startIndex);
-
-						svgElement.timeSliceGroup.playCheck = true;
-					}
-
-
-				});
-
-				options.timeSlice.pause.click(function (){
-
-					svgElement.endTimeSlice();
-		            svgElement.timeSliceGroup.playCheck = false;
-
-		        });
-
-		        options.timeSlice.stop.click(function (){
-
-		            svgElement.endTimeSlice("disabled");
-
-		            if ( svgElement.timeSliceGroup.coverGroup != null ) {
-		            	svgElement.timeSliceGroup.coverGroup.cover.remove();
-
-		            	if ( styles.xAxis.line.use ) {
-							svgElement.timeSliceGroup.coverGroup.coverXAxisLine.remove();
-		            	}
-						svgElement.timeSliceGroup.coverGroup.coverYAxisLine.remove();
-						if ( styles.xAxis.line.underLine.use ) {
-							svgElement.timeSliceGroup.coverGroup.coverXAxisUnderLine.remove();
-						}
-						if ( styles.yAxis.line.underLine.use ) {
-							svgElement.timeSliceGroup.coverGroup.coverYAxisUnderLine.remove();
-						}
-						svgElement.timeSliceGroup.coverGroup = null;
-		            }
-
-		            options.timeSlice.slider.slider({
-			            values: [ startIndex, startIndex + timeSliceData.length - 1 ]
-			        });
-
-			        eval(options.timeSlice.data)(data[startIndex], data[timeSliceData.length - 1]);
-
-		            svgElement.timeSliceGroup.playCheck = false;
-
-		        })
-
-			}
+                svgElement.endTimeSlice();
+            }
 
 			svgElement.inquery = function( _options ) {
 
@@ -2611,8 +2501,7 @@
                 }
                 if(redraw !== false){
                     horizon.children().remove();
-                    svgElement.endTimeSlice("disabled");
-                    self.init(horizon, styles, options);
+                    self.init($(horizon), styles, options);
                 }
             }
 
@@ -2633,8 +2522,6 @@
 
 			return svgElement;
 		};
-
-
 
 		if (!window.webponent){
 			window.webponent = {};

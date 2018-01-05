@@ -2681,132 +2681,218 @@
 			});
 
 			/* data가 없으면 noData처리한 svgElement 반환 */
-            if(options.data.data == null || options.data.data === 'undefined'){
+            if ( data === 'error' || data.length <= 0) {
 
                 noData(scatterPlot, svgElement);
 
-                return svgElement;
-            }
+            }else{
 
-			/* options 의 plot 값이 음수일 경우 절대값으로 변환 */
+				/* options 의 plot 값이 음수일 경우 절대값으로 변환 */
 
-            data = setAbsData(data, options);
+                data = setAbsData(data, options);
 
-            /* options.gubunOption 별로 분리한 data */
+				/* options.gubunOption 별로 분리한 data */
 
-			var sliceData = setTimeSlice(data, options);	
+                var sliceData = setTimeSlice(data, options);
 
-			if ( options.data.reverse ) {
-				sliceData.reverse();
-			}
+                if ( options.data.reverse ) {
+                    sliceData.reverse();
+                }
 
-			/* options 의 gubun 에 해당하는 data */
+				/* options 의 gubun 에 해당하는 data */
 
-			var gubunData = basicData(data, options, sliceData);	
+                var gubunData = basicData(data, options, sliceData);
 
-			/* graph 가 그려지는 전체 영역 */
+				/* graph 가 그려지는 전체 영역 */
 
-			var surroundPlot = drawSurroundPlot(styles, options, svgElement, graphAttr);
+                var surroundPlot = drawSurroundPlot(styles, options, svgElement, graphAttr);
 
-			/* plot 이 그려지는 영역 */
+				/* plot 이 그려지는 영역 */
 
-			var plotArea = drawPlotArea(styles, options, svgElement, graphAttr);
+                var plotArea = drawPlotArea(styles, options, svgElement, graphAttr);
 
-			/* plot 의 size 설정 */
+				/* plot 의 size 설정 */
 
-			setPlotSize(styles, options, gubunData, scatterPlot);
+                setPlotSize(styles, options, gubunData, scatterPlot);
 
-			/* plot 의 x, y, 축 위치 설정 */
+				/* plot 의 x, y, 축 위치 설정 */
 
-			var setData = setPlotPosition(options, gubunData, graphAttr);
+                var setData = setPlotPosition(options, gubunData, graphAttr);
 
-			/* y 축 line 그리기 */
+				/* y 축 line 그리기 */
 
-			var yAxisLine = drawYaxisLine(styles, options, setData, svgElement, graphAttr);
+                var yAxisLine = drawYaxisLine(styles, options, setData, svgElement, graphAttr);
 
-			/* y 축 under line 그리기 */
+				/* y 축 under line 그리기 */
 
-			if ( styles.yAxis.line.underLine.use ) {
+                if ( styles.yAxis.line.underLine.use ) {
 
-				var yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
-			}
+                    var yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
+                }
 
-			/* y 축 text 그리기 */
+				/* y 축 text 그리기 */
 
-			var yAxisTextGroup = drawYaxisText(styles, options, setData, svgElement, yAxisLine, graphAttr);
+                var yAxisTextGroup = drawYaxisText(styles, options, setData, svgElement, yAxisLine, graphAttr);
 
-			/* x 축 line 그리기 */
+				/* x 축 line 그리기 */
 
-			var xAxisLine = drawXaxisLine(styles, options, setData, svgElement, graphAttr);
+                var xAxisLine = drawXaxisLine(styles, options, setData, svgElement, graphAttr);
 
-			/* x 축 under line 그리기 */
+				/* x 축 under line 그리기 */
 
-			if ( styles.xAxis.line.underLine.use ) {
+                if ( styles.xAxis.line.underLine.use ) {
 
-				var xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
-			}
+                    var xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
+                }
 
-			/* x 축 text 그리기 */
+				/* x 축 text 그리기 */
 
-			var xAxisTextGroup = drawXaxisText(styles, options, setData, svgElement, xAxisLine, graphAttr);
+                var xAxisTextGroup = drawXaxisText(styles, options, setData, svgElement, xAxisLine, graphAttr);
 
-			/* y 축 tick 그리기 */
+				/* y 축 tick 그리기 */
 
-			if ( styles.yAxis.tick.use ) {
+                if ( styles.yAxis.tick.use ) {
 
-				var yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
-			}
+                    var yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
+                }
 
-			/* styles 의 fill color 에 image 가 있을 경우 url 형식으로 변환 */
+				/* styles 의 fill color 에 image 가 있을 경우 url 형식으로 변환 */
 
-			setFillColor(styles, options);
+                setFillColor(styles, options);
 
-			/* draw plot */
+				/* draw plot */
 
-			var plotGroup = drawPlot(styles, options, gubunData, svgElement, graphAttr);
+                var plotGroup = drawPlot(styles, options, gubunData, svgElement, graphAttr);
 
-			/* 회기분석에 따른 회기선 그리기 */
+				/* 회기분석에 따른 회기선 그리기 */
 
-			if ( styles.trendLine.use ) {
-				
-				var trendLine = appendTrendLine(svgElement, styles, graphAttr, gubunData);
-				trendLine = setPathTrendLine(setData, graphAttr, trendLine, options);	
+                if ( styles.trendLine.use ) {
 
-			}
+                    var trendLine = appendTrendLine(svgElement, styles, graphAttr, gubunData);
+                    trendLine = setPathTrendLine(setData, graphAttr, trendLine, options);
 
-			/* plot size 에 따라 크기 순으로 plot 의 z-index 값 변경 */
-			
-			plotGroup.toFront();
-			toFrontPlot(plotGroup);
+                }
 
+				/* plot size 에 따라 크기 순으로 plot 의 z-index 값 변경 */
 
-			/* chart element 그룹화 */
-
-			var group = svgElement.set();
-			group.push(surroundPlot, plotArea, plotGroup);
-			group.push(yAxisLine, xAxisLine, yAxisTextGroup)
-			group.push(xAxisTextGroup, yAxisTick);
-			group.push(yAxisUnderLine, xAxisUnderLine);	
-			group.push(trendLine);
-
-			/* mouse event */
-
-			var tip = appendTip(scatterPlot, options);
-
-			tip.appendTo(scatterPlot);
-
-			mouseEvent(styles, options, svgElement, plotGroup, group, yAxisLine, xAxisLine, graphAttr, scatterPlot, tip, yAxisUnderLine, xAxisUnderLine, trendLine);
-
-			svgElement.timeSliceInterval = null;
-			svgElement.timeSlicePlayCheck = false;
-			
-			/* resize event */
-
-			reSize(styles, options, scatterPlot, svgElement);
+                plotGroup.toFront();
+                toFrontPlot(plotGroup);
 
 
-			if(!styles.hasOwnProperty('complete')){
-				styles.isComplete = 'complete';
+				/* chart element 그룹화 */
+
+                var group = svgElement.set();
+                group.push(surroundPlot, plotArea, plotGroup);
+                group.push(yAxisLine, xAxisLine, yAxisTextGroup)
+                group.push(xAxisTextGroup, yAxisTick);
+                group.push(yAxisUnderLine, xAxisUnderLine);
+                group.push(trendLine);
+
+				/* mouse event */
+
+                var tip = appendTip(scatterPlot, options);
+
+                tip.appendTo(scatterPlot);
+
+                mouseEvent(styles, options, svgElement, plotGroup, group, yAxisLine, xAxisLine, graphAttr, scatterPlot, tip, yAxisUnderLine, xAxisUnderLine, trendLine);
+
+                svgElement.timeSliceInterval = null;
+                svgElement.timeSlicePlayCheck = false;
+
+				/* resize event */
+
+                reSize(styles, options, scatterPlot, svgElement);
+
+
+                if(!styles.hasOwnProperty('complete')){
+                    styles.isComplete = 'complete';
+                }
+
+                var startIndex = getStartIndex(sliceData, options);
+
+                var clickCheck = false;
+
+                disabledSlider(clickCheck, options, plotGroup, styles);
+
+                if( options.timeSlice.use ){
+
+                    clearInterval(svgElement.timeSliceInterval);
+                    options.timeSlice.play.unbind('click');
+                    options.timeSlice.pause.unbind('click');
+                    options.timeSlice.stop.unbind('click');
+
+                    eval(options.timeSlice.data)(sliceData[startIndex]);
+                    var slideStartIndex = 0;
+
+                    options.timeSlice.slider.slider({
+                        range: 'max',
+                        min: 0,
+                        max: sliceData.length-1,
+                        value: startIndex,
+                        slide: function( event, ui ) {
+                            clearInterval(svgElement.timeSliceInterval);
+                            startIndex = ui.value;
+                            svgElement.timeSlice(startIndex);
+                            slideStartIndex = ui.value;
+
+                            disabledSlider(clickCheck, options, plotGroup, styles);
+
+                            svgElement.timeSlicePlayCheck = false;
+                        }
+                    });
+
+                    options.timeSlice.play.click(function (){
+
+                        if(!svgElement.timeSlicePlayCheck){
+
+                            if (sliceData.length -1 === startIndex) {
+
+                                startIndex = 0;
+                            }
+
+                            svgElement.timeSliceInterval = setInterval ( function () {
+
+                                svgElement.timeSlice(startIndex);
+                                options.timeSlice.slider.slider({
+                                    value: startIndex
+                                });
+
+                                plotGroup.unclick();
+                                plotGroup.undrag();
+
+                                startIndex += 1;
+                                if( startIndex > sliceData.length-1 ) {
+                                    clearInterval(svgElement.timeSliceInterval);
+                                    svgElement.timeSlicePlayCheck = false;
+
+                                    startIndex = sliceData.length-1;
+                                }
+                            }, options.timeSlice.delay);
+                            svgElement.timeSlicePlayCheck = true;
+                        }
+                    })
+
+                    options.timeSlice.pause.click(function (){
+
+                        clearInterval(svgElement.timeSliceInterval);
+                        mouseEvent(styles, options, svgElement, plotGroup, group, yAxisLine, xAxisLine, graphAttr, scatterPlot, tip, yAxisUnderLine, xAxisUnderLine, trendLine);
+                        disabledSlider(clickCheck, options, plotGroup, styles);
+                        svgElement.timeSlicePlayCheck = false;
+
+                    })
+
+                    options.timeSlice.stop.click(function (){
+
+                        clearInterval(svgElement.timeSliceInterval);
+                        options.timeSlice.slider.slider({
+                            value: sliceData.length-1
+                        });
+                        svgElement.timeSlice(sliceData.length-1);
+                        startIndex = sliceData.length-1;
+                        disabledSlider(clickCheck, options, plotGroup, styles);
+                        svgElement.timeSlicePlayCheck = false;
+                    })
+                }
 			}
 
 			svgElement.drawYAxisLine = function () {
@@ -2868,8 +2954,6 @@
 			svgElement.getPlot = function () {		
 				return plotGroup;
 			}
-
-			var startIndex = getStartIndex(sliceData, options);
 
 			svgElement.getStartIndex = function () {
 
@@ -2961,90 +3045,6 @@
 
 			}
 
-			var clickCheck = false;
-
-			disabledSlider(clickCheck, options, plotGroup, styles);
-
-			if( options.timeSlice.use ){
-				
-				clearInterval(svgElement.timeSliceInterval);
-				options.timeSlice.play.unbind('click');
-				options.timeSlice.pause.unbind('click');
-				options.timeSlice.stop.unbind('click');
-				
-				eval(options.timeSlice.data)(sliceData[startIndex]);
-				var slideStartIndex = 0;
-				
-				options.timeSlice.slider.slider({
-		            range: 'max',
-		            min: 0,
-		            max: sliceData.length-1,
-		            value: startIndex,
-		            slide: function( event, ui ) {
-		            	clearInterval(svgElement.timeSliceInterval);
-		                startIndex = ui.value;
-		                svgElement.timeSlice(startIndex);
-		                slideStartIndex = ui.value;
-
-		                disabledSlider(clickCheck, options, plotGroup, styles);
-
-		                svgElement.timeSlicePlayCheck = false;
-		            }
-		        });
-
-		        options.timeSlice.play.click(function (){
-
-					if(!svgElement.timeSlicePlayCheck){
-
-						if (sliceData.length -1 === startIndex) {
-
-							startIndex = 0;
-						}
-
-					    svgElement.timeSliceInterval = setInterval ( function () {	
-			        
-					        svgElement.timeSlice(startIndex);				        
-					        options.timeSlice.slider.slider({
-					            value: startIndex
-					        });
-
-					        plotGroup.unclick();
-					        plotGroup.undrag();
-
-					        startIndex += 1;
-					        if( startIndex > sliceData.length-1 ) {
-					            clearInterval(svgElement.timeSliceInterval);
-		            			svgElement.timeSlicePlayCheck = false;
-
-					            startIndex = sliceData.length-1;
-					        }
-					    }, options.timeSlice.delay);
-					    svgElement.timeSlicePlayCheck = true;
-					}
-				})
-
-		        options.timeSlice.pause.click(function (){
-
-		            clearInterval(svgElement.timeSliceInterval);
-		            mouseEvent(styles, options, svgElement, plotGroup, group, yAxisLine, xAxisLine, graphAttr, scatterPlot, tip, yAxisUnderLine, xAxisUnderLine, trendLine);
-		            disabledSlider(clickCheck, options, plotGroup, styles);
-		            svgElement.timeSlicePlayCheck = false;
-
-		        })
-
-		        options.timeSlice.stop.click(function (){
-
-		            clearInterval(svgElement.timeSliceInterval);
-		            options.timeSlice.slider.slider({
-			            value: sliceData.length-1
-			        });
-		            svgElement.timeSlice(sliceData.length-1);
-		            startIndex = sliceData.length-1;
-		            disabledSlider(clickCheck, options, plotGroup, styles);
-		            svgElement.timeSlicePlayCheck = false;
-
-		        })
-			}
 
 			svgElement.inquery = function( _options ) {
 				

@@ -12,7 +12,7 @@
 		});
 
 		if (typeof WEBPONENT_CHART_LICENSE_KEY === 'undefined' || WEBPONENT_CHART_LICENSE_KEY === '') {
-			
+
 			alert(productName + '의 라이센스키를 입력해주세요.');
 			return;
 		}
@@ -119,7 +119,7 @@
 		}
 	/**
 		licenseType ED시리즈 조건 추가(ver.150915 평다진)
-	*/	
+	*/
 	} else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001" || licenseObject.licenseType === "ED002" || licenseObject.licenseType === "ED003") {
 
 		var domain = window.location.host.toUpperCase();
@@ -129,7 +129,7 @@
 		var splitedDomain = licenseObject.domains.split(',');
 
 		for (var i = 0; i < splitedDomain.length; i++) {
-			
+
 			var regesteredSite = splitedDomain[i];
 
 			if (domain.indexOf(regesteredSite) > -1) {
@@ -140,7 +140,7 @@
 	} else if (licenseObject.product !== productId) {
 
 		TRIAL_UI = true;
-	 
+
 	} else {
 
 		alert('유효하지 않은 ' + productName + ' 라이센스입니다.');
@@ -168,7 +168,7 @@
 						width : 1
 					}
 				},
-				korea : {                    
+				korea : {
 		            position : {
 		                x : 0,
 		                y : 0
@@ -180,7 +180,7 @@
 		            },
 		            area : {
 		                color : [
-	                        '#fceb96', '#ffde59', '#ffc259', '#ff9632', 
+	                        '#fceb96', '#ffde59', '#ffc259', '#ff9632',
 	                        '#fe753d', '#f45346', '#e63b3b'
 	                    ]
 		            },
@@ -208,8 +208,8 @@
 		                text : {
 		                    value : 'West sea',
 		                    family: 'Nanum Gothic',
-		                    size: 15, 
-		                    color: '#666666', 
+		                    size: 15,
+		                    color: '#666666',
 		                    align: 'center',    /* left | center | right */
 		                    style: 'normal',    /* normal | italic */
 		                    weight: 'bold', /* normal | bold */
@@ -224,8 +224,8 @@
 		                text : {
 		                    value : 'East sea',
 		                    family: 'Nanum Gothic',
-		                    size: 15, 
-		                    color: '#666666', 
+		                    size: 15,
+		                    color: '#666666',
 		                    align: 'center',    /* left | center | right */
 		                    style: 'normal',    /* normal | italic */
 		                    weight: 'bold', /* normal | bold */
@@ -240,15 +240,15 @@
 		                text : {
 		                    value : 'South sea',
 		                    family: 'Nanum Gothic',
-		                    size: 15, 
-		                    color: '#666666', 
+		                    size: 15,
+		                    color: '#666666',
 		                    align: 'center',    /* left | center | right */
 		                    style: 'normal',    /* normal | italic */
 		                    weight: 'bold', /* normal | bold */
 		                    opacity: 1
 		                }
 		            }
-		        } 
+		        }
 		    };
 
 		    return defaultStyles;
@@ -273,7 +273,7 @@
 		}
 
 		function getDefaultOptions () {
-			
+
 			var defaultOptions = {
 				data : {
 					data : null,
@@ -301,7 +301,7 @@
 		        },
 		        timeSlice : {
 		            use : false,
-		            delay : 500,           
+		            delay : 500,
 		            slider : null,
 		            play : null,
 		            pause : null,
@@ -352,7 +352,7 @@
 		var lineError = getLineError();
 
 		function getLineError () {
-			
+
 			var lineError = 0;
 
 			if ( elementType == 'SVG' ) {
@@ -526,7 +526,7 @@
 
 			var dataTotal = 0;
 			var data = options.data.data;
-			
+
 			return data;
 		}
 
@@ -660,23 +660,23 @@
 				data += ".";
 				data += str.substr(2, 2);
 			}
-			
+
 			return data;
 		};
 
-		
+
 		function appendDataElement ( options, data, kG, mG ) {
 
 			var dLen = data.length;
 			var kGLen = kG.length;
 			var locOp = options.data.localOption;
-			
+
 			for ( var i = dLen; i--; ) {
 				for ( var j = kGLen; j--; ) {
 					if ( data[i][locOp] == kG[j].localName || data[i][locOp] == kG[j].localName2 ) {
 						kG[j].data = data[i];
 						if ( mG != undefined ) {
-							mG[j].data = data[i];						
+							mG[j].data = data[i];
 						}
 					}
 				}
@@ -734,14 +734,14 @@
 				if (koreaGroup[i].data[options.data.use]) {
 
 					var dataDiv = Math.floor(koreaGroup[i].data[options.data.use] / dataArr);
-					
+
 					if (dataArr == 0) {
 
 						dataDiv = color.length - 1;
 					}
 
 					colorArr[i] = color[dataDiv];
-				}			
+				}
 			}
 
 			return colorArr;
@@ -768,7 +768,7 @@
 					if (stepArrJ <= koreaUseData && koreaUseData < stepArrJ1) {
 
 						colorArr[i] = color[j];
-					}			
+					}
 				}
 			}
 
@@ -813,7 +813,7 @@
 			markerGroup[4].attr({ x : 205, y : 275 });
 			markerGroup[5].attr({ x : 265, y : 250 });
 			markerGroup[6].attr({ x : 308, y : 378 });
-			markerGroup[7].attr({ x : 340, y : 290 });	
+			markerGroup[7].attr({ x : 340, y : 290 });
 			markerGroup[8].attr({ x : 228, y : 350 });
 			markerGroup[9].attr({ x : 232, y : 405 });
 			markerGroup[10].attr({ x : 200, y : 391 });
@@ -839,7 +839,7 @@
 			var width = svgWidth;
 			var height = svgHeight;
 
-			if (elementType === "VML") { 
+			if (elementType === "VML") {
 
 				width = width - (styles.layout.line.width / 2) - 1.5;
 				height = height - (styles.layout.line.width / 2) - 1.5;
@@ -965,12 +965,12 @@
 
 			return koreaGroup;
 		}
-		
+
 		function getUniqueID () {
 
 			return Math.random().toString(36).substr(2, 9);
 		};
-		
+
 		/* resize event */
 
 		function resizeSvg ( svgElement, korea, koreaGroup, markerGroup, seaGroup, styles, options ) {
@@ -1024,7 +1024,7 @@
 							if (options.loadingBar.use && options.resize.loadingBar.use) {
 
 								loadingBar.hide();
-							}				
+							}
 
 							korea.children().remove();
 
@@ -1040,7 +1040,7 @@
 
 
 		function setColorFormat ( fillstyle ) {
-			
+
 			var color = null;
 			var srcCheck = false;
 
@@ -1083,13 +1083,13 @@
 			var fillstyleLength = fillstyle.length;
 
 			if ( fillstyle.length == undefined ) {
-				
+
 				fillcolor.push(fillstyle.src);
 			}
-			
+
 			for ( var i = 0; i < fillstyleLength; i++ ) {
-				
-				fillcolor.push(fillstyle[i].src);			
+
+				fillcolor.push(fillstyle[i].src);
 			}
 
 			var colorArr = [];
@@ -1145,16 +1145,16 @@
 		}
 
 		function setFillColorSrc (color) {
-				
+
 			var fillstyle = color;
 
 			if ( fillstyle.hasOwnProperty('src')/* || fillstyle[0].hasOwnProperty('src')*/) {
-				color = fillColorPattern(fillstyle);		
+				color = fillColorPattern(fillstyle);
 			} else {
-				color = fillstyle;		
+				color = fillstyle;
 			}
-			
-			return color;		
+
+			return color;
 		}
 
 		function mouseEvent ( korea, styles, options, koreaGroup, markerGroup, tip ) {
@@ -1168,12 +1168,12 @@
 				markerGroup.unhover();
 			}
 
-			koreaGroup.hover ( function (e) {	
+			koreaGroup.hover ( function (e) {
 
 				color = this.attr('fill');
 
 				if ( options.toolTip.use.local ) {
-					
+
 					tip.show();
 				}
 
@@ -1185,13 +1185,13 @@
 
 			}, function () {
 
-				if ( options.toolTip.use.local ) {		
-				
+				if ( options.toolTip.use.local ) {
+
 					tip.hide();
 				}
 
 				if ( styles.korea.hover.use ) {
-				
+
 					this.attr({
 						fill : color
 					});
@@ -1201,7 +1201,7 @@
 
 
 			koreaGroup.mousemove ( function (e) {
-				
+
 				moveToolTip( e, styles, options, this, tip, korea);
 
 			}).mouseout( function(e){
@@ -1211,47 +1211,47 @@
 
 			if ( options.toolTip.use.marker && markerGroup != undefined ) {
 
-				markerGroup.hover ( function (e) {				
+				markerGroup.hover ( function (e) {
 
 					tip.show();
 
 					markerGroup.mousemove ( function (e) {
-						
+
 						moveToolTip( e, styles, options, this, tip, korea);
 					});
 
-				}, function () {			
+				}, function () {
 
 					tip.hide();
 
-				});			
+				});
 			}
 
 			return tip;
 		}
 
 		function moveToolTip ( e, styles, options, element, toolTip, korea ) {
-		
+
 			if ( toolTip != null ) {
 
 				var mousePosition = getMousePosition(e, korea);
 
 				if (options.toolTip.func != null) {
-					
+
 					eval(options.toolTip.func)(element.data, toolTip, options);
-				
+
 				} else {
 
 					var data = element.data;
 
-					var data1 = '<span>' 
-								+ data[options.data.localOption] 
-								+ " : " 
-								+ data[options.data.use] 
+					var data1 = '<span>'
+								+ data[options.data.localOption]
+								+ " : "
+								+ data[options.data.use]
 								+'</span>';
 
 					toolTip.html(data1);
-				}	
+				}
 
 				var toolTipWidth = toolTip.width() / 2;
 				var toolTipHeight = toolTip.height();
@@ -1273,7 +1273,7 @@
 		function appendToolTip ( korea, options, ElementGroup ) {
 
 			var tip = $('<div>');
-			
+
 			if (options.toolTip.className == null) {
 
 				tip.css({
@@ -1290,13 +1290,13 @@
 			}
 
 			tip.css({
-				'position' : "absolute",			
+				'position' : "absolute",
 				'white-space': 'nowrap',
 				'z-index': 100000
 			});
 
 			tip.hide();
-			
+
 			return tip;
 		}
 
@@ -1463,7 +1463,7 @@
 
 		}
 
-		
+
 		function setTrans ( korea, koreaGroup, markerGroup, seaGroup, styles, options ) {
 
 			var koreaW = korea.width();
@@ -1513,7 +1513,7 @@
 					transform : trans
 				});
 			}
-			
+
 		}
 
 
@@ -1524,9 +1524,9 @@
 	        	if ( data[i][options.data.localOption] == hoverLoc ) {
 
 	        		if ( options.toolTip.func != undefined && options.toolTip.func != null ) {
-	        			
+
 	        			eval(options.toolTip.func)(data[i], tip);
-	        			
+
 	        		} else {
 
 	        			var data = element.data;
@@ -1537,7 +1537,7 @@
 
 						var tipElement = '<div class="tip_data">'+ data1 + data2 + '</div>';
 
-		                tip.html(name + tipElement);  
+		                tip.html(name + tipElement);
 	        		}
 	        		break;
 	        	}
@@ -1572,63 +1572,163 @@
             if (data === 'error' || data.length <= 0) {
 
                 noData(korea, svgElement);
-                return svgElement;
 
+            }else{
+
+				/* 시, 도 element 생성 */
+                 koreaGroup = drawLocalElement(styles, svgElement);
+
+				/* append marker */
+                if ( styles.marker.use ) {
+                    var markerGroup = getMarkerGroup(koreaGroup, svgElement, styles);
+                }
+
+                var sliceData = setSliceData(data, options);
+
+                if ( options.data.reverse ) {
+                    sliceData.reverse();
+                }
+
+                var gubunData = getGubunData(data, options, sliceData);
+
+                appendDataElement(options, gubunData, koreaGroup, markerGroup);
+
+                var colorArr = getColorArr(styles, koreaGroup, options);
+
+                setFillColor(styles, options, koreaGroup, colorArr);
+
+				/* append sea text */
+
+                var seaGroup = drawSeaText(styles, svgElement);
+
+
+				/* resize event */
+
+                resizeSvg(svgElement, korea, koreaGroup, markerGroup, seaGroup, styles, options);
+
+                if(!styles.hasOwnProperty('complete')){
+                    styles.isComplete = 'complete';
+                }
+
+                var tip = appendToolTip(korea, options, koreaGroup);
+
+                tip.appendTo(korea);
+
+                mouseEvent(korea, styles, options, koreaGroup, markerGroup, tip);
+
+                setTrans(korea, koreaGroup, markerGroup, seaGroup, styles, options);
+
+                setTimeout(function () {
+
+                    svgElement.event.trigger('drawCompleted', [svgElement]);
+
+                    korea.trigger('drawCompleted', [svgElement]);
+
+                }, 200);
+
+                var timeSliceData = sliceData;
+
+                var startIndex = getStartIndex(timeSliceData, options);
+
+                if ( options.timeSlice.use ) {
+                    clearInterval(svgElement.timeSliceInterval);
+                    options.timeSlice.play.unbind('click');
+                    options.timeSlice.pause.unbind('click');
+                    options.timeSlice.stop.unbind('click');
+
+                    eval(options.timeSlice.data)(timeSliceData[startIndex]);
+
+                    svgElement.playCheck = false;
+
+                    options.timeSlice.slider.slider({
+                        range: 'max',
+                        min: 0,
+                        max: timeSliceData.length-1,
+                        value: startIndex,
+                        slide: function( event, ui ) {
+                            clearInterval(svgElement.timeSliceInterval);
+                            startIndex = ui.value;
+                            eval(options.timeSlice.data)(timeSliceData[startIndex]);
+                            svgElement.timeSlice(timeSliceData[startIndex]);
+
+                            svgElement.playCheck = false;
+                        }
+                    });
+
+                    options.timeSlice.play.click(function (){
+
+                        if ( !svgElement.playCheck ) {
+
+                            if (timeSliceData.length -1 === startIndex) {
+
+                                startIndex = 0;
+                            }
+
+                            svgElement.timeSliceInterval = setInterval ( function () {
+
+                                svgElement.timeSlice(timeSliceData[startIndex]);
+                                options.timeSlice.slider.slider({
+                                    value: startIndex
+                                });
+
+                                eval(options.timeSlice.data)(timeSliceData[startIndex]);
+
+                                if ( options.toolTip.use.local ) {
+                                    setTimeSliceToolTip( tip, options, timeSliceData[startIndex], koreaHoverLoc, koreaGroup );
+                                }
+                                if ( options.toolTip.use.marker ) {
+                                    setTimeSliceToolTip( tip, options, timeSliceData[startIndex], markerHoverLoc, markerGroup );
+                                }
+
+                                startIndex += 1;
+                                if( startIndex > timeSliceData.length-1 ) {
+                                    clearInterval(svgElement.timeSliceInterval);
+                                    svgElement.playCheck = false;
+
+                                    startIndex = timeSliceData.length-1;
+                                }
+
+                            }, options.timeSlice.delay);
+
+                            svgElement.playCheck = true;
+                        }
+                    });
+
+                    options.timeSlice.pause.click(function (){
+                        clearInterval(svgElement.timeSliceInterval);
+                        svgElement.playCheck = false;
+                    });
+
+                    options.timeSlice.stop.click(function (){
+
+                        clearInterval(svgElement.timeSliceInterval);
+                        startIndex = timeSliceData.length - 1;
+                        options.timeSlice.slider.slider({
+                            value: timeSliceData.length - 1
+                        });
+
+                        eval(options.timeSlice.data)(timeSliceData[timeSliceData.length - 1]);
+                        svgElement.timeSlice(timeSliceData[timeSliceData.length - 1]);
+
+                        svgElement.playCheck = false;
+                    });
+
+                }
+                
+                var markerHoverLoc = null;
+                var koreaHoverLoc = null;
+                if ( markerGroup != undefined ) {
+                    markerGroup.hover(function () {
+                        markerHoverLoc = this.localName;
+                    });
+                }
+                koreaGroup.hover(function () {
+                    koreaHoverLoc = this.localName;
+                });
             }
+            
+            /* event 추가 */
 
-			/* 시, 도 element 생성 */
-
-			var koreaGroup = drawLocalElement(styles, svgElement);
-		
-			/* append marker */
-
-			if ( styles.marker.use ) {
-				var markerGroup = getMarkerGroup(koreaGroup, svgElement, styles);
-			}
-
-			var sliceData = setSliceData(data, options);
-
-			if ( options.data.reverse ) {
-				sliceData.reverse();
-			}
-
-			var gubunData = getGubunData(data, options, sliceData);
-
-			appendDataElement(options, gubunData, koreaGroup, markerGroup);
-
-			var colorArr = getColorArr(styles, koreaGroup, options);
-
-			setFillColor(styles, options, koreaGroup, colorArr);
-
-			/* append sea text */
-
-			var seaGroup = drawSeaText(styles, svgElement);
-
-
-			/* resize event */
-
-			resizeSvg(svgElement, korea, koreaGroup, markerGroup, seaGroup, styles, options);
-
-			if(!styles.hasOwnProperty('complete')){
-				styles.isComplete = 'complete';
-			}
-
-			var tip = appendToolTip(korea, options, koreaGroup);
-
-			tip.appendTo(korea);
-
-			mouseEvent(korea, styles, options, koreaGroup, markerGroup, tip);
-
-			setTrans(korea, koreaGroup, markerGroup, seaGroup, styles, options);
-			
-			setTimeout(function () {
-
-				svgElement.event.trigger('drawCompleted', [svgElement]);
-
-				korea.trigger('drawCompleted', [svgElement]);
-
-			}, 200);
-			
 			svgElement.getLocal = function () {
 
 				return koreaGroup;
@@ -1651,7 +1751,7 @@
 
 				return seaGroup;
 			}
-		
+
 			svgElement.timeSlice = function ( timeSliceData ) {
 
 				appendDataElement(options, timeSliceData, koreaGroup, markerGroup);
@@ -1661,8 +1761,6 @@
 				setFillColor(styles, options, koreaGroup, colorArr);
 
 			}
-
-			var timeSliceData = sliceData;
 
 			svgElement.getSliceData = function () {
 
@@ -1684,114 +1782,10 @@
 		        return index;
 			}
 
-			var startIndex = getStartIndex(timeSliceData, options);
-
-			svgElement.getStartIndex = function () {
-
-				return startIndex;
-			}
-
-			var markerHoverLoc = null;
-			var koreaHoverLoc = null;
-			if ( markerGroup != undefined ) {
-				markerGroup.hover(function () {
-					markerHoverLoc = this.localName;
-				});
-			}
-			koreaGroup.hover(function () {
-				koreaHoverLoc = this.localName;
-			});
-
-
-			if ( options.timeSlice.use ) {
-				clearInterval(svgElement.timeSliceInterval);
-				options.timeSlice.play.unbind('click');
-				options.timeSlice.pause.unbind('click');
-				options.timeSlice.stop.unbind('click');
-
-				eval(options.timeSlice.data)(timeSliceData[startIndex]);
-
-				svgElement.playCheck = false;
-
-				options.timeSlice.slider.slider({
-		            range: 'max',
-		            min: 0,
-		            max: timeSliceData.length-1,
-		            value: startIndex,
-		            slide: function( event, ui ) {
-		                clearInterval(svgElement.timeSliceInterval);
-		                startIndex = ui.value;
-		                eval(options.timeSlice.data)(timeSliceData[startIndex]);
-		                svgElement.timeSlice(timeSliceData[startIndex]);
-
-		                svgElement.playCheck = false;
-		            }
-		        });
-
-				options.timeSlice.play.click(function (){
-
-					if ( !svgElement.playCheck ) {
-
-						if (timeSliceData.length -1 === startIndex) {
-
-							startIndex = 0;
-						}
-
-					    svgElement.timeSliceInterval = setInterval ( function () {
-					        
-					        svgElement.timeSlice(timeSliceData[startIndex]);
-					        options.timeSlice.slider.slider({
-					            value: startIndex
-					        });
-					        
-					        eval(options.timeSlice.data)(timeSliceData[startIndex]);
-							
-							if ( options.toolTip.use.local ) {
-								setTimeSliceToolTip( tip, options, timeSliceData[startIndex], koreaHoverLoc, koreaGroup );
-							}
-							if ( options.toolTip.use.marker ) {
-								setTimeSliceToolTip( tip, options, timeSliceData[startIndex], markerHoverLoc, markerGroup );
-							}
-					      
-					        startIndex += 1;
-					        if( startIndex > timeSliceData.length-1 ) {
-					            clearInterval(svgElement.timeSliceInterval);
-					            svgElement.playCheck = false;
-
-					            startIndex = timeSliceData.length-1;
-					        }
-
-					    }, options.timeSlice.delay);
-
-					    svgElement.playCheck = true;
-					}
-				});
-
-				options.timeSlice.pause.click(function (){
-		            clearInterval(svgElement.timeSliceInterval);
-		            svgElement.playCheck = false;
-		        });
-
-		        options.timeSlice.stop.click(function (){
-		            
-		            clearInterval(svgElement.timeSliceInterval);
-		            startIndex = timeSliceData.length - 1;
-		            options.timeSlice.slider.slider({
-			            value: timeSliceData.length - 1
-			        });	            
-
-					eval(options.timeSlice.data)(timeSliceData[timeSliceData.length - 1]);
-		            svgElement.timeSlice(timeSliceData[timeSliceData.length - 1]);
-
-		            svgElement.playCheck = false;
-		        });
-		   
-			}
-
 			svgElement.inquery = function( _options ) {
-				
+
 				clearInterval(svgElement.timeSliceInterval);
-	            
+
 				options = $.extend(true, options, _options);
 
 				korea.children().remove();
@@ -1810,17 +1804,17 @@
 
 				var loadingBar = options.loadingBar.select;
 
-				if ( options.loadingBar.use == true && 
+				if ( options.loadingBar.use == true &&
 						options.resize.loadingBar.use == true ) {
 
-					loadingBar.hide();						
-				}				
+					loadingBar.hide();
+				}
 
 				korea.children().remove();
 
 				clearInterval(svgElement.timeSliceInterval);
 
-				self.init(korea, styles, options);	
+				self.init(korea, styles, options);
 			}
 
             svgElement.reDraw = function(style, option, redraw) {

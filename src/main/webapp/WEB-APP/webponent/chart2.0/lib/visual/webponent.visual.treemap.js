@@ -2918,114 +2918,115 @@
             var data = loadData(options);
 
 			/* data가 없으면 noData 처리, svgElement 반환 */
-            if(options.data.data == null || options.data.data === 'undefined'){
+            if ( data === 'error' || data.length <= 0) {
 
                 noData(treemap, svgElement);
 
-                return svgElement;
-            }
+            }else{
 
-			/* load data */
+				/* load data */
 
-            var data = getData(options);
+                var data = getData(options);
 
-			/* get dataTotal */
+				/* get dataTotal */
 
-            var totalPrice = getTotalData(data);
+                var totalPrice = getTotalData(data);
 
-			/* set data */
+				/* set data */
 
-            var groupData = setDataAttr( treemap, data, totalPrice, styles, options);
+                var groupData = setDataAttr( treemap, data, totalPrice, styles, options);
 
-            data = setDataObj(groupData);
-
+                data = setDataObj(groupData);
 
 
-            svgElement.event.on('selectedItem', function (e, data, position, mode) {
 
-                treemap.trigger('selectedItem', [data, position, mode]);
-            });
+                svgElement.event.on('selectedItem', function (e, data, position, mode) {
 
-            /* draw tree map base */
+                    treemap.trigger('selectedItem', [data, position, mode]);
+                });
 
-			var base = drawBaseTreeMap(treemap, svgElement, styles);
+				/* draw tree map base */
 
-			/* flag 단계 별 data 분류 */
+                var base = drawBaseTreeMap(treemap, svgElement, styles);
 
-			var stepDataArr = getStepDataArr(data, styles, options);
+				/* flag 단계 별 data 분류 */
 
-			/* flag 단계 별 draw path */
+                var stepDataArr = getStepDataArr(data, styles, options);
 
-			var subElement = drawStepElement(svgElement, stepDataArr, options, styles);
+				/* flag 단계 별 draw path */
 
-			/* image loading 후 동작 */
+                var subElement = drawStepElement(svgElement, stepDataArr, options, styles);
 
-			var loading_bar = options.loadingBar.select;
+				/* image loading 후 동작 */
 
-			var imageLoadCheck = setInterval( function () {
+                var loading_bar = options.loadingBar.select;
 
-				if ( options.imageLoadComplete ) {
+                var imageLoadCheck = setInterval( function () {
 
-					clearInterval(imageLoadCheck);
+                    if ( options.imageLoadComplete ) {
 
-					var fillColor = setFillColor (styles, options);				
+                        clearInterval(imageLoadCheck);
 
-					subElement = setStepElementAttr(svgElement, subElement, stepDataArr, styles, options);	
+                        var fillColor = setFillColor (styles, options);
 
-					if ( elementType == 'SVG' && styles.animate.use == true ) {
+                        subElement = setStepElementAttr(svgElement, subElement, stepDataArr, styles, options);
 
-						if ( options.loadingBar.use ) {
-							loading_bar.hide();
-						}
+                        if ( elementType == 'SVG' && styles.animate.use == true ) {
 
-					}	
-				}
-			}, 20);
+                            if ( options.loadingBar.use ) {
+                                loading_bar.hide();
+                            }
 
-			/* tree map 이 그려진 후 동작 ( hide loading bar ) */
+                        }
+                    }
+                }, 20);
 
-			if ( styles.animate.use == false || elementType != 'SVG' ) {
+				/* tree map 이 그려진 후 동작 ( hide loading bar ) */
 
-				var drawCheck = setInterval( function () {
+                if ( styles.animate.use == false || elementType != 'SVG' ) {
 
-					if ( options.drawLoadComplete ) {
-						
-						if ( options.loadingBar.use ) {
-							loading_bar.hide();
-						}
+                    var drawCheck = setInterval( function () {
 
-						clearInterval(drawCheck);
-					}
-				}, 300);
+                        if ( options.drawLoadComplete ) {
+
+                            if ( options.loadingBar.use ) {
+                                loading_bar.hide();
+                            }
+
+                            clearInterval(drawCheck);
+                        }
+                    }, 300);
+                }
+
+                var delay = styles.animate.delay * stepDataArr.length + styles.animate.speed + 100;
+
+                if ( !styles.animate.use ) {
+                    // delay = styles.animate.delay * stepDataArr.length;
+                    delay = 0;
+                }
+
+                if ( styles.group.hover.use ) {
+                    var groupHoverSet = drawGroupHover(styles, groupData, svgElement);
+                }
+
+                setTimeout ( function () {
+
+                    var textGroup = svgElement.set();
+                    textGroup = appendTextGroup(svgElement, treemap, textGroup, groupData, styles);
+                    mouseEvent(svgElement, subElement, treemap, stepDataArr, groupData, styles, textGroup, options, groupHoverSet);
+
+                }, delay)
+
+				/* resize 이벤트 적용 */
+
+                reSize(treemap, options, style, loading_bar, svgElement);
+
+
+                if(!styles.hasOwnProperty('complete')){
+                    styles.isComplete = 'complete';
+                }
 			}
 
-			var delay = styles.animate.delay * stepDataArr.length + styles.animate.speed + 100;
-
-			if ( !styles.animate.use ) {
-				// delay = styles.animate.delay * stepDataArr.length;
-				delay = 0;
-			}		
-
-			if ( styles.group.hover.use ) {
-				var groupHoverSet = drawGroupHover(styles, groupData, svgElement);
-			}
-
-			setTimeout ( function () {
-
-				var textGroup = svgElement.set();
-				textGroup = appendTextGroup(svgElement, treemap, textGroup, groupData, styles);		
-				mouseEvent(svgElement, subElement, treemap, stepDataArr, groupData, styles, textGroup, options, groupHoverSet);
-			
-			}, delay)
-
-			/* resize 이벤트 적용 */
-
-			reSize(treemap, options, style, loading_bar, svgElement);
-
-			
-			if(!styles.hasOwnProperty('complete')){
-				styles.isComplete = 'complete';
-			}
 
 			svgElement.drawBase = function () {
 	        	base = drawBaseTreeMap(treemap, svgElement, styles);
