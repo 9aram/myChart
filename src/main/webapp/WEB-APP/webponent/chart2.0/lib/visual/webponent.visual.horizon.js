@@ -404,7 +404,7 @@
 		        resize : {
 		        	use : false
 		        }
-			}
+			};
 
 			return defaultOptions;
 		}
@@ -757,7 +757,7 @@
 			min = getMin(min, vmin);
 
 			return tempData;
-		};
+		}
 
 
 		function getMax ( val1, val2 ) {
@@ -766,7 +766,7 @@
 			} else {
 				return Number(val2);
 			}
-		};
+		}
 
 
 		function getMin ( val1, val2 ) {
@@ -775,7 +775,7 @@
 			} else {
 				return Number(val2);
 			}
-		};
+		}
 
 
 		dayDataFormat = function( str ){
@@ -819,7 +819,7 @@
 				}
 			}
 			return xLabelSkip;
-		};
+		}
 
 
 		function setYAxis ( styles, options, data, max, min, graphAttr ) {
@@ -854,7 +854,7 @@
 			}
 
 			return yAxis;
-		};
+		}
 
 		function adjustMinMax ( styles, maxValue, minValue, options ) {
 
@@ -888,7 +888,7 @@
 			computed.computedMaximum = y_topBound;
 
 			return computed;
-		};
+		}
 
 		function drawSvg (horizon, styles) {
 
@@ -919,7 +919,7 @@
 				opacity : styles.layout.area.opacity,
 				stroke : styles.layout.line.color,
 				'stroke-width' : styles.layout.line.width
-			})
+			});
 
 	        return svgElement;
 
@@ -971,7 +971,7 @@
 				stroke : styles.graph.line.color,
 				'stroke-width' : 0,
 				opacity: styles.graph.area.opacity
-			})
+			});
 
 			surroundGroup.push(surroundPlotArea);
 
@@ -981,28 +981,28 @@
 				path : topPath,
 				stroke : styles.graph.line.top.color,
 				'stroke-width' : styles.graph.line.top.width
-			})
+			});
 			var surroundBottomLine = svgElement.path();
 			var bottomPath = 'M' + graphAttr.baseX + ',' + graphAttr.baseY2 + 'L' + graphAttr.baseX2 + ',' + graphAttr.baseY2 + 'Z';
 			surroundBottomLine.attr({
 				path : bottomPath,
 				stroke : styles.graph.line.bottom.color,
 				'stroke-width' : styles.graph.line.bottom.width
-			})
+			});
 			var surroundLeftLine = svgElement.path();
 			var leftPath = 'M' + graphAttr.baseX + ',' + graphAttr.baseY + 'L' + graphAttr.baseX + ',' + graphAttr.baseY2 + 'Z';
 			surroundLeftLine.attr({
 				path : leftPath,
 				stroke : styles.graph.line.left.color,
 				'stroke-width' : styles.graph.line.left.width
-			})
+			});
 			var surroundRightLine = svgElement.path();
 			var rightPath = 'M' + graphAttr.baseX2 + ',' + graphAttr.baseY + 'L' + graphAttr.baseX2 + ',' + graphAttr.baseY2 + 'Z';
 			surroundRightLine.attr({
 				path : rightPath,
 				stroke : styles.graph.line.right.color,
 				'stroke-width' : styles.graph.line.right.width
-			})
+			});
 
 			surroundGroup.push(surroundTopLine);
 			surroundGroup.push(surroundBottomLine);
@@ -1024,7 +1024,7 @@
 				fill : styles.graph.area.color,
 				stroke : '',
 				opacity: styles.graph.area.opacity
-			})
+			});
 
 			return horizon;
 		}
@@ -1058,7 +1058,7 @@
 					x : x,
 					y : y,
 					text : text
-				})
+				});
 				xAxisTextGroup.push(xAxisTextElement);
 
 				x += xGap;
@@ -1098,7 +1098,7 @@
 					stroke : styles.xAxis.line.color,
 					'stroke-width' : styles.xAxis.line.width,
 					opacity : styles.xAxis.line.opacity
-				})
+				});
 				xAxisElement.pointX = (Math.floor(x) + lineError);
 				xAxisGroup.push(xAxisElement);
 				x += xGap;
@@ -1127,7 +1127,7 @@
 					stroke : styles.yAxis.line.color,
 					'stroke-width' : styles.yAxis.line.width,
 					opacity : styles.yAxis.line.opacity
-				})
+				});
 				yAxisElement.pointY = (Math.floor(y) + lineError);
 				yLineGroup.push(yAxisElement)
 			}
@@ -1185,7 +1185,7 @@
 					x : x,
 					y : downY,
 					text : text
-				})
+				});
 				yAxisTextGroup.push(yAxisDownTextElement);
 			}
 
@@ -1200,7 +1200,7 @@
 					x : x,
 					y : zeroY,
 					text : zeroText
-				})
+				});
 				yAxisTextGroup.push(zeroTextElement);
 			}
 
@@ -1263,7 +1263,7 @@
 					stroke : styles.yAxis.tick.color,
 					'stroke-width' : styles.yAxis.tick.width,
 					opacity : styles.yAxis.tick.opacity
-				})
+				});
 				yTipGroup.push(tipElement);
 			}
 
@@ -1637,7 +1637,7 @@
 				width : coverWidth + 1,
 				height : coverHeight,
 				stroke : ''
-			})
+			});
 
 			return coverGroup;
 		}
@@ -1665,7 +1665,7 @@
 						'stroke-width' : 0,
 						fill : series.area.color,
 						opacity : series.area.opacity
-					})
+					});
 
 					if ( elementType != 'SVG' ) {
 						areaItem.attr({
@@ -1678,7 +1678,7 @@
 						stroke : series.line.color,
 						'stroke-width' : series.line.width,
 						opacity : series.line.opacity
-					})
+					});
 
 					if ( series.animate.use == true && elementType == 'SVG' ) {
 						areaItem.animate({
@@ -1690,7 +1690,7 @@
 					} else {
 						areaItem.attr({
 							path : pathGroup[i].areaPath
-						})
+						});
 						strokePathElement.attr({
 							path : pathGroup[i].linePath
 						})
@@ -1933,7 +1933,7 @@
 						verticalLine.attr({
 							path : 'M' + verticalX + ',' + baseY + 'L' + verticalX + ',' + baseY2 + 'Z',
 							opacity : verticalOpacity
-						})
+						});
 						verticalLine.toFront();
 					}
 
@@ -1941,7 +1941,7 @@
 						horizonLine.attr({
 							path : 'M' + baseX + ',' + verticalY + 'L' + baseX2 + ',' + verticalY + 'Z',
 							opacity : horizonOpacity
-						})
+						});
 						horizonLine.toFront();
 					}
 
@@ -1961,7 +1961,7 @@
 						})
 					}
 				}
-			})
+			});
 
 			return tip;
 
@@ -1975,7 +1975,7 @@
 	    		stroke: styles.yAxis.line.underLine.color,
 	    		'stroke-width': styles.yAxis.line.underLine.width,
 	    		'stroke-opacity': styles.yAxis.line.underLine.opacity
-	    	})
+	    	});
 	        for ( var i = yAxisLine.length; i--; ) {
 
 	        	var path = cloneYAxisGroup[i].attr('path');
@@ -2013,7 +2013,7 @@
 	    		stroke: styles.xAxis.line.underLine.color,
 	    		'stroke-width': styles.xAxis.line.underLine.width,
 	    		'stroke-opacity': styles.xAxis.line.underLine.opacity
-	    	})
+	    	});
 
 	    	for ( var i = xAxisLine.length; i--; ) {
 
@@ -2074,23 +2074,15 @@
 		function getMinData ( data, options ) {
 
 			var min = 0;
-
 			// var min = Number(data[0][options.yAxis.select.s1]);
-
 			// var yaxisKeyLen = Object.keys(options.yAxis.select).length;
-
 			// for ( var i = data.length; i--; ) {
-
 			// 	for ( var key in options.yAxis.select ) {
-
 			// 		var yaxisKey = options.yAxis.select[key];
-
 			// 		var _data = Number(data[i][yaxisKey]);
-
 			// 		if ( min > _data ) {
 			// 			min = _data;
 			// 		}
-
 			// 	}
 			// }
 
@@ -2133,7 +2125,7 @@
 		function getUniqueID () {
 
 			return Math.random().toString(36).substr(2, 9);
-		};
+		}
 
 		function reSize ( styles, options, horizon, svgElement ) {
 
@@ -2207,13 +2199,12 @@
 				fill: '#000'
 			});
 
-		};
+		}
 
 		self.init = function (horizon, style, option) {
-
 			horizon.css({
 				'position' : "relative"
-			})
+			});
 
 			/* styles extend */
 
@@ -2327,79 +2318,79 @@
 
             svgElement.getTimeSliceData = function () {
                 return timeSliceData;
-            }
+            };
 
             svgElement.drawYAxisLine = function () {
                 yAxisLine = drawYaxisLine(styles, options, data, svgElement, graphAttr);
-            }
+            };
 
             svgElement.getYAxisLine = function () {
                 return yAxisLine;
-            }
+            };
 
             svgElement.drawYAxisUnderLine = function () {
                 yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
-            }
+            };
 
             svgElement.getYAxisUnderLine = function () {
                 return yAxisUnderLine;
-            }
+            };
 
             svgElement.drawYAxisText = function () {
                 yAxisTextGroup = drawYaxisText(styles, options, data, svgElement, graphAttr);
-            }
+            };
 
             svgElement.getYAxisText = function () {
                 return yAxisTextGroup;
-            }
+            };
 
             svgElement.drawYAxisTick = function () {
                 yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
-            }
+            };
 
             svgElement.getYAxisTick = function () {
                 return yAxisTick;
-            }
+            };
 
             svgElement.drawXAxisLine = function (data) {
                 xAxisLine = drawXaxisLine(styles, options, data, svgElement, graphAttr);
-            }
+            };
 
             svgElement.getXAxisLine = function () {
                 return xAxisLine;
-            }
+            };
 
             svgElement.drawXAxisUnderLine = function () {
                 xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
-            }
+            };
 
             svgElement.getXAxisUnderLine = function () {
                 return xAxisUnderLine;
-            }
+            };
 
             svgElement.drawXAxisText = function (data) {
                 xAxisTextGroup = drawXaxisText(styles, options, data, svgElement, xAxisLine, graphAttr);
-            }
+            };
 
             svgElement.getXAxisText = function () {
                 return xAxisTextGroup;
-            }
+            };
 
             svgElement.getPathGroup = function ( data ) {
                 pathGroup = getPath(styles, options, data, svgElement, yAxisLine, graphAttr);
-            }
+            };
 
             svgElement.drawItem = function (data) {
                 itemGroup = drawItem(styles, options, data, svgElement, pathGroup);
-            }
+            };
 
             svgElement.getItem = function () {
                 return itemGroup;
-            }
+            };
 
             svgElement.setItemGroup = function (pathGroup) {
                 setItemGroupPath(pathGroup, itemGroup);
-            }
+            };
 
             svgElement.timeSliceGroup = {};
 
@@ -2419,7 +2410,7 @@
 
                 svgElement.timeSliceGroup = drawTimeSliceItem(styles, options, timeSliceData, yAxisLine, graphAttr, svgElement.timeSliceGroup, startIndex, svgElement);
 
-            }
+            };
 
             svgElement.endTimeSlice = function (disabled) {
 
@@ -2432,7 +2423,7 @@
                 }
 
                 clearInterval(svgElement.timeSliceGroup.animation);
-            }
+            };
 
             svgElement.timeSlice = function ( timeSliceData ) {
 
@@ -2458,7 +2449,7 @@
 
 
                 svgElement.endTimeSlice();
-            }
+            };
 
             if ( options.timeSlice.use ) {
 
@@ -2591,7 +2582,7 @@
 				svgElement.endTimeSlice("disabled");
 
 				self.init(horizon, styles, options);
-			}
+			};
 
             svgElement.reDraw = function(style, option, redraw) {
                 if(style !== undefined ){
@@ -2605,7 +2596,7 @@
                     horizon.children().remove();
                     self.init($(horizon), styles, options);
                 }
-            }
+            };
 
 			if (TRIAL_UI) {
 

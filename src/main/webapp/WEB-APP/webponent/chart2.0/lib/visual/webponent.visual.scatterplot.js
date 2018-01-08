@@ -1237,7 +1237,7 @@
 			}
 
 			return viewTextArray;
-		};
+		}
 
 
 		function drawXaxisLine ( styles, options, data, svgElement, graphAttr ) {
@@ -1291,11 +1291,11 @@
 					stroke : styles.xAxis.line.color,
 					'stroke-width' : styles.xAxis.line.width,
 					opacity : styles.xAxis.line.opacity
-				})			
+				});
 				if ( newMaxLineX > surroundPlotX + surroundPlotWidth ) {
 					newMaxLine.attr({
 						'stroke-width' : 0
-					})
+					});
 					break;
 				}
 
@@ -1382,11 +1382,11 @@
 					stroke : styles.yAxis.line.color,
 					'stroke-width' : styles.yAxis.line.width,
 					opacity : styles.yAxis.line.opacity
-				})
+				});
 				if ( newMaxLineY < surroundPlotY ) {
 					newMaxLine.attr({
 						'stroke-width' : 0
-					})
+					});
 					break;
 				}			
 				newMaxLine.pointY = newMaxLineY;
@@ -1411,7 +1411,7 @@
 				stroke : styles.graph.line.color,
 				'stroke-width' : 0,
 				opacity: styles.graph.area.opacity
-			})
+			});
 
 			surroundGroup.push(surroundPlotArea);
 
@@ -1421,7 +1421,7 @@
 				path : topPath,
 				stroke : styles.graph.line.top.color,
 				'stroke-width' : Number(styles.graph.line.top.width)
-			})
+			});
 
 			var surroundBottomLine = svgElement.path();
 			var bottomPath = 'M' + graphAttr.baseX + ',' + graphAttr.baseY2 + 'L' + graphAttr.baseX2 + ',' + graphAttr.baseY2 + 'Z';
@@ -1429,21 +1429,21 @@
 				path : bottomPath,
 				stroke : styles.graph.line.bottom.color,
 				'stroke-width' : Number(styles.graph.line.bottom.width)
-			})
+			});
 			var surroundLeftLine = svgElement.path();
 			var leftPath = 'M' + graphAttr.baseX + ',' + graphAttr.baseY + 'L' + graphAttr.baseX + ',' + graphAttr.baseY2 + 'Z';
 			surroundLeftLine.attr({
 				path : leftPath,
 				stroke : styles.graph.line.left.color,
 				'stroke-width' : Number(styles.graph.line.left.width)
-			})
+			});
 			var surroundRightLine = svgElement.path();
 			var rightPath = 'M' + graphAttr.baseX2 + ',' + graphAttr.baseY + 'L' + graphAttr.baseX2 + ',' + graphAttr.baseY2 + 'Z';
 			surroundRightLine.attr({
 				path : rightPath,
 				stroke : styles.graph.line.right.color,
 				'stroke-width' : Number(styles.graph.line.right.width)
-			})
+			});
 
 			surroundGroup.push(surroundTopLine);
 			surroundGroup.push(surroundBottomLine);
@@ -1521,7 +1521,7 @@
 				circle.attr({
 					stroke : circleStroke,
 					'stroke-width' : styles.series.line.width
-				})
+				});
 				if ( styles.animate.use == true && elementType == 'SVG' ) {
 					circle.animate({
 						r : dataI.r
@@ -2123,7 +2123,7 @@
 		function getUniqueID () {
 
 			return Math.random().toString(36).substr(2, 9);
-		};
+		}
 
 		function reSize ( styles, options, scatterPlot, svgElement ) {
 
@@ -2403,7 +2403,7 @@
 	    		stroke: styles.yAxis.line.underLine.color,
 	    		'stroke-width': styles.yAxis.line.underLine.width,
 	    		'stroke-opacity': styles.yAxis.line.underLine.opacity
-	    	})
+	    	});
 	        for ( var i = yAxisLine.length; i--; ) {        	
 
 	        	var path = cloneYAxisGroup[i].attr('path');
@@ -2441,7 +2441,7 @@
 	    		stroke: styles.xAxis.line.underLine.color,
 	    		'stroke-width': styles.xAxis.line.underLine.width,
 	    		'stroke-opacity': styles.xAxis.line.underLine.opacity
-	    	})
+	    	});
 
 	    	for ( var i = xAxisLine.length; i--; ) {
 	        	
@@ -2643,7 +2643,7 @@
 
 			scatterPlot.css({
 				'position' : "relative"
-			})	
+			});
 
 			/* styles extend */
 
@@ -2783,7 +2783,7 @@
 
                 var group = svgElement.set();
                 group.push(surroundPlot, plotArea, plotGroup);
-                group.push(yAxisLine, xAxisLine, yAxisTextGroup)
+                group.push(yAxisLine, xAxisLine, yAxisTextGroup);
                 group.push(xAxisTextGroup, yAxisTick);
                 group.push(yAxisUnderLine, xAxisUnderLine);
                 group.push(trendLine);
@@ -2870,7 +2870,7 @@
                             }, options.timeSlice.delay);
                             svgElement.timeSlicePlayCheck = true;
                         }
-                    })
+                    });
 
                     options.timeSlice.pause.click(function (){
 
@@ -2879,7 +2879,7 @@
                         disabledSlider(clickCheck, options, plotGroup, styles);
                         svgElement.timeSlicePlayCheck = false;
 
-                    })
+                    });
 
                     options.timeSlice.stop.click(function (){
 
@@ -2897,73 +2897,73 @@
 
 			svgElement.drawYAxisLine = function () {
 	        	yAxisLine = drawYaxisLine(styles, options, setData, svgElement, graphAttr);
-	        }
+	        };
 
 			svgElement.getYAxisLine = function () {		
 				return yAxisLine;
-			}
+			};
 
 			svgElement.drawYAxisUnderLine = function () {
 	        	yAxisUnderLine = drawYaxisUnderLine(styles, yAxisLine, graphAttr);
-	        }
+	        };
 
 			svgElement.getYAxisUnderLine = function () {		
 				return yAxisUnderLine;
-			}
+			};
 
 			svgElement.drawYAxisText = function () {
 	        	yAxisTextGroup = drawYaxisText(styles, options, setData, svgElement, yAxisLine, graphAttr);
-	        }
+	        };
 
 			svgElement.getYAxisText = function () {		
 				return yAxisTextGroup;
-			}
+			};
 
 			svgElement.drawXAxisLine = function () {
 	        	xAxisLine = drawXaxisLine(styles, options, setData, svgElement, graphAttr);
-	        }
+	        };
 
 			svgElement.getXAxisLine = function () {		
 				return xAxisLine;
-			}
+			};
 
 			svgElement.drawXAxisUnderLine = function () {
 	        	xAxisUnderLine = drawXaxisUnderLine(styles, xAxisLine, yAxisLine);
-	        }
+	        };
 
 			svgElement.getXAxisUnderLine = function () {
 				return xAxisUnderLine;
-			}
+			};
 
 			svgElement.drawXAxisText = function () {
 	        	xAxisTextGroup = drawXaxisText(styles, options, setData, svgElement, xAxisLine, graphAttr);
-	        }
+	        };
 
 			svgElement.getXAxisText = function () {		
 				return xAxisTextGroup;
-			}
+			};
 
 			svgElement.drawYAxisTick = function () {
 	        	yAxisTick = drawYaxisTick(styles, svgElement, yAxisLine, graphAttr);
-	        }
+	        };
 
 			svgElement.getYAxisTick = function () {		
 				return yAxisTick;
-			}
+			};
 			
 			svgElement.getPlot = function () {		
 				return plotGroup;
-			}
+			};
 
 			svgElement.getStartIndex = function () {
 
 				return startIndex;		
-			}
+			};
 
 			svgElement.getTrendLine = function () {
 
 				return trendLine;		
-			}		
+			};
 
 			svgElement.timeSlice = function ( index ) {
 				eval(options.timeSlice.data)(sliceData[index]);
@@ -3036,14 +3036,14 @@
 
 				group = svgElement.set();
 				group.push(surroundPlot, plotArea, plotGroup);
-				group.push(yAxisLine, xAxisLine, yAxisTextGroup)
+				group.push(yAxisLine, xAxisLine, yAxisTextGroup);
 				group.push(xAxisTextGroup, yAxisTick);
 				group.push(yAxisUnderLine, xAxisUnderLine);
 				group.push(trendLine);
 
 				mouseEvent(styles, options, svgElement, plotGroup, group, yAxisLine, xAxisLine, graphAttr, scatterPlot, tip, yAxisUnderLine, xAxisUnderLine, trendLine);
 
-			}
+			};
 
 
 			svgElement.inquery = function( _options ) {
@@ -3070,7 +3070,7 @@
 				clearInterval(svgElement.timeSliceInterval);
 
 				self.init(scatterPlot, styles, options);
-			}
+			};
 
             svgElement.reDraw = function(style, option, redraw) {
                 if(style !== undefined ){
@@ -3084,7 +3084,7 @@
                     scatterPlot.children().remove();
                     self.init(scatterPlot, styles, options);
                 }
-            }
+            };
 
 
 			if (TRIAL_UI) {

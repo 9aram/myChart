@@ -942,7 +942,7 @@
 				localName2 : '제주도'
 			}
 
-		}
+		};
 
 		/* draw local element */
 
@@ -969,7 +969,7 @@
 		function getUniqueID () {
 
 			return Math.random().toString(36).substr(2, 9);
-		};
+		}
 
 		/* resize event */
 
@@ -1732,25 +1732,25 @@
 			svgElement.getLocal = function () {
 
 				return koreaGroup;
-			}
+			};
 
 			svgElement.drawMarker = function () {
 				markerGroup = getMarkerGroup(koreaGroup, svgElement, styles)
-			}
+			};
 
 			svgElement.getMarker = function () {
 
 				return markerGroup;
-			}
+			};
 
 			svgElement.drawSea = function () {
 				seaGroup = drawSeaText(styles, svgElement);
-			}
+			};
 
 			svgElement.getSea = function () {
 
 				return seaGroup;
-			}
+			};
 
 			svgElement.timeSlice = function ( timeSliceData ) {
 
@@ -1760,12 +1760,12 @@
 
 				setFillColor(styles, options, koreaGroup, colorArr);
 
-			}
+			};
 
 			svgElement.getSliceData = function () {
 
 				return timeSliceData;
-			}
+			};
 
 			svgElement.getStartIndex = function () {
 
@@ -1780,7 +1780,7 @@
 		        }
 
 		        return index;
-			}
+			};
 
 			svgElement.inquery = function( _options ) {
 
@@ -1815,7 +1815,7 @@
 				clearInterval(svgElement.timeSliceInterval);
 
 				self.init(korea, styles, options);
-			}
+			};
 
             svgElement.reDraw = function(style, option, redraw) {
                 if(style !== undefined){
@@ -1829,7 +1829,7 @@
                     korea.children().remove();
                     self.init(korea, styles, options);
                 }
-            }
+            };
 
 			if (TRIAL_UI) {
 

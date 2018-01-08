@@ -611,7 +611,7 @@
 			}		
 
 			return dataArr;
-		};
+		}
 
 		function parseDatasText ( data, options ) {
 		
@@ -912,7 +912,7 @@
 				}
 			}		
 			return itemArr;
-		};
+		}
 
 		/* width 와 height 값 중 높은 값 */
 
@@ -922,7 +922,7 @@
 			} else {
 				return "h";
 			}
-		};
+		}
 
 		/* get random color */
 
@@ -1242,7 +1242,7 @@
 				
 		    }
 			return m;
-		};
+		}
 
 
 		// function getMousePosition ( e, treemap ) {		
@@ -1979,23 +1979,23 @@
 				interFace.itemGroup.animate({
 					width : 0,
 					height : 0				
-				}, aniSpeed, aniType)
+				}, aniSpeed, aniType);
 
 				interFace.background.animate({
 					opacity : 0
-				}, aniSpeed, aniType)
+				}, aniSpeed, aniType);
 
 				interFace.toggleBtn.animate({
 					opacity : 0
-				}, aniSpeed, aniType)
+				}, aniSpeed, aniType);
 
 				interFace.backBtn.animate({
 					opacity : 0
-				}, aniSpeed, aniType)
+				}, aniSpeed, aniType);
 
 				interFace.groupText.animate({
 					opacity : 0
-				}, aniSpeed, aniType)
+				}, aniSpeed, aniType);
 
 				setTimeout( function () {
 					interFace.background.remove();
@@ -2076,7 +2076,7 @@
 						interFace.toggleBtn.attr({
 							src : styles.enterGroup.interFace.button.toggle.close.src
 						})
-					}, aniSpeed)
+					}, aniSpeed);
 
 					interFace.itemGroup.click();
 
@@ -2089,64 +2089,64 @@
 					interFace.itemGroup.attr({					
 						transform : trans,
 						opacity: 0	
-					})
+					});
 
 					interFace.background.attr({
 						x : Math.floor(treemapW - backgoundW - right - 2) + lineError,
 						y : Math.floor(treemapH - backgoundH - 12) + lineError,
 						width : backgoundW,
 						height : backgoundH
-					})	
+					});
 
 					interFace.groupText.attr({
 						x : treemapW - 20,
 						y : treemapH,
 						opacity : 0,
 						'font-size' : 0
-					})	
+					});
 
 					interFace.toggleBtn.attr({
 						y : treemapH - backgoundH - 10
-					})
-					
+					});
+
 					interFace.backBtn.attr({
 						y : treemapH - backgoundH - 10
-					})
+					});
 
 					setTimeout( function () {
 						interFace.toggleBtn.attr({
 							src : styles.enterGroup.interFace.button.toggle.open.src
 						})
-					}, 10)
+					}, 10);
 
 					toggleCheck = false;				
 				}						
 
 				setInterFaceToFront(interFace);
-			})	
+			});
 
 			interFace.backBtn.mousedown( function () {
 
 				interFace.itemGroup.attr({
 					width : 0,
 					height : 0				
-				})
+				});
 
 				interFace.background.attr({
 					opacity : 0
-				})
+				});
 
 				interFace.toggleBtn.attr({
 					opacity : 0
-				})
+				});
 
 				interFace.backBtn.attr({
 					opacity : 0
-				})
+				});
 
 				interFace.groupText.attr({
 					opacity : 0
-				})
+				});
 
 				setTimeout( function () {
 					interFace.background.remove();
@@ -2154,7 +2154,7 @@
 					interFace.backBtn.remove();
 					interFace.groupText.remove();
 					interFace.itemGroup.remove();
-				}, 10 )
+				}, 10 );
 				
 				toggleCheck = false;	
 
@@ -2178,7 +2178,7 @@
 					y : groupDataI.y,
 					width : groupDataI.width,
 					height : groupDataI.height				
-				})
+				});
 				groupElement.groupNum = groupDataI.group;
 				groupInterface.push(groupElement);
 			}
@@ -2189,7 +2189,7 @@
 			groupInterface.attr({
 				transform : trans,
 				opacity: 0
-			})
+			});
 
 			return groupInterface;		
 		}
@@ -2391,7 +2391,7 @@
 		
 			enlargeGroupBack.attr({
 				opacity : 1
-			})	
+			});
 
 			for ( var i = groupDataLength; i--; ) {
 				
@@ -2410,7 +2410,7 @@
 						width : groupDataI.width * scaleW,
 						height : groupDataI.height * scaleH,			
 						fill : styles.item.area.color[flag]
-					})
+					});
 
 					enlargeGroup.push(subElement);
 				}		
@@ -2420,7 +2420,7 @@
 			enlargeGroup.attr({
 				stroke: styles.item.line.color,
 				'stroke-width' : styles.item.line.width
-			})
+			});
 
 			subTextGroup.remove();
 
@@ -2461,7 +2461,7 @@
 
 			hoverBox.attr({
 				opacity:0
-			})
+			});
 
 			treemap.unbind('click');
 			subElement.animate({
@@ -2547,7 +2547,7 @@
 				name = name.substr(0, name.length - 1);
 				text.attr({
 	   				text : name
-	   			})
+	   			});
 				rectW = text.getBBox().width + areaPdLR;
 				if ( rectW + labelPsX + gLineW < groupW ) {					
 	   				break;
@@ -2561,7 +2561,7 @@
 			}
 			text.attr({
 				text : name
-			})
+			});
 
 			return name;
 		}
@@ -2759,7 +2759,7 @@
 		function getUniqueID () {
 
 			return Math.random().toString(36).substr(2, 9);
-		};
+		}
 
 		function reSize (treemap, options, styles, loading_bar, svgElement) {
 
@@ -3015,7 +3015,7 @@
                     textGroup = appendTextGroup(svgElement, treemap, textGroup, groupData, styles);
                     mouseEvent(svgElement, subElement, treemap, stepDataArr, groupData, styles, textGroup, options, groupHoverSet);
 
-                }, delay)
+                }, delay);
 
 				/* resize 이벤트 적용 */
 
@@ -3030,15 +3030,15 @@
 
 			svgElement.drawBase = function () {
 	        	base = drawBaseTreeMap(treemap, svgElement, styles);
-	        }
+	        };
 
 			svgElement.getBase = function () {		
 				return base;
-			}
+			};
 
 			svgElement.getItemGroup = function () {		
 				return subElement;
-			}
+			};
 
 			svgElement.resize = function () {
 
@@ -3047,7 +3047,7 @@
 				treemap.children().remove();
 				
 				self.init(treemap, styles, options, loading_bar);
-			}
+			};
 
             svgElement.reDraw = function(style, option, redraw) {
                 if(style !== undefined ){
@@ -3061,7 +3061,7 @@
                     treemap.children().remove();
                     self.init(treemap, styles, options, loading_bar);
                 }
-            }
+            };
 
             if (TRIAL_UI) {
 
@@ -3079,7 +3079,7 @@
 			treemap[0].instance = svgElement;
 
 			return svgElement;
-		}
+		};
 
 		
 
