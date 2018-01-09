@@ -1948,10 +1948,10 @@
              */
             gauge.realTime = function (data) {
                 gauge.options.data.data.push(data);
-
+/*
                 var idx = gauge.options.data.data.length - 1;
 
-                gauge.setData(idx);
+                gauge.setData(idx);*/
 
                 reDrawGauge(gauge,type);
 

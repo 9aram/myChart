@@ -1891,6 +1891,19 @@
                 reDrawGauge(gauge, type);
             };
 
+
+            /**
+             * gauge 차트에 실시간으로 데이터를 입력하여 그린다.
+             * @param   data         데이터
+             */
+            gauge.realTime = function (data) {
+
+                gauge.options.data.data.push(data);
+
+                reDrawGauge(gauge,type);
+
+            };
+
             gauge.mouseMoveFunc = function(e,x,gauge,type){
                 mouseMoveFunc(e, x, gauge, type);
             }
