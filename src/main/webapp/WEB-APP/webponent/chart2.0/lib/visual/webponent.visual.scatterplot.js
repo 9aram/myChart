@@ -2005,13 +2005,30 @@
 		                tip.html(tipElement); 
 					}
 
-					var toolTipWidth = tip.width() / 2;
-					var toolTipHeight = tip.height();
+                    var toolTipWidth = tip.width() / 2;
+                    var toolTipHeight = tip.height();
 
-					tip.css({
-						top : mousePosition.y - toolTipHeight + options.toolTip.position.y - 30,
-						left : mousePosition.x - toolTipWidth + options.toolTip.position.x - 10
-					});
+                    var top = mousePosition.y - toolTipHeight + options.toolTip.position.y -30;
+                    var left = mousePosition.x - toolTipWidth + options.toolTip.position.x - 10;
+
+                    var wrapHeight = scatterPlot.height()-toolTipHeight;
+                    var wrapWidth = scatterPlot.width()-(toolTipWidth*2)-styles.yAxis.width + styles.yAxis.paddingRight;
+
+                    if(top < 0 ){
+                        top =  mousePosition.y + toolTipHeight- options.toolTip.position.y - 30;
+                    }else if(top > wrapHeight){
+                        top = mousePosition.y - options.toolTip.position.y + (toolTipHeight/2)
+                    }
+                    if(left<0){
+                        left = 0;
+                    }else if(left>wrapWidth){
+                        left = wrapWidth;
+                    }
+
+                    tip.css({
+                        top : top,
+                        left : left
+                    });
 				});
 
 				if ( clonePlot != undefined ) {
@@ -2037,13 +2054,30 @@
 			                tip.html(tipElement);
 						}
 
-						var toolTipWidth = tip.width() / 2;
-						var toolTipHeight = tip.height();
+                        var toolTipWidth = tip.width() / 2;
+                        var toolTipHeight = tip.height();
 
-						tip.css({
-							top : mousePosition.y - toolTipHeight + options.toolTip.position.y - 30,
-							left : mousePosition.x - toolTipWidth + options.toolTip.position.x - 10
-						});
+                        var top = mousePosition.y - toolTipHeight + options.toolTip.position.y -30;
+                        var left = mousePosition.x - toolTipWidth + options.toolTip.position.x - 10;
+
+                        var wrapHeight = scatterPlot.height()-toolTipHeight;
+                        var wrapWidth = scatterPlot.width()-(toolTipWidth*2)-styles.yAxis.width + styles.yAxis.paddingRight
+
+                        if(top < 0 ){
+                            top =  mousePosition.y + toolTipHeight- options.toolTip.position.y - 30;
+                        }else if(top > wrapHeight){
+                            top = mousePosition.y - options.toolTip.position.y + (toolTipHeight/2)
+                        }
+                        if(left<0){
+                            left = 0;
+                        }else if(left>wrapWidth){
+                            left = wrapWidth;
+                        }
+
+                        tip.css({
+                            top : top,
+                            left : left
+                        });
 					});
 				}
 			}

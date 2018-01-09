@@ -1973,13 +1973,39 @@
 				toolTip.html(tipElement);
 			}
 
-			var toolTipWidth = toolTip.width() / 2;
+		/*	var toolTipWidth = toolTip.width() / 2;
 			var toolTipHeight = toolTip.height();
 
 			toolTip.css({
 				top : mousePosition.y - toolTipHeight + options.toolTip.position.y - 30,
 				left : mousePosition.x - toolTipWidth + options.toolTip.position.x - 10
-			});
+			});*/
+
+            var toolTipWidth = toolTip.width() / 2;
+            var toolTipHeight = toolTip.height();
+
+            var top = mousePosition.y - toolTipHeight + options.toolTip.position.y -30;
+            var left = mousePosition.x - toolTipWidth + options.toolTip.position.x - 10;
+
+            var wrapHeight = pie.svg.height-toolTipHeight;
+            var wrapWidth = pie.svg.width-(toolTipWidth*2);
+
+            if(top < 0 ){
+                top =  mousePosition.y + toolTipHeight- options.toolTip.position.y - 30;
+            }else if(top > wrapHeight){
+                top = mousePosition.y - options.toolTip.position.y + (toolTipHeight/2)
+            }
+
+            if(left<0){
+                left = 0;
+            }else if(left>wrapWidth){
+                left = wrapWidth;
+            }
+
+            toolTip.css({
+                top : top,
+                left : left
+            });
 		}
 
 		/**
