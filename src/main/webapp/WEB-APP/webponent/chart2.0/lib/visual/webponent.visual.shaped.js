@@ -1407,7 +1407,7 @@
 
                 });
             }
-            if (options.use.animate && options.toolTip.func === null) {
+        /*    if (options.use.animate && options.toolTip.func === null) {
                 gauge.tipItems.prev.mousemove(function(e) {
 
                     gauge.tipItems.toolTip.show();
@@ -1418,7 +1418,7 @@
                     gauge.tipItems.toolTip.hide();
 
                 });
-            }
+            }*/
 
         }
 
