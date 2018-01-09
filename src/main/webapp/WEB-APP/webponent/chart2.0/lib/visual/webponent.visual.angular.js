@@ -355,7 +355,7 @@
                     jsonDepth : 'output.result' ,	// json에 depth
                     format :  null,
                     use : null,			// 표현하고자 하는 데이터 key값
-                    dataLen : 100      // 데이터 저장 갯수
+                    dataLen : null      // 데이터 저장 갯수
                 },
 
                 /*  USING OPTION - 옵션 사용 유무 */
@@ -663,13 +663,11 @@
             if( putData.dataLen ){
                 if(dataLen > putData.dataLen){
                     var idx = dataLen - putData.dataLen;
-                    for(i=0; i<idx; i++){
-                        putData.data.shift();
-                    }
-                    dataLen = putData.dataLen
+                    putData.data.splice(0,idx);
+                    dataLen = putData.data.length;
                 }
             }
-            
+
             for (var i = 0; i < dataLen; i ++ ){
                 dataArr[i] = [];
                 if( use == null ){

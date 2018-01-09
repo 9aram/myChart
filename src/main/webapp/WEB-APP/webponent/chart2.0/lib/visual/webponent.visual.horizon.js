@@ -366,7 +366,8 @@
 					reverse: false,
 					jsonDepth: 'output.result',
 					gubun : '',
-					gubunOption : null
+					gubunOption : null,
+					dataLen : null
 				},
 				xAxis : {
 					select : '',
@@ -463,7 +464,6 @@
 		function loadData (options) {
 
 			var data = [];
-			var dataTotal = 0;
 
 			if (options.data.data) {
 				var data = loadBlock(options);
@@ -486,6 +486,13 @@
 					}
 				});
 			}
+
+            if ( options.data.dataLen ){
+                if( data.length > options.data.dataLen ) {
+                    var i = data.length - options.data.dataLen;
+                    data.splice(0,i);
+                }
+            }
 
 			data = removeComma(data, options);
 

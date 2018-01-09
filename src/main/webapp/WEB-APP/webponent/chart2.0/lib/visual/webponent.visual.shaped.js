@@ -363,7 +363,7 @@
                     jsonDepth: 'output.result',	// json에 depth
                     format: null,         // 데이터 포멧 형식 설정
                     use: null,		    	// 표현할 데이터 key 값 , null인경우 데이터의 마지막key값 기준이 된다.
-                    dataLen: 100      // 데이터 저장 갯수
+                    dataLen: null      // 데이터 저장 갯수
                 },
                 /*  USING OPTION - 옵션 사용 유무 */
                 use : {
@@ -694,10 +694,9 @@
             if( putData.dataLen ){
                 if(dataLen > putData.dataLen){
                     var idx = dataLen - putData.dataLen;
-                    for(i=0; i<idx; i++){
-                        putData.data.shift();
-                    }
-                    dataLen = putData.dataLen
+                    putData.data.splice(0,idx);
+
+                    dataLen = putData.data.length;
                 }
             }
 

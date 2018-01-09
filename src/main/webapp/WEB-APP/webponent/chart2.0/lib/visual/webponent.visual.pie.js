@@ -275,7 +275,8 @@
 					jsonDepth: 'output.result',
 					use : null,
 					gubun : null,
-					gubunOption : null
+					gubunOption : null,
+					dataLen: null
 				},
 				legend : {
 					format : null,
@@ -440,7 +441,6 @@
 		function loadData (options) {
 
 			var data = [];
-			var dataTotal = 0;
 
 			if (options.data.data) {
 
@@ -468,6 +468,13 @@
 
 					}
 				});
+			}
+
+			if ( options.data.dataLen ){
+				if( data.length > options.data.dataLen ) {
+					var i = data.length - options.data.dataLen;
+                    data.splice(0,i);
+                }
 			}
 
 			return data;
