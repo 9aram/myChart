@@ -356,15 +356,15 @@
             var defaultOptions = {
                 /*  DATA SETTING - 데이터 설정  */
                 data : {
-                    data : null ,
-                    url : null ,			// Ajax를 통해서 데이터를 가져오고자 할경우
-                    type : null ,			// json, text 형태 설정
-                    reverse : false , 		// 데이터 흐름이 반대로 들어올경우
-                    jsonDepth : 'output.result' ,	// json에 depth
-                    format :  null,         // 데이터 포멧 형식 설정
-                    use : null		    	// 표현할 데이터 key 값 , null인경우 데이터의 마지막key값 기준이 된다.
+                    data: null,
+                    url: null,			// Ajax를 통해서 데이터를 가져오고자 할경우
+                    type: null,			// json, text 형태 설정
+                    reverse: false, 		// 데이터 흐름이 반대로 들어올경우
+                    jsonDepth: 'output.result',	// json에 depth
+                    format: null,         // 데이터 포멧 형식 설정
+                    use: null,		    	// 표현할 데이터 key 값 , null인경우 데이터의 마지막key값 기준이 된다.
+                    dataLen: 100      // 데이터 저장 갯수
                 },
-
                 /*  USING OPTION - 옵션 사용 유무 */
                 use : {
                     axis : true ,		// 눈금
@@ -690,6 +690,17 @@
             var setData = gauge.settings.data;
             var use = putData.use;
             var dataLen = putData.data.length;
+
+            if( putData.dataLen ){
+                if(dataLen > putData.dataLen){
+                    var idx = dataLen - putData.dataLen;
+                    for(i=0; i<idx; i++){
+                        putData.data.shift();
+                    }
+                    dataLen = putData.dataLen
+                }
+            }
+
             for (var i = 0; i < dataLen; i ++ ){
                 if( use === null || use === undefined){
                     for( var x in putData.data[i]){
