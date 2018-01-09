@@ -1528,7 +1528,9 @@
         function reDrawGauge(gauge, type) {
 
             gauge.redrawItem.remove();
-            gauge.tipItems.toolTip.remove();
+            if(gauge.tipItems.toolTip){
+                gauge.tipItems.toolTip.remove();
+            }
             gauge.redrawItem = gauge.svg.set();
             setWrapper(gauge);
             gauge.settings = cloneSettingModel(gauge);
