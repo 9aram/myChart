@@ -1250,6 +1250,9 @@
             var gapNum = setInterval(function () {
 
                 d = d - 1;
+
+                if(obj === undefined){ return false; }
+
                 if (d === -50) {
                     clearTimeout(gapNum);
                 } else {	// 흔들림 표현
