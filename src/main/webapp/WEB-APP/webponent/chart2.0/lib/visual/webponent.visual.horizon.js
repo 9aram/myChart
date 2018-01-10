@@ -1892,8 +1892,9 @@
 					}
 					if ( tipY + tip.height() + tipPaddingY > baseY2 ) {
 						tipY = baseY2 - tip.height() - tipPaddingY;
+					}else if (tipY < 0){
+						tipY = 0;
 					}
-
 					if ( options.toolTip.use ) {
 
 						if (options.toolTip.func != null) {
