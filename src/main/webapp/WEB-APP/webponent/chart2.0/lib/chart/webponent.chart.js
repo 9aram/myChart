@@ -3496,8 +3496,6 @@
 					max: true
 				};
 
-				console.log(222, xAxisStyles)
-
 				if(!xAxisStyles.hasOwnProperty('useValue')){
 					xAxisStyles.useValue = {};
 				}
