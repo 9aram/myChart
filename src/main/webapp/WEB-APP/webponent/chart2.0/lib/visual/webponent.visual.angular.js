@@ -1,7 +1,6 @@
 /*
- * 사이버이메지네이션
  * 마지막 수정자 : joointhezoo@cyber-i.com
- * 마지막 수정날짜 :  16.01.05
+ * 마지막 수정날짜 :  18.01.17
  */
 (function () {
 
@@ -40,7 +39,7 @@
 
     function appendTrialUi (wrapper) {
 
-        var wrapper = $(wrapper);
+        wrapper = $(wrapper);
 
         var trialUiWrapper = $('<div class="WEBPONENT-TRIAL-UI">');
 
@@ -651,7 +650,7 @@
 
         /**
          * 셋팅화면에 데이터 탭부분
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          */
         function setInputData(gauge){
             var putData = gauge.options.data;
@@ -747,7 +746,7 @@
 
         /**
          * 소수점 자리 대상인지를 확인
-         * @param {num} :  검사 대상
+         * @param {Number} num 검사 대상
          */
         function findFloat(num) {
             if(num === undefined){
@@ -763,8 +762,8 @@
 
         /**
          * 소수점 둘쨋자리 이상의 숫자를 반올림
-         * @param {num} :  검사 대상
-         * @param {idx} :  소수점 자릿수  (둘쨋자리) = -2
+         * @param {Number} num  검사 대상
+         * @param {Number} idx  소수점 자릿수  (둘쨋자리) = -2
          */
         function dropNumber(num,idx){
             num = parseFloat(num);
@@ -781,8 +780,8 @@
 
         /**
          * GAUGE COUNTER  :
-         * @param {gauge} gauge 객체
-         * @param {type} gauge type
+         * @param {Object} gauge 객체
+         * @param {String} type
          */
         function drawCounter(gauge,type){
 
@@ -924,7 +923,7 @@
 
         /**
          * 눈금의 최대범위와 최소범위 값을 설정
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
          */
         function adjustMinMax(gauge) {
@@ -1159,8 +1158,7 @@
 
         /**
          * GAUEGE CHART 의 TARGET 표시
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
+         * @param(Object)  GAUGE CHART TYPE
          */
         function drawTarget(gauge){
             var paper = gauge.svg;
@@ -1185,9 +1183,8 @@
 
         /**
          * 최대값 또는 평균값
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
-         * targetVal =( max || avg )
+         * @param (Object) gauge
+         * @param (String) type ( max || avg )
          */
         function drawPointer(gauge,type){
             var paper = gauge.svg,
@@ -1278,8 +1275,8 @@
 
         /**
          * 기본 공통 BAISC 한 부분을 그려준다. (원형모양)
-         * @param  {[gauge]}
-         * @param  {[type]} : dual 인 겨웅 위치와 갯수를 다르게 그려야함
+         * @param  {Object} gauge
+         * @param  {String} type dual 인 겨웅 위치와 갯수를 다르게 그려야함
          */
         function drawAngular(gauge,type){
             var pos = gauge.sizes;
@@ -1315,8 +1312,8 @@
         /**
          * DRWAWING ANGULAR GAUGE'S ARROW
          * : 원형게이지 차트의 데이터 표시 바늘
-         * @param  {[gauge]}
-         * @param  {[type]}
+         * @param  {Object} gauge
+         * @param  {String} type
          */
         function drawArrow(gauge, type){
 
@@ -1561,7 +1558,7 @@
 
         /**
          * gauge 에 이벤트 발생시
-         * @param  {gauge} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function itemsEvents (gauge) {
 
@@ -1641,7 +1638,7 @@
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {gauge} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function appendToolTip (gauge) {
             var options = gauge.options;
@@ -1778,11 +1775,11 @@
 
         /**
          * GAUGE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
-         * @param  {Gauge} gauge 객체
+         * @param  {Object} gauge 객체
          * @param  {Node} wrapper gauge 가 append 되는 DIV
-         * @param  {Object} styles pie 스타일
-         * @param  {Object} options pie 옵션
-         * @param  {String} GAUGE CHART의 TYPE
+         * @param  {Object} styles gauge 스타일
+         * @param  {Object} options gauge 옵션
+         * @param  {String} type gauge type
          */
         function setup (gauge, wrapper, styles, options, type) {
 
@@ -1828,7 +1825,7 @@
 
         /**
          * GAUEGE 에 이벤트를 붙여준다.
-         * @param  {GAUEGE} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function bindEvents (wrapper, gauge) {
             /**
@@ -1904,7 +1901,8 @@
 
         /**
          * GAUEGE 에 API 를 추가한다.
-         * @param  {GAUEGE} gauge 객체
+         * @param  {Object} gauge 객체
+         * @param  {String} type
          */
         function addApis (gauge,type){
             gauge.on = function (eventName, callback) {
@@ -1979,21 +1977,21 @@
 
         /**
          * GAUGE 초기화 함수
-         * @param  {Node} 	wrapper gauge 가 append 되는 DIV
+         * @param  {Object} wrapper gauge 가 append 되는 DIV
          * @param  {Object} styles  gauge 스타일
          * @param  {Object} options gauge 옵션
-         * @return {gauge}	gauge 객체
+         * @param  {String} type gauge type 설정
+         * @return {Object}	gauge 객체
          */
         self.init = function (wrapper, styles, options,type) {
+
             var gauge = {};
 
             gauge.event = $({});
 
             bindEvents(wrapper, gauge);
 
-            if(type == undefined ){
-                type = "angular_normal"
-            }
+            if(!type){ type = "angular_normal" }
 
             if(type.substring(0, 7) === "angular"){
                 var flag = type.lastIndexOf( "_" );
@@ -2005,20 +2003,12 @@
 
             addApis(gauge,type);
 
-
-            // 트라이얼 워터마크 생성
             if (TRIAL_UI) {
-
                 appendTrialUi(wrapper);
             }
 
-            /**
-             license object chart 에 추가(ver.150915 평다진)
-             */
             gauge.license = licenseObject;
-            /**
-             * wrapper(jQuery selector)에 저장(ver. 160318 평다진)
-             */
+
             wrapper[0].instance = gauge;
 
             return gauge;

@@ -1,7 +1,6 @@
 /*
- * 사이버이메지네이션
  * 마지막 수정자 : joointhezoo@cyber-i.com
- * 마지막 수정날짜 :  16.11.10
+ * 마지막 수정날짜 :  18.01.17
  */
 (function() {
 
@@ -40,7 +39,7 @@
 
     function appendTrialUi(wrapper) {
 
-        var wrapper = $(wrapper);
+        wrapper = $(wrapper);
 
         var trialUiWrapper = $('<div class="WEBPONENT-TRIAL-UI">');
 
@@ -303,8 +302,7 @@
             return defaultStyles;
         }
         /**
-         * 기본으로 설정되어 있는 옵션 반환 data 부분에 해당하는 key들은 고정이며 추가되는 부분은 자유롭게 설정한다.
-         *
+         * 기본으로 설정되어 있는 옵션 반환 data 부분에 해당하는 key들은 고정이며 추가되는 부분은 자유롭게 설정
          * @return {defaultOptions} default options
          */
         function getDefaultOptions() {
@@ -465,7 +463,6 @@
 
         /**
          * 브라우져 환경에 따라 SVG 인지 VML 인지 구분해준다.
-         *
          * @return {String} ['SVG' or 'VML']
          */
         function getElementType() {
@@ -485,8 +482,7 @@
         /**
          * AJAX 를 이용하여 데이터를 읽어온다.
          *
-         * @param {Object}
-         *            options [GAUGE 옵션]
+         * @param {Object} options [GAUGE 옵션]
          * @return {Array} [파싱된 데이터 반환]
          */
         function loadData(options) {
@@ -523,10 +519,8 @@
         /**
          * 데이터가 json 형식일 경우 options.data.jsonDepth 에 따라 해당 데이터를 반환한다.
          *
-         * @param {Array}
-         *            data [AJAX 에 의해 호출되어진 데이터]
-         * @param {Object}
-         *            options [PIE 옵션]
+         * @param {Array} data [AJAX 에 의해 호출되어진 데이터]
+         * @param {Object} options [PIE 옵션]
          * @return {Array} [PIE 데이터]
          */
         function loadJson(data, options) {
@@ -548,16 +542,13 @@
         /**
          * 데이터가 text 형식일 경우 '|' ,'\n' 을 기준으로 데이터를 파싱한다.
          *
-         * @param {String}
-         *            data [AJAX 에 의해 호출되어진 데이터]
-         * @param {Object}
-         *            options [PIE 옵션]
-         * @return {Array} [PIE 데이터]
+         * @param {String} data [AJAX 에 의해 호출되어진 데이터]
+         * @param {Object} options [GAUGE 옵션]
+         * @return {Array} [GAUGE 데이터]
          */
-        function loadText(data2, options) {
+        function loadText(data, options) {
 
             var arr = [];
-            var data = data2;
             var lineArr = data.split('\n');
             var dataTitles = [];
             var titleCheck = true;
@@ -668,7 +659,7 @@
 
         /**
          * gauge 의 데이터 중 최대값,최소값,평균값 을 구한다.
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          */
         function setComputedData(gauge){
             var opt = gauge.options;
@@ -704,7 +695,7 @@
 
         /**
          * 소수점 자리 대상인지를 확인
-         * @param {num} :  검사 대상
+         * @param {Number} num  검사 대상
          */
         function findFloat(num) {
             if(num === undefined){
@@ -720,8 +711,8 @@
 
         /**
          * 소수점 둘쨋자리 이상의 숫자를 반올림
-         * @param {num} :  검사 대상
-         * @param {idx} :  소수점 자릿수  (둘쨋자리) = -2
+         * @param {Number} num  검사 대상
+         * @param {Number} idx  소수점 자릿수  (둘쨋자리) = -2
          */
         function dropNumber(num, idx) {
             num = parseFloat(num);
@@ -738,8 +729,8 @@
 
         /**
          * GAUGE COUNTER BOX
-         * @param {gauge} gauge 객체
-         * @param {type} gauge type
+         * @param {Object} gauge 객체
+         * @param {String} type
          */
         function drawCounter(gauge, type) {
             var pos = gauge.sizes;
@@ -820,7 +811,7 @@
 
         /**
          * 눈금의 최대범위와 최소범위 값을 설정
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
          */
         function adjustMinMax(gauge) {
@@ -871,7 +862,7 @@
 
         /**
          * CHART 의 눈금 표시
-         * ( col(가로) || row(세로) )
+         * @param {String} type [ col(가로) || row(세로) ]
          */
         function drawAxis(gauge, type) {
 
@@ -992,8 +983,7 @@
 
         /**
          * GAUEGE CHART 의 TARGET 표시
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
+         * @param {String} type : GAUGE CHART TYPE
          */
         function drawTarget(gauge, type) {
             var paper = gauge.svg;
@@ -1038,9 +1028,9 @@
 
         /**
          * 최대값 또는 평균값
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
-         * targetVal =( max || avg )
+         * @Param {Object} gauge
+         * @param {String} type : GAUGE CHART TYPE
+         * @Param {String} pointerType [targetVal =( max || avg )]
          */
         function drawPointer(gauge, type, pointerType) {
             var paper = gauge.svg,
@@ -1551,7 +1541,7 @@
 
         /**
          * gauge 에 이벤트 발생시
-         * @param  {gauge} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function itemsEvents(gauge) {
 
@@ -1670,8 +1660,8 @@
 
         /**
          * 데이터 형식 변환
-         * @param  {num} 데이터 값
-         * @param  {formatType} 형식 종류
+         * @param  {Number} num 데이터 값
+         * @param  {String} formatType 형식 종류
          */
         function formatting(num, formatType) {
             var res = null;
@@ -1764,11 +1754,11 @@
 
         /**
          * GAUGE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
-         * @param  {Gauge} gauge 객체
+         * @param  {Object} gauge 객체
          * @param  {Node} wrapper gauge 가 append 되는 DIV
          * @param  {Object} styles pie 스타일
          * @param  {Object} options pie 옵션
-         * @param  {String} GAUGE CHART의 TYPE
+         * @param  {String} type gauge type
          */
         function setup(gauge, wrapper, styles, options, type) {
 
@@ -1813,9 +1803,8 @@
 
         /**
          * GAUEGE 에 이벤트를 붙여준다.
-         *
-         * @param {GAUEGE}
-         *            gauge 객체
+         * @param {Object} wrapper 객체
+         * @param {Object} gauge 객체
          */
         function bindEvents(wrapper, gauge) {
             /**
@@ -1869,7 +1858,8 @@
 
         /**
          * GAUEGE 에 API 를 추가한다.
-         * @param  {GAUEGE} gauge 객체
+         * @param  {Object} gauge 객체
+         * @param  {String} type
          */
         function addApis(gauge, type) {
             gauge.on = function(eventName, callback) {
@@ -1925,12 +1915,10 @@
         /**
          * LINEAR 초기화 함수
          *
-         * @param {Node}
-         *            wrapper gauge 가 append 되는 DIV
-         * @param {Object}
-         *            styles gauge 스타일
-         * @param {Object}
-         *            options gauge 옵션
+         * @param {Node} wrapper gauge 가 append 되는 DIV
+         * @param {Object} styles gauge 스타일
+         * @param {Object} options gauge 옵션
+         * @param {String} type gauge 타입
          * @return {gauge} gauge 객체
          */
         self.init = function(wrapper, styles, options, type) {
@@ -1940,9 +1928,7 @@
 
             bindEvents(wrapper, gauge);
 
-            if(type == undefined ){
-                type = "linear_solid"
-            }
+            if(!type){type = "linear_solid"}
 
             if (type.substring(0, 6) === "linear") {
                 var flag = type.lastIndexOf("_");
@@ -1954,19 +1940,12 @@
 
             addApis(gauge, type);
 
-            // 트라이얼 워터마크 생성
             if (TRIAL_UI) {
-
                 appendTrialUi(wrapper);
             }
 
-            /**
-             * license object chart 에 추가(ver.150915 평다진)
-             */
             gauge.license = licenseObject;
-            /**
-             * wrapper(jQuery selector)에 저장(ver. 160318 평다진)
-             */
+
             wrapper[0].instance = gauge;
 
             return gauge;

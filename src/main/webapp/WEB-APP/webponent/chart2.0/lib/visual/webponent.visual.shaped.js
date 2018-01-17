@@ -677,7 +677,7 @@
         }
         /**
          * y축 위치 찾기
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          */
         function getPixel(endPoint, data, allData, interval, measureNum) {
             var res =  Math.round(endPoint - (data / (allData / measureNum)) * interval);
@@ -718,7 +718,7 @@
         }
         /**
          * gauge 의 데이터 중 최대값,최소값,평균값 을 구한다.
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          */
         function setComputedData(gauge){
 
@@ -754,7 +754,7 @@
 
         /**
          * 소수점 자리 대상인지를 확인
-         * @param {num} :  검사 대상
+         * @param {Integer} num  검사 대상
          */
         function findFloat(num) {
             if(num === undefined){
@@ -770,8 +770,8 @@
 
         /**
          * 소수점 둘쨋자리 이상의 숫자를 반올림
-         * @param {num} :  검사 대상
-         * @param {idx} :  소수점 자릿수  (둘쨋자리) = -2
+         * @param {Integer} num  검사 대상
+         * @param {Integer} idx  소수점 자릿수  (둘쨋자리) = -2
          */
         function dropNumber(num, idx) {
             num = parseFloat(num);
@@ -787,9 +787,8 @@
         }
 
         /**
-         * GAUGE COUNTER  :
-         * @param {gauge} gauge 객체
-         * @param {type} gauge type
+         * GAUGE COUNTER
+         * @param {Object} gauge 객체
          */
         function drawCounter(gauge) {
             var pos = gauge.sizes;
@@ -867,7 +866,7 @@
 
         /**
          * 눈금의 최대범위와 최소범위 값을 설정
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          * 타겟값, 데이터값보다 최대값이 작거나 최소값이 크면 자동 설정
          */
         function adjustMinMax(gauge) {
@@ -1006,8 +1005,8 @@
 
         /**
          * GAUEGE CHART 의 TARGET 표시
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
+         * @param {Object} gauge  객체
+         * @param {String} type 객체타입설정
          */
         function drawTarget(gauge, type) {
             var paper = gauge.svg;
@@ -1032,9 +1031,9 @@
 
         /**
          * 최대값 또는 평균값
-         * @param(type) : GAUGE CHART TYPE
-         * @param(targetVal) : TARGET VALUE
-         * targetVal =( max || avg )
+         * @param {Object} gauge  객체
+         * @param {String} type 객체타입설정
+         * @param {String} pointerType 최대값 또는 평균값 설정
          */
         function drawPointer(gauge, type, pointerType) {
             var paper = gauge.svg;
@@ -1083,7 +1082,7 @@
             var pointer = paper.path(pointerCmd)
                 .attr({ "stroke" : styles.bar.color });
 
-            if (type == 'thermometer' ) {
+            if (type === 'thermometer' ) {
                 pointer.attr({ "stroke-dasharray" : "- " });
             }
             if( pointerType === 'max'){
@@ -1343,7 +1342,7 @@
 
         /**
          * gauge 에 이벤트 발생시
-         * @param  {gauge} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function itemsEvents(gauge) {
 
@@ -1354,18 +1353,20 @@
                 return;
             }
 
+            // gauge all - tooltip
             gauge.tipItems.base.mousemove(function (e) {
 
                 gauge.tipItems.toolTip.show();
                 mouseMoveFunc(e, this, gauge, "draw");
 
-            }).mouseout(function (e) {
+            }).mouseout(function () {
 
                 gauge.tipItems.toolTip.hide();
 
             });
 
 
+            // max - tooltip
             if (options.use.max && options.toolTip.func === null) {
                 gauge.tipItems.max.mousemove(function (e) {
 
@@ -1374,13 +1375,14 @@
                     gauge.mouseMoveFunc(e, this, gauge, func);
 
 
-                }).mouseout(function (e) {
+                }).mouseout(function () {
 
                     gauge.tipItems.toolTip.hide();
 
                 });
             }
 
+            // average - tooltip
             if (options.use.avg && options.toolTip.func === null) {
                 gauge.tipItems.avg.mousemove(function (e) {
 
@@ -1388,43 +1390,30 @@
                     var func = '<span>' + " Average :  " + gauge.options.pointer.avg + '</span><br />';
                     gauge.mouseMoveFunc(e, this, gauge, func);
 
-                }).mouseout(function (e) {
+                }).mouseout(function () {
 
                     gauge.tipItems.toolTip.hide();
 
                 });
             }
-
+            // target - tooltip
             if (options.use.target && options.toolTip.func === null) {
                 gauge.tipItems.targetPointer.mousemove( function (e) {
 
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge,"targetPointer");
 
-                }).mouseout( function(e){
+                }).mouseout( function(){
 
                     gauge.tipItems.toolTip.hide();
 
                 });
             }
-        /*    if (options.use.animate && options.toolTip.func === null) {
-                gauge.tipItems.prev.mousemove(function(e) {
-
-                    gauge.tipItems.toolTip.show();
-                    mouseMoveFunc(e, this, gauge, "prev");
-
-                }).mouseout(function(e) {
-
-                    gauge.tipItems.toolTip.hide();
-
-                });
-            }*/
-
         }
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {gauge} gauge 객체
+         * @param  {Object} gauge 객체
          */
         function appendToolTip(gauge) {
             var options = gauge.options;
@@ -1554,11 +1543,11 @@
 
         /**
          * GAUGE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
-         * @param  {Gauge} gauge 객체
+         * @param  {Object} gauge 객체
          * @param  {Node} wrapper gauge 가 append 되는 DIV
          * @param  {Object} styles shaped 스타일
          * @param  {Object} options shaped 옵션
-         * @param  {String} GAUGE CHART의 TYPE
+         * @param  {String} type CHART의 TYPE
          */
         function setup(gauge, wrapper, styles, options, type) {
             gauge.wrapper = wrapper;
@@ -1604,7 +1593,8 @@
 
         /**
          * GAUEGE 에 이벤트를 붙여준다.
-         * @param  {GAUEGE} gauge 객체
+         * @param  gauge.settings 세팅 정보를 담은 객체
+         * @param  gauge.wrapper  wrapper 정보를 담은 객체
          */
         function bindEvents(wrapper, gauge) {
             /**
@@ -1626,8 +1616,7 @@
 
             $(window).on(
                 wrapper.data('resizeEventName'),
-                function(e) {
-
+                function() {
                     var afterWrapperWidth = gauge.settings.wrapper.width;
                     var beforeWrapperWidth = gauge.wrapper.width();
                     var afterWrapperHeight = gauge.settings.wrapper.height;
@@ -1656,7 +1645,8 @@
 
         /**
          * GAUEGE 에 API 를 추가한다.
-         * @param  {GAUEGE} gauge 객체
+         * @param  {Object} gauge 객체
+         * @param  {String} type 타입설정
          */
         function addApis(gauge, type) {
             gauge.on = function(eventName, callback) {
@@ -1715,7 +1705,8 @@
          * @param  {Node}   wrapper gauge 가 append 되는 DIV
          * @param  {Object} styles  gauge 스타일
          * @param  {Object} options gauge 옵션
-         * @return {gauge}  gauge 객체
+         * @param  {String} type 설정 ('cylinder' || 'thermometer')
+         * @return {Object}  gauge 객체
          */
         self.init = function(wrapper, styles, options, type) {
             var gauge = {};
@@ -1724,9 +1715,7 @@
 
             bindEvents(wrapper, gauge);
 
-            if(type == undefined ){
-                type = 'cylinder';
-            };
+            if(!type){ type = 'cylinder';}
 
             gauge.type = type;
 
@@ -1734,18 +1723,12 @@
 
             addApis(gauge, type);
 
-            // 트라이얼 워터마크 생성
             if (TRIAL_UI) {
-
                 appendTrialUi(wrapper);
             }
-            /**
-             license object chart 에 추가(ver.150915 평다진)
-             */
+
             gauge.license = licenseObject;
-            /**
-             * wrapper(jQuery selector)에 저장(ver. 160318 평다진)
-             */
+
             wrapper[0].instance = gauge;
 
             return gauge;
