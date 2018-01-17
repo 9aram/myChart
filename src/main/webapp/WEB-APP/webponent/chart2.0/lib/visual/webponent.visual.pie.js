@@ -2461,10 +2461,12 @@
 			 */
             pie.reDraw = function (styles, options, redraw) {
 
-				if(styles !== undefined){
+            	pie.wrapper.children().remove();
+
+				if(styles !== undefined &&  styles !== null){
                     pie.styles = extendStyles(styles);
 				}
-                if(options !== undefined){
+                if(options !== undefined &&  options !== null){
                     pie.options = extendOptions(options);
                     pie.data = loadData(pie.options);
                 }
