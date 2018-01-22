@@ -501,7 +501,6 @@
 
 		/**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
-		 * @param  {pie} pie 객체
 		 */
 		function removeComma (data, options) {
 
@@ -649,10 +648,9 @@
 			return arr;
 		}
 
-		function loadText (data2, dataParam) {
+		function loadText (data, dataParam) {
 
 			var arr = [];
-			var data = data2;
 			var lineArr = data.split('\n');
 			var dataTitles = [];
 			var titleCheck = true;

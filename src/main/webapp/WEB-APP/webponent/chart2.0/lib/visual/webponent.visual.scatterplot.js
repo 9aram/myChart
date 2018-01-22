@@ -35,7 +35,7 @@
 
 	function appendTrialUi (wrapper) {
 
-		var wrapper = $(wrapper);
+		wrapper = $(wrapper);
 
 		var trialUiWrapper = $('<div class="WEBPONENT-TRIAL-UI">');
 
@@ -389,7 +389,7 @@
 		        	use : false
 		        }
 
-			}
+			};
 
 			return defaultOptions;
 		}
@@ -504,7 +504,6 @@
 
 		/**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
-		 * @param  {pie} pie 객체
 		 */
 		function removeComma (data, options) {
 
@@ -1778,7 +1777,7 @@
 
         /**
          * 데이터가 load 되지 않았을 경우
-         * @param  {scatterPlot} pie 객체
+         * @param  {Object} scatterPlot 객체
          */
         function noData (scatterPlot, svgElement) {
 

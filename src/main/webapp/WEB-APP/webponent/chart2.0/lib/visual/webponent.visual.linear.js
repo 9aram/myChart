@@ -521,7 +521,7 @@
          *
          * @param {Array} data [AJAX 에 의해 호출되어진 데이터]
          * @param {Object} options [PIE 옵션]
-         * @return {Array} [PIE 데이터]
+         * @return {Array} [Gauge 데이터]
          */
         function loadJson(data, options) {
 
@@ -1625,7 +1625,7 @@
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {pie} pie 객체
+         * @param  {Object} Gauge 객체
          */
         function appendToolTip(gauge) {
             var options = gauge.options;
@@ -1756,8 +1756,8 @@
          * GAUGE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
          * @param  {Object} gauge 객체
          * @param  {Node} wrapper gauge 가 append 되는 DIV
-         * @param  {Object} styles pie 스타일
-         * @param  {Object} options pie 옵션
+         * @param  {Object} styles Gauge 스타일
+         * @param  {Object} options Gauge 옵션
          * @param  {String} type gauge type
          */
         function setup(gauge, wrapper, styles, options, type) {
@@ -1919,7 +1919,7 @@
          * @param {Object} styles gauge 스타일
          * @param {Object} options gauge 옵션
          * @param {String} type gauge 타입
-         * @return {gauge} gauge 객체
+         * @return {Object} gauge 객체
          */
         self.init = function(wrapper, styles, options, type) {
             var gauge = {};

@@ -35,7 +35,7 @@
 
 	function appendTrialUi (wrapper) {
 
-		var wrapper = $(wrapper);
+		wrapper = $(wrapper);
 
 		var trialUiWrapper = $('<div class="WEBPONENT-TRIAL-UI">');
 
@@ -447,7 +447,8 @@
 
         /**
          * 데이터가 load 되지 않았을 경우
-         * @param  {treemap} pie 객체
+         * @param  {Object} treemap 객체
+         * @param  {svg} svgElement
          */
         function noData (treemap, svgElement) {
 
@@ -464,7 +465,6 @@
 
 		/**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
-		 * @param  {pie} pie 객체
 		 */
 		function removeComma (data, options) {
 

@@ -564,8 +564,8 @@
          * 데이터가 json 형식일 경우
          * options.data.jsonDepth 에 따라 해당 데이터를 반환한다.
          * @param  {Array} data    [AJAX 에 의해 호출되어진 데이터]
-         * @param  {Object} options [PIE 옵션]
-         * @return {Array}         [PIE 데이터]
+         * @param  {Object} options [Gauge 옵션]
+         * @return {Array}         [Gauge 데이터]
          */
         function loadJson(data, options) {
 
@@ -587,8 +587,8 @@
          * 데이터가 text 형식일 경우
          * '|' ,'\n' 을 기준으로 데이터를 파싱한다.
          * @param  {String} data    [AJAX 에 의해 호출되어진 데이터]
-         * @param  {Object} options [PIE 옵션]
-         * @return {Array}         [PIE 데이터]
+         * @param  {Object} options [Gauge 옵션]
+         * @return {Array}         [Gauge 데이터]
          */
         function loadText(data2, options) {
 

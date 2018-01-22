@@ -399,7 +399,7 @@
 
         /**
          * 데이터가 load 되지 않았을 경우
-         * @param  {korea} korea 객체
+         * @param  {Object} korea 객체
          */
         function noData (korea, svgElement) {
 
@@ -417,7 +417,6 @@
 
         /**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
-		 * @param  {pie} pie 객체
 		 */
 		function removeComma (data, options) {
 
@@ -1821,8 +1820,7 @@
 
 				var loadingBar = options.loadingBar.select;
 
-				if ( options.loadingBar.use == true &&
-						options.resize.loadingBar.use == true ) {
+				if ( options.loadingBar.use && options.resize.loadingBar.use  ) {
 
 					loadingBar.hide();
 				}

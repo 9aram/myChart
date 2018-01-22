@@ -42,7 +42,7 @@
 
 	function appendTrialUi (wrapper) {
 
-		var wrapper = $(wrapper);
+		wrapper = $(wrapper);
 
 		var trialUiWrapper = $('<div class="WEBPONENT-TRIAL-UI">');
 
@@ -559,7 +559,7 @@
 
 		/**
 		 * 현재 렌더링된 데이터를 가져온다.
-		 * @param  {Pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function getRenderedData (pie) {
 
@@ -958,7 +958,7 @@
 
 		/**
 		 * pie 애니메이션 루프
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function animationLoop (pie) {
 
@@ -985,7 +985,7 @@
 
 		/**
 		 * pie 의 조각별 각도를 구한 후 각각의 조각 별로 path 를 설정하여 그린다.
-		 * @param {pie} pie              객체
+		 * @param {Object} pie              객체
 		 */
 		function setPieAttribute (pie, animationDecimal) {
 
@@ -1074,7 +1074,7 @@
 
 		/**
 		 * pie 와 legend 사이를 연결하는 막대사탕 형태를 그려준다.
-		 * @param  {pie} pie     객체
+		 * @param  {Object} pie     객체
 		 * @param  {object} tipAttr 	tip 이 그려지기 위한 attr 을 정의
 		 */
 		function drawLollipop (pie, tipAttr) {
@@ -1132,7 +1132,7 @@
 
 		/**
 		 * pie 의 legend 를 그리기 위한 전반적인 설정을 한다.
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function drawLegend (pie) {
 
@@ -1165,7 +1165,7 @@
 
 		/**
 		 * pie 의 tip 을 그리기 위한 attr 을 설정한다.
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function getTipAttr (pie) {
 
@@ -1239,7 +1239,7 @@
 
 		/**
 		 * pie 의 legend 가 겹칠 경우 겹치지 않도록 수정한다.
-		 * @param {pie} pie 객체
+		 * @param {Object} pie 객체
 		 */
 		function setTipArrayStacked (pie) {
 
@@ -1354,7 +1354,7 @@
 
 		/**
 		 * legend 를 그릴 경우 pie 와 legend 사이에 line 을 그린다 (pie 에 직접 닿는 부분).
-		 * @param  {pie} pie     객체
+		 * @param  {Object} pie     객체
 		 */
 		function drawLegendPin (pie) {
 
@@ -1462,7 +1462,7 @@
 
 		/**
 		 * legend 를 그릴 경우 pie 와 legend 사이에 꺾인 형태의 line 을 그린다.
-		 * @param  {pie} pie     객체
+		 * @param  {Object} pie     객체
 		 * @param  {object} tipAttr 선이 그려질 기준이 정의된 object
 		 */
 		function drawBrokenTip (pie, tipAttr) {
@@ -1538,7 +1538,7 @@
 
 		/**
 		 * legend 를 사용할 경우 legend 전반적인 설정을 해준다.
-		 * @param  {pie} pie  객체
+		 * @param  {Object} pie  객체
 		 * @param  {json} data
 		 */
 		function appendLegend (pie, data) {
@@ -1639,7 +1639,7 @@
 
 		/**
 		 * 툴팁 사용 시 element 를 생성 한다.
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function appendToolTip (pie) {
 
@@ -1677,7 +1677,7 @@
 		/**
 		 * pie 를 둘러싸고 있는 div 의 width 와 height 를 기준으로
 		 * styles 에 정의 된 % 값을 pixel 로 변경
-		 * @param  {pie} pie     객체
+		 * @param  {Object} pie     객체
 		 * @param  {number} percent  pixel 로 변경할 % 값
 		 * @return {number}   pixel
 		 */
@@ -1700,7 +1700,7 @@
 
 		/**
 		 * 데이터가 load 되지 않았을 경우
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function noData (pie) {
 
@@ -1747,7 +1747,7 @@
 
 		/**
 		 * 데이터에 ',' 가 있을 경우 제거한다.
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function removeComma (pie) {
 
@@ -1773,7 +1773,7 @@
 
 		/**
 		 * pie 를 그리기 위한 전반적인 데이터 setting 을 해준다.
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function settingData (pie) {
 
@@ -1815,7 +1815,7 @@
 
 		/**
 		 * pie 의 데이터 중 최대값을 구한다.
-		 * @param {pie} pie 객체
+		 * @param {Object} pie 객체
 		 */
 		function setMaxData (pie) {
 
@@ -1842,7 +1842,7 @@
 
 		/**
 		 * pie 의 데이터 중 최소값을 구한다.
-		 * @param {pie} pie 객체
+		 * @param {Object} pie 객체
 		 */
 		function setMinData (pie) {
 
@@ -1869,7 +1869,7 @@
 
 		/**
 		 * 데이터의 총 합을 구한다.
-		 * @param {pie} pie 객체
+		 * @param {Object} pie 객체
 		 */
 		function setDataTotalValue (pie) {
 
@@ -1888,7 +1888,7 @@
 
 		/**
 		 * pie 의 시계열 사용 시 slider 를 설정한다.
-		 * @param {pie} pie 객체
+		 * @param {Object} pie 객체
 		 */
 		function setTimeSlice (pie) {
 
@@ -2010,7 +2010,7 @@
 
 		/**
 		 * pie 에 이벤트 발생시
-		 * @param  {pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function itemsEvents (pie) {
 
@@ -2149,7 +2149,7 @@
 
 		/**
 		 * pie 의 데이터가 변경 되었을 때 pie 의 attr 을 변경해준다.
-		 * @param  {pie} pie          객체
+		 * @param  {Object} pie          객체
 		 * @param  {boolean} usingAnimate 	애니메이션 동작 여부
 		 * @param  {number} aniSpeed     애니메이션 속도
 		 * @param  {string} aniType      애니메이션 타입
@@ -2217,7 +2217,7 @@
 
 		/**
 		 * PIE 에 나타나는 모든것을 그려준다.
-		 * @param  {Pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function drawItems (pie) {
 
@@ -2289,7 +2289,7 @@
 
 		/**
 		 * PIE 을 렌더링 하기 위한 전반적인 부분을 세팅한다.
-		 * @param  {Pie} pie 객체
+		 * @param  {Object} pie 객체
 		 * @param  {Node} wrapper pie 가 append 되는 DIV
 		 * @param  {Object} styles pie 스타일
 		 * @param  {Object} options pie 옵션
@@ -2346,7 +2346,7 @@
 
 		/**
 		 * PIE 에 이벤트를 붙여준다.
-		 * @param  {Pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function bindEvents (wrapper, pie) {
 
@@ -2426,7 +2426,7 @@
 
 		/**
 		 * PIE 에 API 를 추가한다.
-		 * @param  {Pie} pie 객체
+		 * @param  {Object} pie 객체
 		 */
 		function addApis (pie) {
 
@@ -2579,7 +2579,7 @@
 		 * @param  {Node} 	wrapper pie 가 append 되는 DIV
 		 * @param  {Object} styles  pie 스타일
 		 * @param  {Object} options pie 옵션
-		 * @return {pie}	pie 객체
+		 * @return {Object}	pie 객체
 		 */
 		self.init = function (wrapper, styles, options) {
 
