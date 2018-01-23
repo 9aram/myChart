@@ -724,30 +724,6 @@
 		 */
 		if(!_sliderHtml) {
 			_sliderHtml = ''
-				+ '<style>'
-					+ '.sliderContainer {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden;  bottom: 0; border-top: 1px solid #ddd;}'
-					+ '.sliderArea 		{font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; background: url(../../../lib/stock/img/slider_bg.png) 50% 50% no-repeat;}'
-					+ '.sliderArea .slider {background: url(../../../lib/stock/img/slider_cent.gif) 50% 50% no-repeat; height: 17px; position: absolute;}'
-					+ '.sliderArea .slider .slider-left {display: block; background: url(../../../lib/stock/img/slider_left.gif) left 50% no-repeat; height: 17px; width: 100%;}'
-					+ '.sliderArea .slider .slider-right {display: block; background: url(../../../lib/stock/img/slider_right.gif) right 50% no-repeat; height: 17px; width: 100%;}'
-					+ '.sliderArea .slider .slider-right span {visibility: hidden}'
-					+ '.sliderButton {font-size: 12px; font-family: Tahoma, dotum, gulim; background: #fff; position: absolute; overflow: hidden; right: 5px;}'
-					+ '.sliderButton input {font-size: 11px;font-family: Tahoma, dotum, gulim; margin: 6px 0 0 2px; padding: 0 4px; vertical-align: top;}'
-
-					+ '.sliderButton input[type=button]{text-indent: -9999px; cursor: pointer; overflow: hidden;}'
-					+ '*html .sliderButton input[type=button]{font-size:0;line-height:0;}' /*ie6*/
-					+ '*+html .sliderButton input[type=button]{text-indent: 0;font-size:0;line-height:0;padding-left: 100px;}'  /*ie7*/
-
-					+ '.sliderButton .slider-plus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_plus.png)}'
-					+ '.sliderButton .slider-plus:hover {background-image: url(../../../lib/stock/img/bt_plus_over.png)}'
-					+ '.sliderButton .slider-plus:active {background-image: url(../../../lib/stock/img/bt_plus_sel.png)}'
-					+ '.sliderButton .slider-default {width: 43px; height: 19px; background: url(../../../lib/stock/img/bt_default.png)}'
-					+ '.sliderButton .slider-default:hover {background-image: url(../../../lib/stock/img/bt_default_over.png)}'
-					+ '.sliderButton .slider-default:active {background-image: url(../../../lib/stock/img/bt_default_sel.png)}'
-					+ '.sliderButton .slider-minus {width: 18px; height: 19px; background: url(../../../lib/stock/img/bt_minus.png)}'
-					+ '.sliderButton .slider-minus:hover {background-image: url(../../../lib/stock/img/bt_minus_over.png)}'
-					+ '.sliderButton .slider-minus:active {background-image: url(../../../lib/stock/img/bt_minus_sel.png)}'
-				+ '</style>'
 				+ '<div class="sliderContainer">'
 					+ '<div class="sliderArea">'
 						+ '<div class="slider">'
@@ -6644,65 +6620,29 @@
 			if(('createTouch' in document) || ('ontouchstart' in document)){
 				var svg = selector.children().get(0);
 				svg.addEventListener('touchstart', function(event){
-					if(event.layerX < 0){ //Android
+					// Mobile Chrome 브라우저에서 event 객체에 변경이 있어 대응 로직 변경--S
+					if(event.layerX < 0 || event.layerX == undefined){ //Android
 						downPos.x = event.touches[0].pageX || event.changedTouches[0].pageX;// + event.layerX;
 					} else {
 						downPos.x = event.layerX;
 					}
-					downPos.y = event.pageY;
+					if(event.layerY < 0 || event.layerY == undefined){ //Android
+						downPos.y = event.touches[0].pageY || event.changedTouches[0].pageY;
+					} else {
+						downPos.y = event.pageY;
+					}
+					// Mobile Chrome 브라우저에서 event 객체에 변경이 있어 대응 로직 변경--E
 					downPos.leftSliderIndecator = _this.leftSliderIndecator;
+
 					_this.sliderDownChk = true;
 				})
-				/*selector.swipe({
-					swipeStatus: function(event, phase, direction, distance , duration , fingerCount){
-						console.log('status')
-						if(_this.sliderDownChk){
-							touchMoveHandler(event, downPos, "button", _this.maximum, direction, distance);
-						}
-					}
-				})*/
-				/*selector[0].addEventListener('touchmove', function(event){
-					if(_this.sliderDownChk){
-						touchMoveHandler(event, downPos, "button", _this.maximum);
-					}
-				}, false);*/
-				/*$(selector).bind('swipe', function(event){
-					if(_this.sliderDownChk){
-						$('.chart02').html($('.chart02').html() + '<br/>' + event.pageX)
-						touchMoveHandler(event, downPos, "button", _this.maximum);
-					}
-				});*/
-				/*selector[0].addEventListener( 'touchmove', function( e ) {
-				    var drag_dist = 0;
-				    var scroll_dist = 0;
-				 	if(_this.sliderDownChk){
-					    if ( e.type === 'touchmove' && e.touches.length === 1 ) {
-					        drag_dist = e.touches[ 0 ].pageX - downPos.x;
-					        scroll_dist = e.touches[ 0 ].pageY - downPos.y;
-					        move_dx = ( drag_dist / buttonWidth ) * 100;
-
-					        if ( Math.abs( drag_dist ) > Math.abs( scroll_dist ) ) {
-
-					            // ... move slide element
-					            touchMoveHandler(e, downPos, "button", _this.maximum);
-
-					            e.preventDefault( );
-					        }
-					    }
-					}
-				}, false );*/
 
 				svg.addEventListener('touchend', function(event){
 					_this.sliderDownChk = false;
 				}, false);
 
 				$('.slider', selector).bind('touchstart', function(event){
-					// if(event.layerX < 0){ //Android
-						downPos.x = $(event.target).position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
-					// } else {
-					// 	console.log($(event.target))
-					// 	downPos.x = event.target.layerX;
-					// }
+					downPos.x = $(event.target).position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
 					downPos.y = $(event.target).offset().top;//event.pageY;
 					downPos.leftSliderIndecator = _this.leftSliderIndecator;
 					_this.sliderDownChk = true;

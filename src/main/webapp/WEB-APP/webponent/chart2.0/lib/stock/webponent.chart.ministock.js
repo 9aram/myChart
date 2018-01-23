@@ -1517,12 +1517,18 @@
 			if(('createTouch' in document) || ('ontouchstart' in document)){
 				var svg = selector.children().get(0);
 				svg.addEventListener('touchstart', function(event){
-					if(event.layerX < 0){ //Android
+					// Mobile Chrome 브라우저에서 event 객체에 변경이 있어 대응 로직 변경--S
+					if(event.layerX < 0 || event.layerX == undefined){ //Android
 						downPos.x = event.touches[0].pageX || event.changedTouches[0].pageX;// + event.layerX;
 					} else {
 						downPos.x = event.layerX;
 					}
-					downPos.y = event.pageY;
+					if(event.layerY < 0 || event.layerY == undefined){ //Android
+						downPos.y = event.touches[0].pageY || event.changedTouches[0].pageY;
+					} else {
+						downPos.y = event.pageY;
+					}
+					// Mobile Chrome 브라우저에서 event 객체에 변경이 있어 대응 로직 변경--E
 					downPos.leftSliderIndecator = _this.leftSliderIndecator;
 					_this.sliderDownChk = true;
 				})
@@ -1532,12 +1538,8 @@
 				}, false);
 
 				$('.slider', selector).bind('touchstart', function(event){
-					// if(event.layerX < 0){ //Android
-					downPos.x = $(event.target).closest('.slider').position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
-					// } else {
-					// 	downPos.x = event.target.layerX;
-					// }
-					downPos.y = $(event.target).closest('.slider').position().top;//event.pageY;
+					downPos.x = $(event.target).position().left;//event.target.pageX;// || event.target.changedTouches[0].pageX;// + event.layerX;
+					downPos.y = $(event.target).offset().top;//event.pageY;
 					downPos.leftSliderIndecator = _this.leftSliderIndecator;
 					_this.sliderDownChk = true;
 				}).bind('touchend', function(event){

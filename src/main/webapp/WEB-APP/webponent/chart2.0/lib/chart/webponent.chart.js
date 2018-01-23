@@ -10961,18 +10961,23 @@
 
 			    var appName 	= navigator.appName.toLowerCase();
 			    var userAgent 	= navigator.userAgent.toLowerCase();
-
 			    if(TOUCHDEVICE){
+			    	// Mobile Chrome 브라우저에서 e 객체에 changedTouchs가 originalEvent에 들어가 있는 상태로
+			    	// 읽힐 경우 대응
+			    	var _e = e;
+			    	if(_e.originalEvent != undefined) {
+			    		_e = e.originalEvent;
+			    	}
 			    
-			    	if(e.changedTouches && e.changedTouches.length > 0){
+			    	if(_e.changedTouches && _e.changedTouches.length > 0){
 			    		
 				    	var target 		= e.target || e.srcElement,
 				    		rect 		= target.getBoundingClientRect(),
 				    		parent 		= target.parentNode,
 				    		parentRect 	= parent.getBoundingClientRect();
 
-				    	m.x = e.changedTouches[0].clientX - parentRect.left; 
-				    	m.y = e.changedTouches[0].clientY - parentRect.top;
+				    	m.x = _e.changedTouches[0].clientX - parentRect.left; 
+				    	m.y = _e.changedTouches[0].clientY - parentRect.top;
 			    	}
 			    } else {
 		    		if(userAgent.indexOf('firefox') > -1){ // FireFox

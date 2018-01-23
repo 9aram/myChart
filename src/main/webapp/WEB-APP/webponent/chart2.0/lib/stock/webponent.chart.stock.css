@@ -30,14 +30,14 @@
 .accordionArea .item .title {display: block;height: 25px;  line-height: 25px; width: 100%; border-bottom: 1px solid #ccc;}
 .accordionArea .item .title h4 {margin: 0; padding: 0; font-size: 12px; font-weight: bold;}
 .accordionArea .item .title a {display: block; color: #5b564a; padding-left: 10px; text-decoration: none;}
-.accordionArea .item .title a:link, .accordionArea .item .title a:visited, .accordionArea .item .title a:hover {background: url(../../../lib/stock/img/acc_tl_bg.png) no-repeat;}
-.accordionArea .item .title a:active {background: url(../../../lib/stock/img/acc_tl_bg2.png) no-repeat;}
+.accordionArea .item .title a:link, .accordionArea .item .title a:visited, .accordionArea .item .title a:hover {background: url(../../lib/stock/img/acc_tl_bg.png) no-repeat;}
+.accordionArea .item .title a:active {background: url(../../lib/stock/img/acc_tl_bg2.png) no-repeat;}
 .accordionArea .item .content {background-color: #fff; border-bottom: 1px solid #ccc; color: #333;}
 .accordionArea .item .content .tab {padding: 10px 0px; text-align: center; font-size: 0;}
-.accordionArea .item .content .tab01 {width: 49px; height: 21px; background: url(../../../lib/stock/img/tab01.png); font-size: 12px; margin: 0; }
-.accordionArea .item .content .tab01.sel {background: url(../../../lib/stock/img/tab01_on.png);}
-.accordionArea .item .content .tab02 {width: 49px; height: 21px; background: url(../../../lib/stock/img/tab02.png); font-size: 12px; margin: 0;}
-.accordionArea .item .content .tab02.sel {background: url(../../../lib/stock/img/tab02_on.png);}
+.accordionArea .item .content .tab01 {width: 49px; height: 21px; background: url(../../lib/stock/img/tab01.png); font-size: 12px; margin: 0; }
+.accordionArea .item .content .tab01.sel {background: url(../../lib/stock/img/tab01_on.png);}
+.accordionArea .item .content .tab02 {width: 49px; height: 21px; background: url(../../lib/stock/img/tab02.png); font-size: 12px; margin: 0;}
+.accordionArea .item .content .tab02.sel {background: url(../../lib/stock/img/tab02_on.png);}
 
 .accordionArea .item .content .list .wrapper {position: relative;}
 .accordionArea .item .content .list .wrapper .stockchart-layer-overlay, 
@@ -48,12 +48,12 @@
 .accordionArea .item .content fieldset dd {padding: 0; margin: 0; text-align: center;}
 .accordionArea .item .content fieldset dd input {width: 40px; font-size: 12px; font-family: dotum; border: 1px solid #d1d1d1;}
 .accordionArea .item .content fieldset dd input.minus, .accordionArea .item .content fieldset dd input.plus {width: auto;width: 21px; height: 18px; border: 0;}
-.accordionArea .item .content fieldset dd input.minus {background: url(../../../lib/stock/img/btn_minus.png) no-repeat;margin-right: 2px;}
-.accordionArea .item .content fieldset dd input.plus {background: url(../../../lib/stock/img/btn_plus.png) no-repeat;margin-left: 2px;}
+.accordionArea .item .content fieldset dd input.minus {background: url(../../lib/stock/img/btn_minus.png) no-repeat;margin-right: 2px;}
+.accordionArea .item .content fieldset dd input.plus {background: url(../../lib/stock/img/btn_plus.png) no-repeat;margin-left: 2px;}
 .accordionArea .item .content select {border: 1px solid #d1d1d1; font-family: dotum; font-size: 12px; height: 18px;}
-.accordionArea .item .content .stockchart-default {margin-top: 5px; width: 88px; height: 22px; background: url(../../../lib/stock/img/btn_default.png) no-repeat;}
-.accordionArea .item .content .stockchart-default:hover {background-image: url(../../../lib/stock/img/btn_default_over.png);}
-.accordionArea .item .content .stockchart-default:active {background-image: url(../../../lib/stock/img/btn_default_sel.png);}
+.accordionArea .item .content .stockchart-default {margin-top: 5px; width: 88px; height: 22px; background: url(../../lib/stock/img/btn_default.png) no-repeat;}
+.accordionArea .item .content .stockchart-default:hover {background-image: url(../../lib/stock/img/btn_default_over.png);}
+.accordionArea .item .content .stockchart-default:active {background-image: url(../../lib/stock/img/btn_default_sel.png);}
 
 
 
