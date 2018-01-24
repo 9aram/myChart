@@ -107,7 +107,10 @@
 
     if (licenseObject.licenseType === 'TRIAL') {
 
-        TRIAL_UI = true;
+        var domain = window.location.host.toUpperCase();
+        if(domain.indexOf('LOCALHOST') !== 0) {
+            TRIAL_UI = true;
+        }
 
         if (new Date() > new Date(licenseObject.expireDate * 1)) {
 
@@ -127,8 +130,9 @@
     } else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001" || licenseObject.licenseType === "ED002" || licenseObject.licenseType === "ED003") {
 
         var domain = window.location.host.toUpperCase();
-
-        TRIAL_UI = true;
+        if(domain.indexOf('LOCALHOST') !== 0){
+            TRIAL_UI = true;
+        }
 
         var splitedDomain = licenseObject.domains.split(',');
 
