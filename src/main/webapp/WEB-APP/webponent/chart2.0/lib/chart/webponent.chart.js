@@ -9154,14 +9154,21 @@
 					if(!mouseLeaveCheck) {
 						return;
 					}
-					if(_functip != null){
 
+                    var top = _y - tipElement.outerHeight() - 10;
+                    var left = (_x) - tipElement.outerWidth()/2;
+
+					if(_functip !== null){
 						if(thisSeries){
-
 							eval(_functip)(tipElement, _data, {x: _x, y: _y}, thisSeries);
 						} else {
 							eval(_functip)(tipElement, _data, {x: _x, y: _y});
 						}
+
+                        if(top < 0) { top = 5;}
+                        if(left < 0) {left = 0;}
+						tipElement.css({top: top, left: left}).show();
+
 					} else {
 						var xAxis = _data.xaxis;
 						
@@ -9172,16 +9179,10 @@
 						
 						tipElement.text(xAxis+ " " + String(_data.hasOwnProperty('yaxis') ? _data.yaxis : _data.close).format());
 
-						var top = _y - tipElement.outerHeight() - 10;
-						var left = (_x) - tipElement.outerWidth()/2;
-						
-						if(top < 0) {
 
-							top = 10;
-						}
+                        if(top < 0) { top = 10;}
 
 						if(left < 0) {
-						
 							left = 0;
 						} else if(left + tipElement.outerWidth() > CHART_WIDTH) {
 						
@@ -11236,7 +11237,7 @@
 		      
 		      $.ui.slider.prototype._mouseCapture.apply(this,arguments);
 
-		      if(this._rangeCapture == true) {	
+		      if(this._rangeCapture == true) {
 		          this.handles.removeClass("ui-state-active").blur();	
 		      }
 		      
