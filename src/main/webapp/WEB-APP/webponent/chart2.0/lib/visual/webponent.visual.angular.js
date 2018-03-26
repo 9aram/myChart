@@ -105,9 +105,10 @@
 
     var licenseObject = makeLicenseObject(decodedLicenseKey);
 
+    var domain = window.location.host.toUpperCase();
+
     if (licenseObject.licenseType === 'TRIAL') {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0) {
             TRIAL_UI = true;
         }
@@ -129,7 +130,6 @@
          */
     } else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001" || licenseObject.licenseType === "ED002" || licenseObject.licenseType === "ED003") {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0){
             TRIAL_UI = true;
         }
@@ -366,8 +366,8 @@
                     axis : true ,			// 눈금
                     axisText : true ,		// 치수
                     counter : true ,		// 치수표시판
-                    max :true ,			    // 최대값 표시
-                    avg : true ,			// 평균값 표시
+                    max :'auto' ,			// 최대값 표시 | 값 고정시 true 변경 후 pointer.max 수치입력
+                    avg : 'auto'  ,			// 평균값 표시 | 값 고정시 true 변경 후 pointer.avg 수치입력
                     target : false ,        // 타겟값 표시
                     toolTip : true ,		// 마우스오버 툴팁
                     animate : true ,		// 움직이는 효과
@@ -703,10 +703,11 @@
 
         /**
          * gauge 의 데이터 중 최대값,최소값,평균값 을 구한다.
-         * @param {gauge} gauge 객체
+         * @param {Object} gauge 객체
          */
         function setComputedData(gauge){
 
+            var opts = gauge.options;
             var datas = gauge.settings.data;
             var dataLen = datas.length;
             var maxVal =0,  sum=0 , minVal=0;
@@ -734,16 +735,16 @@
                 sum = sum + curVal;
                 findMin.push(minVal);
             }
-            if(gauge.options.pointer.max==="auto"){
-                gauge.options.pointer.max = findFloat(maxVal);
+            if(opts.use.max ==="auto"){
+                opts.pointer.max = findFloat(maxVal);
 
             }
-            if(gauge.options.pointer.avg==="auto"){
-                gauge.options.pointer.avg = findFloat(sum / dataLen);
+            if(opts.use.avg ==="auto"){
+                opts.pointer.avg = findFloat(sum / dataLen);
             }
 
-            if(gauge.options.minmax.min==="auto"){
-                gauge.options.minmax.min = findFloat(Math.min.apply(null, findMin));
+            if(opts.minmax.min==="auto"){
+                opts.minmax.min = findFloat(Math.min.apply(null, findMin));
             }
         }
 
@@ -800,8 +801,8 @@
             var secondData = (dataSet[dataSet.length-1][1] !== undefined) ? dataSet[dataSet.length-1][1] : 0;
             var secondPrev =  ((dataSet.length-2) >= 0 )? dataSet[dataSet.length-2][1] : 0;
 
-            var rectW = (typeof counter.width == "number")? counter.width: (pos.objWidth/2),
-                rectH = (typeof counter.height == "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) :  (pos.objWidth*0.265),
+            var rectW = (typeof counter.width === "number")? counter.width: (pos.objWidth/2),
+                rectH = (typeof counter.height === "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) :  (pos.objWidth*0.265),
                 rectX = (pos.centerX-(rectW/2) + counter.x ),
                 rectY = (pos.centerY+(rectH*0.8) + counter.y) ,
                 txtX = rectX +  (rectW/2),
@@ -1161,7 +1162,7 @@
 
         /**
          * GAUEGE CHART 의 TARGET 표시
-         * @param(Object)  GAUGE CHART TYPE
+         * @param {Object}  gauge [GAUGE CHART TYPE]
          */
         function drawTarget(gauge){
             var paper = gauge.svg;
@@ -1186,8 +1187,8 @@
 
         /**
          * 최대값 또는 평균값
-         * @param (Object) gauge
-         * @param (String) type ( max || avg )
+         * @param {Object} gauge
+         * @param {String} type ( max || avg )
          */
         function drawPointer(gauge,type){
             var paper = gauge.svg,
@@ -1676,8 +1677,8 @@
 
         /**
          * 데이터 형식 변환
-         * @param  {num} 데이터 값
-         * @param  {formatType} 형식 종류
+         * @param  {number} num        [데이터 값]
+         * @param  {String} formatType [형식 종류]
          */
         function formatting( num, formatType){
             var res = null;
@@ -1827,7 +1828,8 @@
         }
 
         /**
-         * GAUEGE 에 이벤트를 붙여준다.
+         * GAUEGE 에 이벤트를
+         * @param  {Object} wrapper 객체
          * @param  {Object} gauge 객체
          */
         function bindEvents (wrapper, gauge) {
@@ -1867,7 +1869,7 @@
 
             wrapper.data('resizeEventName', 'resize.' + wrapperUniqueId);
 
-            $(window).on(wrapper.data('resizeEventName'), function (e) {
+            $(window).on(wrapper.data('resizeEventName'), function () {
 
 
                 var afterWrapperWidth = gauge.settings.wrapper.width;
@@ -1944,9 +1946,6 @@
              * options.data.use 로 데이터가 나눠진 상태인 경우에
              * 해당 데이터의 인덱스 값을 이용해 gauge 의 데이터를 변경해 준다.
              * @param {Number} idx          data index
-             * @param {boolean} usingAnimate 	애니메이션 사용 여부
-             * @param {number} aniSpeed     애니메이션 속도
-             * @param {string} aniType      애니메이션 타입
              */
             gauge.setData = function (idx) {
 

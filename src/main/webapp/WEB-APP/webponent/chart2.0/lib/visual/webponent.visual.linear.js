@@ -106,9 +106,10 @@
 
     var licenseObject = makeLicenseObject(decodedLicenseKey);
 
+    var domain = window.location.host.toUpperCase();
+
     if (licenseObject.licenseType === 'TRIAL') {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0) {
             TRIAL_UI = true;
         }
@@ -130,7 +131,6 @@
          */
     } else if (licenseObject.licenseType === 'OFFICIAL'|| licenseObject.licenseType === "ED001"|| licenseObject.licenseType === "ED002"|| licenseObject.licenseType === "ED003") {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0){
             TRIAL_UI = true;
         }
@@ -329,8 +329,8 @@
                     axis : true ,			// 눈금
                     axisText : true ,		// 치수
                     counter : true ,		// 치수표시판
-                    max :true ,			    // 최대값 표시
-                    avg : true ,			// 평균값 표시
+                    max :'auto' ,			    // 최대값 표시 | 값 고정시 true 변경 후 pointer.max 수치입력
+                    avg : 'auto',			// 평균값 표시 | 값 고정시 true 변경 후 pointer.avg 수치입력
                     target : false ,		// 타겟값 표시
                     toolTip : true ,		// 마우스오버 툴팁
                     animate : true ,		// 움직이는 효과
@@ -666,7 +666,8 @@
          * @param {Object} gauge 객체
          */
         function setComputedData(gauge){
-            var opt = gauge.options;
+
+            var opts = gauge.options;
             var datas = gauge.settings.data;
             var dataLen = datas.length;
             var maxVal =0,  sum=0 , minVal=0;
@@ -684,16 +685,16 @@
                 sum = sum + inputData;
                 findMin.push(minVal);
             }
-            if(opt.pointer.max==="auto"){
-                opt.pointer.max = findFloat(maxVal);
+            if(opts.use.max ==="auto"){
+                opts.pointer.max = findFloat(maxVal);
 
             }
-            if(opt.pointer.avg==="auto"){
-                opt.pointer.avg = findFloat(sum / dataLen);
+            if(opts.pointer.avg==="auto"){
+                opts.pointer.avg = findFloat(sum / dataLen);
             }
 
-            if(opt.minmax.min==="auto"){
-                opt.minmax.min = findFloat(Math.min.apply(null, findMin));
+            if(opts.minmax.min==="auto"){
+                opts.minmax.min = findFloat(Math.min.apply(null, findMin));
             }
         }
 
@@ -746,8 +747,8 @@
             var currentVal = dataSet[dataSet.length-1];
             var prevData = ((dataSet.length-2) > 0 ) ? dataSet[dataSet.length-2] : 0;
 
-            var rectW = (typeof counter.width == "number")? counter.width:  (paper.width * 0.1),
-                rectH = (typeof counter.height == "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) :  rectW / 2 ,
+            var rectW = (typeof counter.width === "number")? counter.width:  (paper.width * 0.1),
+                rectH = (typeof counter.height === "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) :  rectW / 2 ,
                 rectX = (pos.endX + rectH * 0.6)+ counter.x ,
                 rectY = (pos.endY - rectH)+ counter.y ,
                 textSize = rectW * 0.4 * counter.text.size,
@@ -866,7 +867,8 @@
 
         /**
          * CHART 의 눈금 표시
-         * @param {String} type [ col(가로) || row(세로) ]
+         * @param {Object} gauge [ linear gauge 객체 ]
+         * @param {String} type  [col(가로)||row(세로)]
          */
         function drawAxis(gauge, type) {
 
@@ -987,7 +989,8 @@
 
         /**
          * GAUEGE CHART 의 TARGET 표시
-         * @param {String} type : GAUGE CHART TYPE
+         * @param {Object} gauge [GAUGE CHART 객체]
+         * @param {String} type [GAUGE CHART TYPE]
          */
         function drawTarget(gauge, type) {
             var paper = gauge.svg;
@@ -1032,8 +1035,8 @@
 
         /**
          * 최대값 또는 평균값
-         * @Param {Object} gauge
-         * @param {String} type : GAUGE CHART TYPE
+         * @Param {Object} gauge [GAUGE CHART OBJECT]
+         * @param {String} type  [GAUGE CHART TYPE]
          * @Param {String} pointerType [targetVal =( max || avg )]
          */
         function drawPointer(gauge, type, pointerType) {
@@ -1425,7 +1428,7 @@
             var rectW = pos.objWidth;
             var rectH = pos.objHeight;
 
-            var baseRect = paper.rect(rectX , rectY, rectW, rectH)
+            var baseRect = paper.rect(rectX , rectY, rectW, rectH);
             baseRect.attr({
                 fill : linear.base.color,
                 stroke : linear.base.border
@@ -1562,7 +1565,7 @@
                 gauge.tipItems.toolTip.show();
                 mouseMoveFunc(e, this, gauge, "draw");
 
-            }).mouseout(function(e) {
+            }).mouseout(function() {
 
                 gauge.tipItems.toolTip.hide();
 
@@ -1575,7 +1578,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge, "max");
 
-                }).mouseout(function (e) {
+                }).mouseout(function () {
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1589,7 +1592,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge, "avg");
 
-                }).mouseout(function (e) {
+                }).mouseout(function () {
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1603,7 +1606,7 @@
                     gauge.tipItems.toolTip.show();
                     mouseMoveFunc(e, this, gauge, "targetPointer");
 
-                }).mouseout(function(e) {
+                }).mouseout(function() {
 
                     gauge.tipItems.toolTip.hide();
 
@@ -1618,7 +1621,7 @@
                         gauge.tipItems.toolTip.show();
                         mouseMoveFunc(e, this, gauge, "prev");
 
-                    }).mouseout(function(e) {
+                    }).mouseout(function() {
 
                         gauge.tipItems.toolTip.hide();
 
@@ -1629,7 +1632,7 @@
 
         /**
          * 툴팁 사용 시 element 를 생성 한다.
-         * @param  {Object} Gauge 객체
+         * @param  {Object} gauge 객체
          */
         function appendToolTip(gauge) {
             var options = gauge.options;
@@ -1689,8 +1692,8 @@
 
         function noData(gauge) {
 
-            var x = gauge.wrapper.width() / 2,
-                y = gauge.wrapper.height() / 2,
+            var x = $(gauge.wrapper).width() / 2,
+                y = $(gauge.wrapper).height() / 2,
                 text = gauge.svg.text(x, y, '데이터가 로드되지 않았습니다.');
 
             text.attr({
@@ -1830,7 +1833,7 @@
 
             $(window).on(
                 wrapper.data('resizeEventName'),
-                function(e) {
+                function() {
 
                     var afterWrapperWidth = gauge.settings.wrapper.width;
                     var beforeWrapperWidth = gauge.wrapper.width();

@@ -107,9 +107,10 @@
 
     var licenseObject = makeLicenseObject(decodedLicenseKey);
 
+    var domain = window.location.host.toUpperCase();
+
     if (licenseObject.licenseType === 'TRIAL') {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0) {
             TRIAL_UI = true;
         }
@@ -132,7 +133,6 @@
     } else if (licenseObject.licenseType === 'OFFICIAL' || licenseObject.licenseType === "ED001"  ||
         licenseObject.licenseType === "ED002"  || licenseObject.licenseType === "ED003") {
 
-        var domain = window.location.host.toUpperCase();
         if(domain.indexOf('LOCALHOST') !== 0){
             TRIAL_UI = true;
         }
@@ -374,8 +374,8 @@
                     axis : true ,		// 눈금
                     axisText : true ,	// 치수
                     counter : true ,	// 치수표시판
-                    max :true ,		// 최대값 표시
-                    avg : true ,		// 평균값 표시
+                    max : 'auto' ,		// 최대값 표시 | 값 고정시 true 변경 후 pointer.max 수치입력
+                    avg : 'auto',		// 평균값 표시 | 값 고정시 true 변경 후 pointer.avg 수치입력
                     target : false ,	// 타겟값 표시
                     toolTip : true ,	// 마우스오버 툴팁
                     animate : true ,	// 움직이는 효과
@@ -590,7 +590,7 @@
         /**
          * 데이터가 text 형식일 경우
          * '|' ,'\n' 을 기준으로 데이터를 파싱한다.
-         * @param  {String} data    [AJAX 에 의해 호출되어진 데이터]
+         * @param  {String} data2    [AJAX 에 의해 호출되어진 데이터]
          * @param  {Object} options [Gauge 옵션]
          * @return {Array}         [Gauge 데이터]
          */
@@ -681,7 +681,11 @@
         }
         /**
          * y축 위치 찾기
-         * @param {Object} gauge 객체
+         * @param {Number} endPoint
+         * @param {Number} data
+         * @param {Number} allData
+         * @param {Number} interval
+         * @param {Number} measureNum
          */
         function getPixel(endPoint, data, allData, interval, measureNum) {
             var res =  Math.round(endPoint - (data / (allData / measureNum)) * interval);
@@ -726,7 +730,7 @@
          */
         function setComputedData(gauge){
 
-            var opt = gauge.options;
+            var opts = gauge.options;
             var datas = gauge.settings.data;
             var dataLen = datas.length;
             var maxVal =0,  sum=0 , minVal=0;
@@ -744,14 +748,14 @@
                 sum = sum + inputData;
                 findMin.push(minVal);
             }
-            if(opt.pointer.max==="auto"){
-                opt.pointer.max = findFloat(maxVal);
+            if(opts.pointer.max==="auto"){
+                opts.pointer.max = findFloat(maxVal);
             }
-            if(opt.pointer.avg==="auto"){
-                opt.pointer.avg = findFloat(sum / dataLen);
+            if(opts.pointer.avg==="auto"){
+                opts.pointer.avg = findFloat(sum / dataLen);
             }
-            if(opt.minmax.min==="auto"){
-                opt.minmax.min = findFloat(Math.min.apply(null, findMin));
+            if(opts.minmax.min==="auto"){
+                opts.minmax.min = findFloat(Math.min.apply(null, findMin));
             }
 
         }
@@ -804,8 +808,8 @@
             var currentVal = dataSet[dataSet.length-1];
             var prevData = ((dataSet.length-2) > 0 ) ? dataSet[dataSet.length-2] : 0;
 
-            var rectW = (typeof counter.width == "number")? counter.width: (paper.width * 0.1),
-                rectH = (typeof counter.height == "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) : rectW / 2,
+            var rectW = (typeof counter.width === "number")? counter.width: (paper.width * 0.1),
+                rectH = (typeof counter.height === "number")?  rectW / 2 + ( counter.height - (rectW / 2) ) : rectW / 2,
                 rectX = (pos.endX + rectH * 0.6)+ counter.x ,
                 rectY = (pos.endY - rectH)+ counter.y ,
                 textSize = rectW * 0.4 * counter.text.size,
