@@ -1,6 +1,6 @@
 /*
  * 마지막 수정자 : joointhezoo@cyber-i.com
- * 마지막 수정날짜 :  18.01.17
+ * 마지막 수정날짜 :  18.03.27
  */
 (function () {
 
@@ -55,10 +55,6 @@
             'z-index': '1',
             'opacity': '0.3'
         });
-
-        var img = $('<img src="http://www.webponent.com/img/webponent.png"/>');
-
-        trialUiWrapper.append(img);
 
         wrapper.prepend(trialUiWrapper);
 
@@ -371,6 +367,7 @@
                     target : false ,        // 타겟값 표시
                     toolTip : true ,		// 마우스오버 툴팁
                     animate : true ,		// 움직이는 효과
+                    animateText : true,     // counter 숫자 회전판
                     resize : false ,		// 게이지 사이즈 조절
                     responsive : true 		// 반응형 유무
                 },
@@ -831,7 +828,7 @@
                 });
 
                 /* SECOND COUNTER ANIMATION */
-                animNum(secondData,secondPrev,multiVal,gauge);
+                animateText(secondData,secondPrev,multiVal,gauge);
                 if(counter.multi.divider){
                     var dividerY = multiY-(cntInterval/2);
                     var divider = paper.path("M"+(rectX)+","+ dividerY +"L"+(rectX+rectW)+","+ dividerY )
@@ -854,7 +851,7 @@
                 var dualVal = paper.text(txtX ,(txtY+moveY-18), inputData);
 
                 /* DUAL COUNTER ANIMATION */
-                animNum(secondData,secondPrev,dualVal,gauge);
+                animateText(secondData,secondPrev,dualVal,gauge);
                 dualBox.scale(0.5,0.5);
                 dualVal.attr({
                     "font-family":counter.text.family,
@@ -878,7 +875,7 @@
                 "text-decoration": 'underline'
             });
             if(isAnimated ){
-                animNum(inputData,prevData,curVal,gauge);
+                animateText(inputData,prevData,curVal,gauge);
             }else{
                 if (gauge.options.data.format !== null) {
                     inputData = formatting(inputData, gauge.options.data.format);
@@ -890,19 +887,27 @@
             gauge.redrawItem.push(counterBox,curVal);
         }
 
-        /**GAUEGE function: animNum
+        /**GAUEGE function: animateText
          * 값 변경 애니메이션	[ COUNTER 내의 숫자 움직임 ]
          * (curVal.attr("text")) 의 값을 변경
          * @[param] :  (비교값1, 비교값2, 대상, GAUGE);
          */
-        function animNum(currentVal,prevData,inputData,gauge){
+        function animateText(currentVal,prevData,inputData,gauge){
+
+            gauge.counterTimer = {};
+            clearInterval(gauge.counterTimer);
+
+            if(gauge.options.use.animateText === false){
+                return false;
+            }
+
             inputData.attr({'text' : prevData});
 
             var difference  = Math.floor( Math.abs(currentVal-prevData));
             var counter = 0, inputText ="", inputNum=0;
 
             if(currentVal !==prevData ){
-                var gapNum = setInterval(function() {
+                gauge.counterTimer = setInterval(function() {
 
                     if(currentVal < prevData) {
                         inputNum = parseInt((inputData.attr("text")))-1;
@@ -916,11 +921,9 @@
                     counter = counter + 1;
 
                     if(inputNum===currentVal || counter === difference){
-                        clearTimeout(gapNum);
+                        clearInterval(gauge.counterTimer);
                     }
                 }, 1000/difference);
-
-                gauge.settings.animation.push(gapNum);
 
             }
         }
@@ -1241,21 +1244,24 @@
          * @[param] :  (비교값1, 비교값2, 각도, 대상, 회전중심X, 회전중심Y);
          * 데이터를 가르키는 바늘 애니메이션
          */
+
         function animRotate(prevVal,curVal,obj,x,y,gauge){
+
+            gauge.animate;
+            clearInterval(gauge.animate);
 
             var difference  = Math.floor(Math.abs(curVal-prevVal));
             var d = difference - 1 ;
-            if (obj === undefined) {
-                return false;
-            }
-            var gapNum = setInterval(function () {
 
-                d = d - 1;
+            if (obj === undefined) { return false; }
+
+            gauge.animate = setInterval(function () {
 
                 if(obj === undefined){ return false; }
 
+                d = d - 1;
                 if (d === -50) {
-                    clearTimeout(gapNum);
+                    clearInterval(gauge.animate);
                 } else {	// 흔들림 표현
                     if (curVal > prevVal) {
                         if ((d < -10 && d > -26) || (d < -35) && d > -46) {
@@ -1272,8 +1278,6 @@
                     }
                 }
             }, 1000 / (difference + 50), 'bounce');
-
-            gauge.settings.animation.push(gapNum);
 
         }
 
@@ -1748,6 +1752,9 @@
         }
 
         function reDrawGauge (gauge, type){
+
+            clearInterval(gauge.animate);
+            clearInterval(gauge.counterTimer);
 
             gauge.redrawItem.remove();
             if(gauge.tipItems.toolTip){

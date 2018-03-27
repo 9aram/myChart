@@ -1,7 +1,6 @@
 /*
- * 사이버이메지네이션
  * 마지막 수정자 : joointhezoo@cyber-i.com
- * 마지막 수정날짜 :  16.10.28
+ * 마지막 수정날짜 :  18.01.17
  */
 (function() {
 
@@ -57,10 +56,6 @@
                 'z-index' : '1',
                 'opacity' : '0.3'
             });
-
-        var img = $('<img src="http://www.webponent.com/img/webponent.png"/>');
-
-        trialUiWrapper.append(img);
 
         wrapper.prepend(trialUiWrapper);
 
@@ -379,6 +374,7 @@
                     target : false ,	// 타겟값 표시
                     toolTip : true ,	// 마우스오버 툴팁
                     animate : true ,	// 움직이는 효과
+                    animateText : true, // counter 숫자 회전판
                     resize : false ,	// 게이지 사이즈 조절
                     responsive : true 	// 반응형 유무
                 },
@@ -829,7 +825,7 @@
             gauge.redrawItem.push(counterBox,inputData);
 
             if(isAnimated){
-                animNum(currentVal,prevData,inputData,gauge);
+                animateText(currentVal,prevData,inputData,gauge);
             }else{
 
                 if (gauge.options.data.format !== null) {
@@ -840,19 +836,27 @@
             }
         }
 
-        /** GAUEGE function: animNum
+        /** GAUEGE function: animateText
          * 값 변경 애니메이션    [ COUNTER 내의 숫자 움직임 ]
          * (inputData.attr("text")) 의 값을 변경
          * @[param] :  (비교값1, 비교값2, 대상, GAUGE);
          */
-        function animNum(currentVal,prevData,inputData,gauge){
+        function animateText(currentVal,prevData,inputData,gauge){
+
+            gauge.counterTimer = {};
+            clearInterval(gauge.counterTimer);
+
+            if(gauge.options.use.animateText === false){
+                return false;
+            }
+
             inputData.attr({'text' : prevData});
 
             var difference  = Math.floor( Math.abs(currentVal-prevData));
             var counter = 0, inputText ="", inputNum=0;
 
             if(currentVal !==prevData ){
-                var gapNum = setInterval(function() {
+                gauge.counterTimer = setInterval(function() {
 
                     if(currentVal < prevData) {
                         inputNum = parseInt((inputData.attr("text")))-1;
@@ -866,7 +870,7 @@
                     counter = counter + 1;
 
                     if(inputNum===currentVal || counter === difference){
-                        clearTimeout(gapNum);
+                        clearInterval(gauge.counterTimer);
                     }
                 }, 1000/difference);
             }
@@ -1523,6 +1527,8 @@
             }
         }
         function reDrawGauge(gauge, type) {
+
+            clearInterval(gauge.counterTimer);
 
             gauge.redrawItem.remove();
             if(gauge.tipItems.toolTip){
