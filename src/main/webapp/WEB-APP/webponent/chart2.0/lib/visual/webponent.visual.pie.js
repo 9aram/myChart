@@ -59,10 +59,6 @@
 			'opacity': '0.3'
 		});
 
-		var img = $('<img src="http://www.webponent.com/img/webponent.png"/>');
-
-		trialUiWrapper.append(img);
-
 		wrapper.prepend(trialUiWrapper);
 
 		wrapper.on('mouseenter', function () {

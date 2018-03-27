@@ -56,15 +56,6 @@
 			'z-index': '1',
 			'opacity': '0.3'
 		});
-		/*
-			https 에서 http 이미지를 불러와서 sec7111 보안 에러 경고가 뜸.
-			트라이얼 버전이 아니라면 appendTrialUi 이 함수가 실행되지 않으나 
-			어떤 이유에서인지 이 구문이 발생하는 듯함.
-			우선 제거하기로 결정함(20160229 평다진)
-		 */
-		// var img = $('<img src="http://www.webponent.com/img/webponent.png"/>');
-
-		// trialUiWrapper.append(img);
 
 		wrapper.prepend(trialUiWrapper);
 
