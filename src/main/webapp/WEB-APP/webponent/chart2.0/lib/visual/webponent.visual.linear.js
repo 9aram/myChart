@@ -325,8 +325,8 @@
                     axis : true ,			// 눈금
                     axisText : true ,		// 치수
                     counter : true ,		// 치수표시판
-                    max :'auto' ,			    // 최대값 표시 | 값 고정시 true 변경 후 pointer.max 수치입력
-                    avg : 'auto',			// 평균값 표시 | 값 고정시 true 변경 후 pointer.avg 수치입력
+                    max :true ,			    // 최대값 표시
+                    avg : true ,			// 평균값 표시
                     target : false ,		// 타겟값 표시
                     toolTip : true ,		// 마우스오버 툴팁
                     animate : true ,		// 움직이는 효과
@@ -682,7 +682,7 @@
                 sum = sum + inputData;
                 findMin.push(minVal);
             }
-            if(opts.use.max ==="auto"){
+            if(opts.pointer.max ==="auto"){
                 opts.pointer.max = findFloat(maxVal);
 
             }
