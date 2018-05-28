@@ -286,6 +286,10 @@
 		    return n;
     	};
 
+        // yAxis percent
+        press_format_percent = function(value) {
+            return value + '%';
+        };
 
     	press_toolTip_percent = function (pie, data, tipElement) {
 
