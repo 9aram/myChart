@@ -286,6 +286,11 @@
 		    return n;
     	};
 
+		// Number 0.0
+		press_format_num3 = function(value) {
+			return Number(value).toFixed(1);
+		};
+
         // yAxis percent
         press_format_percent = function(value) {
             return value + '%';
