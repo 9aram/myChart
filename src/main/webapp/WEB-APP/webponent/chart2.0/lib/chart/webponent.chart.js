@@ -8699,7 +8699,7 @@
              * @param  {Object} _series    시리즈
              * @return {Function}            그려진 시리즈 객체
              */
-                // Hloc
+            // Hloc
             DRAWSERIES.drawhloc = function(_serieskey, _options, _styles, _series){
                 // 기본 스타일 정의
                 var defaultStyles = {
