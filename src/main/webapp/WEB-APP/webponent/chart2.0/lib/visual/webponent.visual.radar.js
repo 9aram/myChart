@@ -1666,13 +1666,13 @@
                 'stroke-width' : styles.sideLegend.layout.line.width
             });
             var textX = x + 10;
-            var textY = y + 10;
+            var textY = y +(styles.sideLegend.text.size);
             var text ='';
 
             for(var i = 0;i<options.data.use.length;i++) {
                 var useKey = Object.keys(radar.options.data.use[i])[0];
                 text = options.data.use[i]['s'+(i+1)];
-                textY += styles.sideLegend.text.size+2;
+
                 var sideLegendText = radar.svg.text(textX, textY,text);
                 var seriesStyles=   styles.series[i][useKey];
                 sideLegendText.attr({
@@ -1688,11 +1688,12 @@
                     fill : seriesStyles.tick.area.color,
                     stroke :seriesStyles.tick.area.color
                 });
-
-
+                if(i !=options.data.use.length-1) {
+                    textY += styles.sideLegend.text.size+2;
+                }
             }
             sideLegend.attr({
-                height: textY + 10
+                height: textY + styles.sideLegend.text.size/2
             });
 
 
@@ -2057,7 +2058,7 @@
 
                 radar.options.data.data = data;
 
-                
+
                 radar.wrapper.children().remove();
 
                 radar = self.init(radar.wrapper, radar.styles, radar.options);
