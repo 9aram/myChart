@@ -862,6 +862,9 @@
         }
 
         function drawPath(radar,startX,startY,endX,endY) {
+
+
+            var styles = radar.styles;
             var segment = radar.svg.path();
             radar.items.radar.push(segment);
             var cmd = 'M' + startX + ',' + startY +
@@ -1193,6 +1196,7 @@
         }
         function appendLegend(radar) {
             var options = radar.options;
+            var styles = radar.styles;
             var legendTextGroup = radar.svg.set();
             var tipAttr = radar.settings.legend.tipAttrArray;
             var legendUse = styles.legend.use;
@@ -1471,10 +1475,15 @@
                         var angle = 2 / dataCnt * Math.PI * i;
                         var x =  Number(data[i][use] / maxValue * radarRadius) * Math.cos(angle) + centerX;
                         var y =  Number(data[i][use] / maxValue * radarRadius) * Math.sin(angle) + centerY;
+                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( 2/dataCnt*Math.PI*dataCnt) + centerX;
+                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( 2/dataCnt*Math.PI*dataCnt) + centerY;
                         if (i == 0) {
                             path += 'M' + x + ',' + y;
                         } else {
                             path += 'L' + x + ',' + y;
+                        }
+                        if(i==(dataCnt-1)) {
+                            path  +='L' + lastX + ',' + lastY;
                         }
                     }
                 }
@@ -1521,11 +1530,12 @@
 
         function animationOption(t,styles) {
 
-            var animOption = animOptions[styles.radar.animate.type](t);
+            var animOption = t > 1 ? 1 :t;
 
             return animOption;
         }
         function setRadarAnimate(radar,animationDecimal,inside) {
+            var styles = radar.styles;
             var dataCnt = radar.settings.data.renderedData.length;
             var centerX = radar.svg.width / 2 + styles.layout.position.x;
             var centerY = radar.svg.height / 2 + styles.layout.position.y;
@@ -1542,13 +1552,13 @@
                 var series = radar.styles.series[j][useKey];
                 if(series.use) {
                     var firstPath='';
-                    for(var i =0;i<8;i++) {
+                    for(var i =0;i<dataCnt;i++) {
 
                         var angle = 2/dataCnt*Math.PI*i*animationDecimal;
                         var x = Number(data[i][use]/maxValue*radarRadius) * Math.cos(angle) + centerX;
                         var y = Number(data[i][use]/maxValue*radarRadius) * Math.sin(angle) + centerY;
-                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( 2/dataCnt*Math.PI*8*animationDecimal) + centerX;
-                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( 2/dataCnt*Math.PI*8*animationDecimal) + centerY;
+                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( 2/dataCnt*Math.PI*dataCnt*animationDecimal) + centerX;
+                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( 2/dataCnt*Math.PI*dataCnt*animationDecimal) + centerY;
                         if(i==0) {
                             firstPath = 'M' + centerX + ',' +centerY;
                             path += x + ',' +y;
@@ -1599,7 +1609,8 @@
             var styles = radar.styles;
             var inside = getSeriesPath(radar);
             var animCount = (styles.radar.animate.use) ? 0 :1;
-            var animFrameAmount = (styles.radar.animate.use) ? 1 / styles.radar.animate.step : 1;
+            var num = 1 / styles.radar.animate.step;
+            var animFrameAmount = (styles.radar.animate.use) ? num: 1;
 
             radar.settings.animation.firstDraw = setInterval(function () {
                 animCount += animFrameAmount;
@@ -1615,7 +1626,7 @@
             }, 10);
         }
         function drawTickFunc(radar) {
-
+            var styles = radar.styles;
             radar.items.circle = radar.svg.set();
             var dataCnt = radar.settings.data.renderedData.length;
             var centerX = radar.svg.width / 2 + styles.layout.position.x;
@@ -2046,6 +2057,7 @@
 
                 radar.options.data.data = data;
 
+                
                 radar.wrapper.children().remove();
 
                 radar = self.init(radar.wrapper, radar.styles, radar.options);
