@@ -35,60 +35,18 @@
     var options = {
         data : {
             data: [
-                {"dataGb":"1","name" : "Perceivable", "val1":'N/A' ,"val2" : 22},
-                {"dataGb":"1","name" : "Information", "val1":42,"val2" : 22},
-                {"dataGb":"1","name" : "Understandable", "val1":67,"val2" : 22},
-                {"dataGb":"1","name" : "Enough", "val1":23,"val2" : 22},
-                {"dataGb":"1","name" : "Epilepsy", "val1":78,"val2" : 22},
-                {"dataGb":"1","name" : "Operable", "val1":23,"val2" : 22},
-                {"dataGb":"1","name" : "Navigation", "val1":42,"val2" : 22},
-                {"dataGb":"1","name" : "Error", "val1":22,"val2" : 22},
-                {"dataGb":"2","name" : "Perceivable", "val1":22 ,"val2" : 22},
-                {"dataGb":"2","name" : "Information", "val1":23,"val2" : 22},
-                {"dataGb":"2","name" : "Understandable", "val1":27,"val2" : 22},
-                {"dataGb":"2","name" : "Enough", "val1":23,"val2" : 22},
-                {"dataGb":"2","name" : "Epilepsy", "val1":23,"val2" : 22},
-                {"dataGb":"2","name" : "Operable", "val1":22,"val2" : 22},
-                {"dataGb":"2","name" : "Navigation", "val1":42,"val2" : 22},
-                {"dataGb":"2","name" : "Error", "val1":42,"val2" : 22},
-                {"dataGb":"3","name" : "Perceivable", "val1":22 ,"val2" : 22},
-                {"dataGb":"3","name" : "Information", "val1":23,"val2" : 22},
-                {"dataGb":"3","name" : "Understandable", "val1":42,"val2" : 22},
-                {"dataGb":"3","name" : "Enough", "val1":23,"val2" : 31},
-                {"dataGb":"3","name" : "Epilepsy", "val1":78,"val2" : 22},
-                {"dataGb":"3","name" : "Operable", "val1":23,"val2" : 22},
-                {"dataGb":"3","name" : "Navigation", "val1":42,"val2" : 22},
-                {"dataGb":"3","name" : "Error", "val1":42,"val2" : 22},
-                {"dataGb":"4","name" : "Perceivable", "val1":22 ,"val2" : 22},
-                {"dataGb":"4","name" : "Information", "val1":23,"val2" : 22},
-                {"dataGb":"4","name" : "Understandable", "val1":42,"val2" : 22},
-                {"dataGb":"4","name" : "Enough", "val1":23,"val2" : 22},
-                {"dataGb":"4","name" : "Epilepsy", "val1":78,"val2" : 22},
-                {"dataGb":"4","name" : "Operable", "val1":23,"val2" : 22},
-                {"dataGb":"4","name" : "Navigation", "val1":42,"val2" : 22},
-                {"dataGb":"4","name" : "Error", "val1":42,"val2" : 22},
-                {"dataGb":"5","name" : "Perceivable", "val1":25 ,"val2" : 25},
-                {"dataGb":"5","name" : "Information", "val1":53,"val2" : 55},
-                {"dataGb":"5","name" : "Understandable", "val1":45,"val2" : 55},
-                {"dataGb":"5","name" : "Enough", "val1":23,"val2" : 55},
-                {"dataGb":"5","name" : "Epilepsy", "val1":78,"val2" : 44},
-                {"dataGb":"5","name" : "Operable", "val1":53,"val2" : 55},
-                {"dataGb":"5","name" : "Navigation", "val1":45,"val2" : 55},
-                {"dataGb":"5","name" : "Error", "val1":45,"val2" : 0},
-                {"dataGb":"6","name" : "Perceivable", "val1":25 ,"val2" : 25},
-                {"dataGb":"6","name" : "Information", "val1":53,"val2" : 55},
-                {"dataGb":"6","name" : "Understandable", "val1":45,"val2" : 55},
-                {"dataGb":"6","name" : "Enough", "val1":23,"val2" : 15},
-                {"dataGb":"6","name" : "Epilepsy", "val1":78,"val2" : 55},
-                {"dataGb":"6","name" : "Operable", "val1":53,"val2" : 55},
-                {"dataGb":"6","name" : "Navigation", "val1":45,"val2" : 55},
-                {"dataGb":"6","name" : "Error", "val1":45,"val2" : 55},
+                {"dataGb":"1","name" : "매출이익변동성", "val1":88 ,"val2" : 22},
+                {"dataGb":"1","name" : "총자산 이익변동성", "val1":42,"val2" : 22},
+                {"dataGb":"1","name" : "잠재력", "val1":67,"val2" : 22},
+                {"dataGb":"1","name" : "성장성", "val1":50,"val2" : 22},
+                {"dataGb":"1","name" : "수익성", "val1":66,"val2" : 32},
+                {"dataGb":"1","name" : "규모", "val1":23,"val2" : 22},
 
             ],
             use:  [
                 {"s1" : "val1"},
-                {"s2" : "val2"}
-                ],
+                {"s2" : "val2"},
+            ],
             gubun : 'dataGb'
         },
         legend : {
@@ -236,29 +194,6 @@
                 weight: 'bold',   /* normal | bold */
                 opacity: 1
             }
-        },
-        sideLegend:{
-            use : true,
-            text: {
-                family: 'Nanum Gothic',
-                size: 12,
-                color: '#333333',
-                style: 'normal',    /* normal | italic */
-                weight: 'bold',   /* normal | bold */
-                opacity: 1
-            },
-            area: {
-                color:'black',
-                opacity: 0.5
-
-            },
-            line : {
-                color : 'black',
-                opacity : 1,
-                width:2
-            }
-
-
         }
     };
 

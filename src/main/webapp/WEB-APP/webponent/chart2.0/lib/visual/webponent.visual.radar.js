@@ -223,7 +223,6 @@
                 legend : {
                     use : true,
                     stackedGap : 5,
-                    type : 'lollipop',
                     text: {
                         family: 'Nanum Gothic',
                         size: 12,
@@ -242,32 +241,6 @@
                         color: '#333333',
                         style: 'normal',    /* normal | italic */
                         weight: 'bold',   /* normal | bold */
-                        opacity: 1
-                    }
-                },
-                sideLegend: {
-                    layout: {
-                        width: 100,
-                        height: 100,
-                        area: {
-                            color: 'white',
-                            opacity: 0.5
-
-                        },
-                        line: {
-                            color: 'white',
-                            opacity: 1,
-                            width: 2
-                        }
-
-                    },
-                    use: true,
-                    text: {
-                        family: 'Nanum Gothic',
-                        size: 12,
-                        color: '#333333',
-                        style: 'normal', /* normal | italic */
-                        weight: 'bold', /* normal | bold */
                         opacity: 1
                     }
                 }
@@ -875,9 +848,10 @@
                 fill :  styles.radar.line.color,
                 stroke :  styles.radar.line.color,
                 "stroke-width" : styles.radar.line.width,
+                "stroke-opacity" : styles.radar.line.opacity,
                 "stroke-miterlimit" : 2,
                 path:cmd,
-                opacity:1
+                "fill-opacity" : 1
             });
         }
 
@@ -1288,9 +1262,9 @@
             setTipArrayStacked(radar);
 
             appendLegend(radar);
-            if (radar.styles.sideLegend.use ===true) {
-                drawSideLegend(radar);
-            }
+            // if (radar.styles.sideLegend.use ===true) {
+            //     drawSideLegend(radar);
+            // }
         }
 
         function setTimeSlice (radar) {
@@ -1461,15 +1435,17 @@
             var centerX = radar.svg.width / 2 + styles.layout.position.x;
             var centerY = radar.svg.height / 2 + styles.layout.position.y;
             var radarRadius = getPixel(radar, radar.styles.radar.radius);
-            var path ='';
+
             var maxValue = styles.radar.maxValue;
             var data = radar.settings.data.renderedData;
 
 
             for(var j = 0;j<radar.options.data.use.length;j++) {
                 var useKey = Object.keys(radar.options.data.use[j])[0];
+                var path ='';
                 var use = radar.options.data.use[j][useKey];
                 var series = radar.styles.series[j][useKey];
+                console.log(series);
                 if (series.use) {
                     for (var i = 0; i < dataCnt; i++) {
                         var angle = 2 / dataCnt * Math.PI * i;
@@ -1487,15 +1463,25 @@
                         }
                     }
                 }
+                console.log(radar.items.radar.itemPath);
                 if(usingAnimate ===true ) {
                     radar.items.radar.itemPath[j].animate({
                         'path' : path,
+                        fill :  colorConstructor(series.area.color),
+                        stroke :  series.line.color,
+                        "stroke-width" :series.line.width,
+                        "fill-opacity": series.area.opacity,
+                        "stroke-opacity" :series.line.opacity
 
                     },aniSpeed);
                 } else {
                     radar.items.radar.itemPath[j].attr({
                         'path' : path,
-
+                        fill :  colorConstructor(series.area.color),
+                        stroke :  series.line.color,
+                        "stroke-width" :series.line.width,
+                        "fill-opacity": series.area.opacity,
+                        "stroke-opacity" :series.line.opacity
                     });
                 }
 
@@ -1573,7 +1559,7 @@
                             fill :  colorConstructor(series.area.color),
                             stroke :  series.line.color,
                             "stroke-width" :series.line.width,
-                            opacity: series.area.opacity,
+                            "fill-opacity": series.area.opacity,
                             "stroke-opacity" :series.line.opacity
                         });
                     }
@@ -1582,7 +1568,7 @@
                         fill :  colorConstructor(series.area.color),
                         stroke :  series.line.color,
                         "stroke-width" :series.line.width,
-                        opacity: series.area.opacity,
+                        "fill-opacity": series.area.opacity,
                         "stroke-opacity" :series.line.opacity
                     });
                 }
@@ -1653,51 +1639,50 @@
             }
             // radar.items.circle.toFront();
         }
-        function drawSideLegend(radar) {
-            var styles = radar.styles;
-            var options = radar.options;
-            var x = radar.svg.width + styles.layout.position.x - (styles.sideLegend.layout.width) - 10;
-            var y = styles.layout.position.y + 10 ;
-            var sideLegend = radar.svg.rect( x , y,styles.sideLegend.layout.width,styles.sideLegend.layout.height);
-            sideLegend.attr({
-                fill : styles.sideLegend.layout.area.color,
-                opacity: styles.sideLegend.layout.area.opacity,
-                stroke : styles.sideLegend.layout.line.color,
-                'stroke-width' : styles.sideLegend.layout.line.width
-            });
-            var textX = x + 10;
-            var textY = y +(styles.sideLegend.text.size);
-            var text ='';
-
-            for(var i = 0;i<options.data.use.length;i++) {
-                var useKey = Object.keys(radar.options.data.use[i])[0];
-                text = options.data.use[i]['s'+(i+1)];
-
-                var sideLegendText = radar.svg.text(textX, textY,text);
-                var seriesStyles=   styles.series[i][useKey];
-                sideLegendText.attr({
-                    'font-family': styles.sideLegend.text.family,
-                    'font-size': styles.sideLegend.text.size,
-                    fill : styles.sideLegend.text.color,
-                    weight :styles.sideLegend.text.weight,
-                    'text-anchor' : 'start'
-                });
-                var textCircleX = textX + sideLegendText.getBBox().width+styles.sideLegend.text.size;
-                var sideLegendCircle = radar.svg.circle(textCircleX,textY,styles.sideLegend.text.size/2);
-                sideLegendCircle.attr({
-                    fill : seriesStyles.tick.area.color,
-                    stroke :seriesStyles.tick.area.color
-                });
-                if(i !=options.data.use.length-1) {
-                    textY += styles.sideLegend.text.size+2;
-                }
-            }
-            sideLegend.attr({
-                height: textY + styles.sideLegend.text.size/2
-            });
-
-
-        }
+        // function drawSideLegend(radar) {
+        //     var styles = radar.styles;
+        //     var options = radar.options;
+        //     var x = radar.svg.width + styles.layout.position.x - (styles.sideLegend.layout.width) - 10;
+        //     var y = styles.layout.position.y + 10 ;
+        //     var sideLegend = radar.svg.rect( x , y,styles.sideLegend.layout.width,styles.sideLegend.layout.height);
+        //     sideLegend.attr({
+        //         fill : styles.sideLegend.layout.area.color,
+        //         opacity: styles.sideLegend.layout.area.opacity,
+        //         stroke : styles.sideLegend.layout.line.color,
+        //         'stroke-width' : styles.sideLegend.layout.line.width
+        //     });
+        //     var textX = x + 10;
+        //     var textY = y + 10;
+        //     var text ='';
+        //
+        //     for(var i = 0;i<options.data.use.length;i++) {
+        //         var useKey = Object.keys(radar.options.data.use[i])[0];
+        //         text = options.data.use[i]['s'+(i+1)];
+        //         textY += styles.sideLegend.text.size+2;
+        //         var sideLegendText = radar.svg.text(textX, textY,text);
+        //         var seriesStyles=   styles.series[i][useKey];
+        //         sideLegendText.attr({
+        //             'font-family': styles.sideLegend.text.family,
+        //             'font-size': styles.sideLegend.text.size,
+        //             fill : styles.sideLegend.text.color,
+        //             weight :styles.sideLegend.text.weight,
+        //             'text-anchor' : 'start'
+        //         });
+        //         var textCircleX = textX + sideLegendText.getBBox().width+styles.sideLegend.text.size;
+        //         var sideLegendCircle = radar.svg.circle(textCircleX,textY,styles.sideLegend.text.size/2);
+        //         sideLegendCircle.attr({
+        //             fill : seriesStyles.tick.area.color,
+        //             stroke :seriesStyles.tick.area.color
+        //         });
+        //
+        //
+        //     }
+        //     sideLegend.attr({
+        //         height: textY + 10
+        //     });
+        //
+        //
+        // }
         function drawItems(radar) {
             var styles = radar.styles;
             var options = radar.options;
@@ -2057,7 +2042,6 @@
             radar.appendData = function (data) {
 
                 radar.options.data.data = data;
-
 
                 radar.wrapper.children().remove();
 
