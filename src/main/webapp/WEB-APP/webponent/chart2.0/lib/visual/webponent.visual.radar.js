@@ -2061,6 +2061,7 @@
 
         }
 
+
         self.init = function (wrapper, styles, options) {
 
             var radar = {};
