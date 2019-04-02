@@ -204,7 +204,8 @@
                         area : {
                             color : '#138b87'
                         }
-                    }
+                    },
+                    startAngle : 90
                 },
                 tick: {
                     style: 'circle',
@@ -854,6 +855,12 @@
                 "fill-opacity" : 1
             });
         }
+        function turnAng(angle,radar) {
+            var startAngle = radar.styles.radar.startAngle;
+            var returnAngle =angle - startAngle/90*(1/2*Math.PI);
+            return returnAngle;
+
+        }
 
         function drawBackground(radar) {
 
@@ -866,10 +873,11 @@
 
             for(var i =0;i <=radiusSize-1;i++) {
                 var angle = 2/radiusSize*Math.PI*i;
+                var turnAngle = turnAng(angle,radar);
                 var startX = centerX ;
                 var startY = centerY ;
-                var endX = radarRadius*Math.cos(angle)+centerX;
-                var endY = radarRadius*Math.sin(angle)+centerY;
+                var endX = radarRadius*Math.cos(turnAngle)+centerX;
+                var endY = radarRadius*Math.sin(turnAngle)+centerY;
 
 
                 drawPath(radar,startX,startY,endX,endY);
@@ -877,25 +885,25 @@
                 for(var j = 0;j < 5; j++) {
                     var radarRadiusSub = Number(radarRadius-(radarRadius/5*j)).toFixed(2);
                     var angleSub =  2/radiusSize*Math.PI*(i+1);
-                    var basePolyGonX = radarRadiusSub*Math.cos(angleSub)+centerX;
-                    var basePolyGonY = radarRadiusSub*Math.sin(angleSub)+centerY;
-                    var endXSub =  radarRadiusSub*Math.cos(angle)+centerX;
-                    var endYSub =  radarRadiusSub*Math.sin(angle)+centerY;
+                    var basePolyGonX = radarRadiusSub*Math.cos(turnAng(angleSub,radar))+centerX;
+                    var basePolyGonY = radarRadiusSub*Math.sin(turnAng(angleSub,radar))+centerY;
+                    var endXSub =  radarRadiusSub*Math.cos(turnAng(angle,radar))+centerX;
+                    var endYSub =  radarRadiusSub*Math.sin(turnAng(angle,radar))+centerY;
                     drawPath(radar,endXSub,endYSub,basePolyGonX,basePolyGonY);
                 }
             }
         }
 
-        var CalculateStarPoints = function(centerX, centerY, arms, outerRadius, innerRadius){
+        var CalculateStarPoints = function(centerX, centerY, arms, outerRadius, innerRadius,radar){
             var results = "";
 
             var angle = Math.PI / arms;
-
+            var turnAngle = turnAng(angle,radar);
             for (var i = 0; i < 2 * arms; i++) {
                 var r = (i & 1) == 0 ? outerRadius : innerRadius;
 
-                var currX = centerX + Math.cos(i * angle) * r;
-                var currY = centerY + Math.sin(i * angle) * r;
+                var currX = centerX + Math.cos(i * turnAngle) * r;
+                var currY = centerY + Math.sin(i * turnAngle) * r;
 
                 if (i == 0) {
                     results = currX + " " + currY;
@@ -918,10 +926,10 @@
             var tickSize = tickStyles.size;
 
             var tickStyle = {
-                'fill'			: tickStyles.area.color,
-                'fill-opacity'	: tickStyles.area.opacity,
-                'stroke'		: tickStyles.line.color,
-                'stroke-width'	: tickStyles.line.width,
+                'fill'          : tickStyles.area.color,
+                'fill-opacity'  : tickStyles.area.opacity,
+                'stroke'        : tickStyles.line.color,
+                'stroke-width'  : tickStyles.line.width,
                 'stroke-opacity': tickStyles.line.opacity,
                 'display':'none'
             }
@@ -939,7 +947,7 @@
                     if(
                         tickSize > 0) { tickSize += 1, tickHalf += 1;
                     }
-                    tick = radar.svg.path('M'+CalculateStarPoints(x, y, 5, tickSize, tickHalf)+'Z');
+                    tick = radar.svg.path('M'+CalculateStarPoints(x, y, 5, tickSize, tickHalf,radar)+'Z');
                     break;
                 case "diamond":
                     if(tickSize > 0) tickSize += 1;
@@ -1023,15 +1031,15 @@
             for (var i=0; i < dataLength; i++) {
 
                 var angle = (360 / dataLength * i) * (Math.PI /180) ;
-
+                var turnAngle = turnAng(angle,radar);
                 tipArray[i] = {};
 
                 var tipArrI = tipArray[i];
 
-                tipArrI.moveX = radarPositionX + (radarRadius - (lineW) / 2 ) * Math.cos(angle) * 1.20;
-                tipArrI.moveY = radarPositionY + (radarRadius - (lineW) / 2 ) * Math.sin(angle) * 1.20;
+                tipArrI.moveX = radarPositionX + (radarRadius - (lineW) / 2 ) * Math.cos(turnAngle) * 1.20;
+                tipArrI.moveY = radarPositionY + (radarRadius - (lineW) / 2 ) * Math.sin(turnAngle) * 1.20;
 
-                var _angle = angle * 180 / Math.PI;
+                var _angle = turnAngle * 180 / Math.PI;
 
                 if (_angle < 90) {
 
@@ -1236,8 +1244,8 @@
                 var legendText = radar.svg.text();
 
                 legendText.attr({
-                    x : centerX + (radarRadius / innerLegendNum * i) ,
-                    y : centerY,
+                    x : centerX + (radarRadius / innerLegendNum * i)*Math.cos(turnAng(0,radar)) ,
+                    y : centerY + (radarRadius / innerLegendNum * i)*Math.sin(turnAng(0,radar)),
                     text : String(text),
                     fill: legendT.color,
                     opacity : legendT.opacity,
@@ -1449,10 +1457,11 @@
                 if (series.use) {
                     for (var i = 0; i < dataCnt; i++) {
                         var angle = 2 / dataCnt * Math.PI * i;
-                        var x =  Number(data[i][use] / maxValue * radarRadius) * Math.cos(angle) + centerX;
-                        var y =  Number(data[i][use] / maxValue * radarRadius) * Math.sin(angle) + centerY;
-                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( 2/dataCnt*Math.PI*dataCnt) + centerX;
-                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( 2/dataCnt*Math.PI*dataCnt) + centerY;
+                        var turnAngle = turnAng(angle,radar);
+                        var x =  Number(data[i][use] / maxValue * radarRadius) * Math.cos(turnAngle) + centerX;
+                        var y =  Number(data[i][use] / maxValue * radarRadius) * Math.sin(turnAngle) + centerY;
+                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos(turnAng( 2/dataCnt*Math.PI*dataCnt,radar)) + centerX;
+                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin(turnAng( 2/dataCnt*Math.PI*dataCnt,radar)) + centerY;
                         if (i == 0) {
                             path += 'M' + x + ',' + y;
                         } else {
@@ -1541,10 +1550,11 @@
                     for(var i =0;i<dataCnt;i++) {
 
                         var angle = 2/dataCnt*Math.PI*i*animationDecimal;
-                        var x = Number(data[i][use]/maxValue*radarRadius) * Math.cos(angle) + centerX;
-                        var y = Number(data[i][use]/maxValue*radarRadius) * Math.sin(angle) + centerY;
-                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( 2/dataCnt*Math.PI*dataCnt*animationDecimal) + centerX;
-                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( 2/dataCnt*Math.PI*dataCnt*animationDecimal) + centerY;
+                        var turnAngle = turnAng(angle,radar);
+                        var x = Number(data[i][use]/maxValue*radarRadius) * Math.cos(turnAngle) + centerX;
+                        var y = Number(data[i][use]/maxValue*radarRadius) * Math.sin(turnAngle) + centerY;
+                        var lastX =  Number(data[0][use]/maxValue*radarRadius) * Math.cos( turnAng(2/dataCnt*Math.PI*dataCnt*animationDecimal,radar)) + centerX;
+                        var lastY =  Number(data[0][use]/maxValue*radarRadius) * Math.sin( turnAng(2/dataCnt*Math.PI*dataCnt*animationDecimal,radar)) + centerY;
                         if(i==0) {
                             firstPath = 'M' + centerX + ',' +centerY;
                             path += x + ',' +y;
@@ -1631,8 +1641,9 @@
                 if(series.use) {
                     for(var i =0;i<dataCnt;i++) {
                         var angle = 2/dataCnt*Math.PI*i;
-                        var x = Number(data[i][use]/maxValue*radarRadius) * Math.cos(angle) + centerX;
-                        var y =  Number(data[i][use]/maxValue*radarRadius) * Math.sin(angle) + centerY;
+                        var turnAngle = turnAng(angle,radar);
+                        var x = Number(data[i][use]/maxValue*radarRadius) * Math.cos(turnAngle) + centerX;
+                        var y =  Number(data[i][use]/maxValue*radarRadius) * Math.sin(turnAngle) + centerY;
                         drawTick(radar,x,y,i,j);
                     }
                 }
@@ -1877,7 +1888,7 @@
             });
 
             radar.styles = extendStyles(styles);
-
+            console.log(radar.styles);
             // url에 hash - #exportPDF를 붙이면 애니메이션이 동작하지 않는다.
             if (window.location.hash && window.location.hash.slice(1) === "skipAnimation" ||
                 getElementType() === 'VML') {
