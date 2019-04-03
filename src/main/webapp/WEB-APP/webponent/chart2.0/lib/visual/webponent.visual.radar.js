@@ -1041,68 +1041,48 @@
 
                 var _angle = turnAngle * 180 / Math.PI + startAngle;
 
-                // if (_angle < 90) {
-                //
-                //     tipArrI.directionX = "right";
-                //     tipArrI.directionY = "bottom";
-                //
-                // } else if (90 < _angle && _angle < 180) {
-                //
-                //     tipArrI.directionX = "left";
-                //     tipArrI.directionY = "bottom";
-                //
-                // } else if (180 <= _angle && _angle < 270) {
-                //
-                //     tipArrI.directionX = "left";
-                //     tipArrI.directionY = "top";
-                //
-                // } else if (270 < _angle) {
-                //
-                //     tipArrI.directionX = "right";
-                //     tipArrI.directionY = "top";
-                // }
                 if (90 <= startAngle && startAngle< 180) {
-                    if(_angle - startAngle <= -90 && _angle-startAngle>-180)  {
+                    if(_angle - startAngle < -90 && _angle-startAngle>-180)  {
                         tipArrI.directionX = "right";
                         tipArrI.directionY = "bottom";
-                    } else if (_angle - startAngle <= 0 && _angle-startAngle>-90){
+                    } else if (_angle - startAngle < 0 && _angle-startAngle>-90){
                         tipArrI.directionX = "left";
                         tipArrI.directionY = "top";
                     } else if (_angle - startAngle > 0 && _angle-startAngle <90){
                         tipArrI.directionX = "left";
                         tipArrI.directionY = "bottom";
-                    } else if (_angle - startAngle >=90) {
+                    } else if (_angle - startAngle >90) {
                         tipArrI.directionX = "right";
                         tipArrI.directionY = "top";
                     }
                     console.log(_angle - startAngle);
-                } else if ( startAngle>=180&&startAngle<=270) {
-                if(startAngle - _angle  <=0 &&startAngle - _angle >-90)  {
+                } else if ( startAngle>=180&&startAngle<270) {
+                if(startAngle - _angle  <0 &&startAngle - _angle >-90)  {
                     tipArrI.directionX = "left";
                     tipArrI.directionY = "bottom";
-                } else if (startAngle - _angle <= 0 || startAngle - _angle <=90){
+                } else if (startAngle - _angle < 0 || startAngle - _angle <90){
                     tipArrI.directionX = "left";
                     tipArrI.directionY = "top";
                 } else if ( startAngle - _angle  <-90 ||startAngle -_angle >180){
                     tipArrI.directionX = "right";
                     tipArrI.directionY = "bottom";
-                } else if (startAngle - _angle  >90 &&startAngle - _angle  <=180) {
+                } else if (startAngle - _angle  >90 &&startAngle - _angle  <180) {
                     tipArrI.directionX = "right";
                     tipArrI.directionY = "top";
                 }
                 console.log(_angle - startAngle);
 
-              } else if ( startAngle>270) {
-                if(startAngle - _angle  >= 270 )  {
+              } else if ( startAngle>=270) {
+                if(startAngle - _angle  > 270 )  {
                     tipArrI.directionX = "left";
                     tipArrI.directionY = "bottom";
-                } else if (startAngle - _angle <= 0 && startAngle - _angle <=90){
+                } else if (startAngle - _angle < 0 && startAngle - _angle <90){
                     tipArrI.directionX = "left";
                     tipArrI.directionY = "top";
                 } else if ( startAngle - _angle  <270 && startAngle -_angle >180){
                     tipArrI.directionX = "right";
                     tipArrI.directionY = "bottom";
-                } else if (startAngle - _angle  >90 && startAngle - _angle  <=180) {
+                } else if (startAngle - _angle  >90 && startAngle - _angle  <180) {
                     tipArrI.directionX = "right";
                     tipArrI.directionY = "top";
                 }
